@@ -1,1 +1,6 @@
-
+{
+  "name": "1v1soccer",
+  "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/1.png",
+  "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/1v1soccer/1v1soccer.html",
+  "method": "iframe"
+}
