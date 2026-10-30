@@ -16,5 +16,29 @@
     "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/3.png",
     "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/1v1lol/1v1lol.html",
     "method": "iframe"
+  },
+  {
+    "name": "10bullets",
+    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/4.png",
+    "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/10bullets/10bullets.html",
+    "method": "iframe"
+  },
+  {
+    "name": "99nightsintheforest",
+    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/5.png",
+    "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/99nightsintheforest/99nightsintheforest.html",
+    "method": "iframe"
+  },
+    {
+    "name": "8ballpool",
+    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/6.png",
+    "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/8ballpool/8ballpool.html",
+    "method": "iframe"
+  },
+  {
+    "name": "angrybirds",
+    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/7.png",
+    "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/angrybirds/angrybirds.html",
+    "method": "iframe"
   }
 ]
