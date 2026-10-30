@@ -10,5 +10,11 @@
     "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/2.png",
     "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/1v1tennis/1v1tennis.html",
     "method": "iframe"
+  },
+  {
+    "name": "1v1lol",
+    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/3.png",
+    "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/1v1lol/1v1lol.html",
+    "method": "iframe"
   }
 ]
