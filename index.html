@@ -557,6 +557,114 @@
         opacity: 1;
       }
 
+      .toast-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        pointer-events: none;
+      }
+
+      .toast {
+        pointer-events: auto;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        padding: 16px 20px;
+        min-width: 300px;
+        max-width: 400px;
+        position: relative;
+        overflow: hidden;
+        animation: toastSlideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        border: 1px solid transparent;
+      }
+
+      .toast.error {
+        border-color: #FF0000;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 2px #FF0000;
+      }
+
+      .toast.warn {
+        border-color: #ffff00;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 2px #ffff00;
+      }
+
+      .toast.casual {
+        border-color: #00ff00;
+        box-shadow: 0 10px 30px rgba(65, 65, 65, 0.5), 0 0 2px #00ff00;
+      }
+
+      .toast.info {
+        border-color: #00fff7;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 2px #00fff7;
+      }
+
+      .toast-content {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .toast-icon {
+        font-size: 1.2rem;
+        flex-shrink: 0;
+      }
+
+      .toast.error .toast-icon {
+        color: #FF0000;
+      }
+
+      .toast.warn .toast-icon {
+        color: #ffff00;
+      }
+
+      .toast.casual .toast-icon {
+        color: #00ff00;
+      }
+
+      .toast.info .toast-icon {
+        color: #00fff7;
+      }
+
+      .toast-message {
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.9rem;
+        color: #fff;
+        line-height: 1.4;
+      }
+
+      .toast.hiding {
+        animation: toastSlideOut 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      }
+
+      @keyframes toastSlideIn {
+        from {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes toastSlideOut {
+        from {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+      }
+
       .g-circle {
         position: relative;
         display: inline-block;
@@ -669,6 +777,7 @@
 
   <body>
     <canvas id="action-bar-canvas"></canvas>
+    <div class="toast-container" id="toast-container"></div>
     <div class="action-bar">
       <div class="pod bar-pod" id="barPod">
         <button title="Home" id="homeBtn" class="active"><i class="fa-solid fa-house actionbarBtn"></i></button>
@@ -1059,6 +1168,52 @@
     </script>
 
     <script>
+      function showToast(message, type = "info", duration = 4000) {
+        const container = document.getElementById("toast-container");
+        if (!container) {
+          console.error("Toast container not found");
+          return;
+        }
+
+        // Remove oldest toast if we have 5 or more
+        const existingToasts = container.querySelectorAll(".toast");
+        if (existingToasts.length >= 5) {
+          const oldestToast = existingToasts[0];
+          oldestToast.classList.add("hiding");
+          oldestToast.addEventListener("animationend", () => {
+            oldestToast.remove();
+          });
+        }
+
+        const toast = document.createElement("div");
+        toast.className = `toast ${type}`;
+
+        const icons = {
+          error: "fa-solid fa-xmark",
+          warn: "fa-solid fa-exclamation-triangle",
+          casual: "fa-solid fa-check",
+          info: "fa-solid fa-info-circle"
+        };
+
+        toast.innerHTML = `
+          <div class="toast-content">
+            <i class="toast-icon ${icons[type] || icons.info}"></i>
+            <span class="toast-message">${message}</span>
+          </div>
+        `;
+
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.classList.add("hiding");
+          toast.addEventListener("animationend", () => {
+            toast.remove();
+          });
+        }, duration);
+      }
+    </script>
+
+    <script>
       document.addEventListener("DOMContentLoaded", () => {
         const gameGrid = document.getElementById("game-grid");
         const searchInput = document.getElementById("game-search");
@@ -1195,6 +1350,7 @@
             frameContainer.appendChild(iframe);
           } catch (error) {
             console.error("Load error:", error);
+            showToast("Failed to load game.", "error");
           }
         }
       }
@@ -1225,11 +1381,10 @@
               if (requestFs) requestFs.call(docEl);
             }, 500);
           } else {
-            alert("Popup blocked! Please allow popups to launch the game.");
+            showToast("Popup blocked! Please allow popups to launch the game.", "error");
           }
         }
       });
-
 
       fetchGames();
       });
