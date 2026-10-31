@@ -1,0 +1,1238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9S5S41LCR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-W9S5S41LCR');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet" />
+    <title>GX Verse</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-color: #0000ff;
+        --secondary-color: #00fff7;
+      }
+
+      body {
+        width: 100vw;
+        height: 100vh;
+        background-color: #000;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      section {
+        position: relative;
+      }
+
+      .main-title {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        font-weight: bold;
+        font-family: "Orbitron", sans-serif;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: clamp(2px, 1vw, 4px);
+        animation: glitch 2s infinite;
+        text-align: center;
+        white-space: nowrap;
+        z-index: 5;
+      }
+
+      .main-title::before,
+      .main-title::after {
+        content: "GX VERSE";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .sub-title::before,
+      .sub-title::after {
+        content: "Welcome to GX VERSE";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .main-title::before,
+      .sub-title::before {
+        color: var(--secondary-color);
+        z-index: -1;
+      }
+
+      .main-title::after,
+      .sub-title::after {
+        color: var(--primary-color);
+        z-index: -2;
+      }
+
+      .home {
+        width: 100vw;
+        height: 100vh;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .search-container {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .search-box {
+        position: relative;
+        width: 100%;
+        height: 54px;
+        background: #000;
+        border-radius: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .search-box input {
+        width: 100%;
+        height: 100%;
+        padding: 0 25px;
+        border: none;
+        background: transparent;
+        color: #fff;
+        font-size: 1.1rem;
+        outline: none;
+        font-family: "Orbitron", sans-serif;
+      }
+
+      .search-box:hover {
+        transform: scale(1.05);
+      }
+
+      .search-box:focus-within {
+        transform: scale(1.02);
+      }
+
+      .search-box:focus-within .line-driver {
+        filter: drop-shadow(0 0 12px var(--secondary-color));
+      }
+
+      .line-driver {
+        position: absolute;
+        inset: 0;
+        border-radius: 100px;
+        z-index: -1;
+        overflow: hidden;
+        -webkit-mask:
+          linear-gradient(#000 0 0) content-box,
+          linear-gradient(#000 0 0);
+        mask:
+          linear-gradient(#000 0 0) content-box,
+          linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        padding: 2px;
+      }
+
+      .line-driver::before {
+        content: "";
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: conic-gradient(from 0deg, transparent 0%, var(--primary-color) 10%, var(--secondary-color) 20%, transparent 25%);
+        animation: rotate 3s linear infinite;
+        filter: drop-shadow(0 0 15px var(--primary-color)) drop-shadow(0 0 5px var(--secondary-color)) drop-shadow(0 0 50px var(--primary-color));
+      }
+
+      @keyframes rotate {
+        from {
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+        to {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
+
+      .search-wrapper {
+        position: sticky;
+        top: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 15px 0;
+        z-index: 100;
+        background: transparent;
+        pointer-events: none;
+      }
+
+      #gxmes-page .search-box {
+        width: 80%;
+        max-width: 800px;
+        height: 60px;
+        pointer-events: all;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+      }
+
+      #gxmes-page .search-box input {
+        font-size: 1rem;
+        pointer-events: all;
+        letter-spacing: 1px;
+      }
+
+      #gxmes-page .line-driver::before {
+        width: 1000px;
+        height: 1000px;
+      }
+
+      #gxmes-page {
+        background-color: #000 !important;
+        min-height: 100vh;
+      }
+
+      .grid {
+        width: 90%;
+        max-width: 1200px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 80px;
+        padding-bottom: 100px;
+      }
+
+      .game-item {
+        aspect-ratio: 1/1;
+        background: #111;
+        border: 2px solid transparent;
+        border-radius: 14px;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 10px rgba(0, 0, 255, 0.2);
+      }
+
+      .game-item:hover {
+        transform: translateY(-10px) scale(1.05);
+        border-color: white;
+        box-shadow: 0 0 20px var(--primary-color);
+        z-index: 2;
+      }
+
+      .game-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .game-item:hover img {
+        transform: scale(1.1);
+        opacity: 0.5;
+      }
+
+      .game-title {
+        position: absolute;
+        bottom: -60px;
+        width: 100%;
+        padding: 15px 10px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+        text-align: center;
+        font-family: "Orbitron", sans-serif;
+        color: white;
+        font-weight: bold;
+        transition: bottom 0.3s ease-out;
+      }
+
+      .game-item:hover .game-title {
+        bottom: 0;
+      }
+
+      .game-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #000;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        transform: translateY(100%);
+        visibility: hidden;
+        pointer-events: none;
+        transition:
+          transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+          visibility 0.5s;
+      }
+
+      .game-overlay.active {
+        transform: translateY(0);
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      #game-overlay.active ~ .action-bar,
+      #game-overlay.active ~ #action-bar-canvas {
+        display: none !important;
+      }
+
+      #game-frame-container {
+        flex: 1;
+        width: 100%;
+        background: #111;
+      }
+
+      .newtab-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+      }
+
+      .game-controls {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+        height: 65px;
+        background: #000;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 100px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 10px;
+        padding: 0 15px;
+        box-shadow:
+          0 10px 30px rgba(0, 0, 0, 0.5),
+          0 0 20px rgba(0, 255, 247, 0.1);
+        z-index: 10000;
+      }
+
+      .game-controls button {
+        width: 45px;
+        height: 45px;
+        border: none;
+        border-radius: 50%;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      .game-controls button:hover {
+        color: var(--primary-color);
+        transform: translateY(-5px) scale(1.2);
+        filter: drop-shadow(0 0 10px var(--primary-color));
+      }
+
+      .game-controls button::after {
+        content: attr(title);
+        position: absolute;
+        top: -45px;
+        left: 50%;
+        transform: translateX(-50%) scale(0.8);
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.7rem;
+        font-weight: bold;
+        color: #000;
+        background: var(--primary-color);
+        padding: 4px 10px;
+        border-radius: 4px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .game-controls button:hover::after,
+      .game-controls button.show-tooltip::after {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+        top: -50px;
+      }
+
+      .game-controls button::before {
+        content: "";
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 5px;
+        border-style: solid;
+        border-color: var(--primary-color) transparent transparent transparent;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .game-controls button:hover::before,
+      .game-controls button.show-tooltip::before {
+        opacity: 1;
+      }
+
+      .page-fade {
+        animation: fadeInPage 0.4s ease-out forwards;
+      }
+
+      .game-pop {
+        animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      }
+
+      @keyframes fadeInPage {
+        from {
+          opacity: 0;
+          transform: scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes popIn {
+        from {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .action-bar {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 20px;
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+      }
+
+      .pod {
+        display: flex;
+        pointer-events: auto;
+        background: rgba(0, 0, 0, 0);
+        border-radius: 100px;
+        position: relative;
+      }
+
+      .bar-pod {
+        flex-direction: row;
+        gap: 10px;
+        padding: 10px 20px;
+        align-items: center;
+        height: 65px;
+      }
+
+      .action-bar button {
+        width: 45px;
+        height: 45px;
+        border: none;
+        border-radius: 50%;
+        background-color: transparent;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 1.3rem;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+        z-index: 2;
+        position: relative;
+      }
+
+      .action-bar button:hover {
+        color: var(--primary-color);
+        transform: translateY(-5px) scale(1.2);
+        filter: drop-shadow(0 0 10px var(--primary-color));
+      }
+
+      .action-bar button.active {
+        color: var(--primary-color) !important;
+        transform: translateY(-5px) scale(1.2);
+        filter: drop-shadow(0 0 10px var(--primary-color));
+      }
+
+      .actionbarBtn {
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .actionbarBtn:hover {
+        color: var(--primary-color);
+        transform: translateY(-5px) scale(1.2);
+        filter: drop-shadow(0 0 10px var(--primary-color));
+      }
+
+      #action-bar-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9;
+        pointer-events: none;
+      }
+
+      .action-bar button::after {
+        content: attr(title);
+        position: absolute;
+        top: -45px;
+        left: 50%;
+        transform: translateX(-50%) scale(0.8);
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.7rem;
+        font-weight: bold;
+        color: #000;
+        background: var(--primary-color);
+        padding: 4px 10px;
+        border-radius: 4px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .action-bar button:hover::after,
+      .action-bar button.show-tooltip::after {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+        top: -50px;
+      }
+
+      .action-bar button::before {
+        content: "";
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 5px;
+        border-style: solid;
+        border-color: var(--primary-color) transparent transparent transparent;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .action-bar button:hover::before,
+      .action-bar button.show-tooltip::before {
+        opacity: 1;
+      }
+
+      .g-circle {
+        position: relative;
+        display: inline-block;
+        color: #fff;
+        z-index: 5;
+        perspective: 600px;
+        animation: glow 10s linear infinite;
+      }
+
+      .g-circle::before,
+      .g-circle::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 1.4em;
+        height: 1.4em;
+        border: 10px solid #ffff00;
+        border-radius: 50%;
+        pointer-events: none;
+        transform: translate(-50%, -50%) rotateX(70deg) rotateY(-20deg);
+
+        box-shadow:
+          0 0 10px rgba(255, 255, 0, 0.6),
+          inset 0 0 10px rgba(255, 255, 0, 0.6);
+      }
+
+      .g-circle::before {
+        z-index: -1;
+      }
+
+      .g-circle::after {
+        z-index: 1;
+        clip-path: inset(50% 0 0 0);
+      }
+
+      .version-label {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.7rem;
+        font-weight: bold;
+        color: #ffffffb7;
+        background: transparent;
+        padding: 4px 10px;
+        border-radius: 4px;
+        white-space: nowrap;
+        opacity: 0.5;
+      }
+
+      #home-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 1;
+        transition: opacity 0.5s ease-out;
+        pointer-events: none;
+      }
+
+      @keyframes glitch {
+        0% {
+          text-shadow:
+            0 0 2px #fff,
+            0 0 10px var(--primary-color);
+        }
+        20% {
+          text-shadow:
+            -2px 0 var(--secondary-color),
+            2px 2px var(--primary-color);
+        }
+        40% {
+          text-shadow:
+            2px -2px var(--secondary-color),
+            -2px 2px var(--primary-color);
+        }
+        60% {
+          text-shadow:
+            0 0 3px #fff,
+            0 0 15px var(--primary-color);
+        }
+        80% {
+          text-shadow:
+            2px 0 var(--secondary-color),
+            -2px -2px var(--primary-color);
+        }
+        100% {
+          text-shadow:
+            0 0 2px #fff,
+            0 0 10px var(--primary-color);
+        }
+      }
+
+      @keyframes glow {
+        0% {
+          filter: drop-shadow(0 0 10px #ffff00);
+        }
+        50% {
+          filter: drop-shadow(0 0 1px #ffff00);
+        }
+        100% {
+          filter: drop-shadow(0 0 10px #ffff00);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="action-bar-canvas"></canvas>
+    <div class="action-bar">
+      <div class="pod bar-pod" id="barPod">
+        <button title="Home" id="homeBtn" class="active"><i class="fa-solid fa-house actionbarBtn"></i></button>
+        <button title="Gxmes" id="gxmesBtn"><i class="fa-solid fa-gamepad actionbarBtn"></i></button>
+        <button title="Info" id="infoBtn"><i class="fa-solid fa-address-book actionbarBtn"></i></button>
+        <button title="Pr0xys" id="proxyBtn"><i class="fa-solid fa-cloud actionbarBtn"></i></button>
+        <button title="Sound Board" id="soundboardBtn"><i class="fa-solid fa-volume actionbarBtn"></i></button>
+      </div>
+    </div>
+    <canvas id="home-canvas"></canvas>
+
+    <section class="home" id="home-page">
+      <h1 class="main-title"><span class="g-circle">G</span>X VERSE</h1>
+      <h1 class="sub-title main-title" style="font-size: 1rem; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%)">Welcome to GX VERSE</h1>
+      <div class="search-container">
+        <div class="search-box">
+          <div class="line-driver"></div>
+          <input type="text" id="home-search" autocomplete="off" autofocus autocapitalize="off" autocorrect="off" placeholder="Search..." spellcheck="false" />
+        </div>
+      </div>
+      <label class="version-label">Ver 0.0.3 BETA</label>
+    </section>
+
+    <section class="gxmes" id="gxmes-page" style="display: none; width: 100vw; height: 100vh; flex-direction: column; align-items: center; overflow-y: auto">
+      <div class="search-wrapper">
+        <div class="search-box">
+          <div class="line-driver"></div>
+          <input type="text" id="game-search" placeholder="Search gxmes..." autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" />
+        </div>
+      </div>
+
+      <div class="grid" id="game-grid"></div>
+    </section>
+
+    <div id="game-overlay" class="game-overlay">
+      <div id="game-frame-container"></div>
+
+      <div class="game-controls">
+        <button id="btn-fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+        <button id="btn-exit" title="Exit"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+
+    <script>
+      const canvas = document.getElementById("home-canvas");
+      const ctx = canvas.getContext("2d");
+
+      let stars = [];
+      let constellations = [];
+      let shootingStars = [];
+      let lastSpawn = Date.now();
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        createStars();
+        createConstellations();
+      }
+
+      function createStars() {
+        stars = Array.from({length: 200}, () => ({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 1.5 + 0.5,
+          opacity: Math.random() * 0.9,
+          speed: Math.random() * 0.02 + 0.005,
+          phase: Math.random() * Math.PI * 2,
+        }));
+      }
+
+      function createConstellations() {
+        constellations = [];
+
+        for (let i = 0; i < 5; i++) {
+          const cx = Math.random() * canvas.width;
+          const cy = Math.random() * canvas.height;
+
+          const points = [];
+          const connections = [];
+          const count = Math.floor(Math.random() * 4) + 4;
+          const radius = Math.random() * 80 + 60;
+
+          for (let j = 0; j < count; j++) {
+            const angle = (j / count) * Math.PI * 2 + Math.random() * 0.5;
+            const dist = radius * (0.6 + Math.random() * 0.4);
+
+            points.push({
+              x: cx + Math.cos(angle) * dist,
+              y: cy + Math.sin(angle) * dist,
+            });
+          }
+
+          for (let j = 0; j < count; j++) {
+            const next = (j + 1) % count;
+            connections.push([j, next]);
+
+            if (Math.random() > 0.5) {
+              connections.push([j, (j + 2) % count]);
+            }
+          }
+
+          constellations.push({points, connections});
+        }
+      }
+
+      function createShootingStar() {
+        return {
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height * 0.5,
+          length: Math.random() * 80 + 60,
+          speed: Math.random() * 3 + 2,
+          angle: Math.PI / 4,
+          opacity: 0.8,
+        };
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        stars.forEach((s) => {
+          s.phase += s.speed;
+          const glow = (Math.sin(s.phase) + 1) / 1.5;
+
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,255,255,${s.opacity * glow})`;
+          ctx.fill();
+        });
+
+        constellations.forEach((c) => {
+          ctx.strokeStyle = "rgba(255,255,255,0.16)";
+          ctx.lineWidth = 1;
+
+          c.connections.forEach(([a, b]) => {
+            const p1 = c.points[a];
+            const p2 = c.points[b];
+
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          });
+
+          c.points.forEach((p) => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(255,255,255,0.70)";
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(255,255,255,0.2)";
+            ctx.fill();
+          });
+        });
+
+        const now = Date.now();
+        if (now - lastSpawn > 1500 + Math.random() * 2000) {
+          shootingStars.push(createShootingStar());
+          lastSpawn = now;
+        }
+
+        shootingStars = shootingStars.filter((s) => {
+          if (s.opacity <= 0) return false;
+
+          const grad = ctx.createLinearGradient(s.x, s.y, s.x - Math.cos(s.angle) * s.length, s.y - Math.sin(s.angle) * s.length);
+
+          grad.addColorStop(0, `rgba(255,255,255,${s.opacity})`);
+          grad.addColorStop(1, "rgba(255,255,255,0)");
+
+          ctx.beginPath();
+          ctx.moveTo(s.x, s.y);
+          ctx.lineTo(s.x - Math.cos(s.angle) * s.length, s.y - Math.sin(s.angle) * s.length);
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          s.x += Math.cos(s.angle) * s.speed;
+          s.y += Math.sin(s.angle) * s.speed;
+          s.opacity -= 0.01;
+
+          return true;
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener("resize", resize);
+
+      resize();
+      draw();
+    </script>
+
+    <script>
+      const actionBarCanvas = document.getElementById("action-bar-canvas");
+      const actionCtx = actionBarCanvas.getContext("2d");
+      const barPod = document.getElementById("barPod");
+
+      let barRotation = 0;
+
+      function resizeActionBarCanvas() {
+        actionBarCanvas.width = window.innerWidth;
+        actionBarCanvas.height = window.innerHeight;
+      }
+
+      function renderActionBar() {
+        if (!actionBarCanvas.width || !actionBarCanvas.height) {
+          console.log("Canvas not sized yet");
+          requestAnimationFrame(renderActionBar);
+          return;
+        }
+
+        actionCtx.clearRect(0, 0, actionBarCanvas.width, actionBarCanvas.height);
+        barRotation += 0.04;
+
+        const b = barPod.getBoundingClientRect();
+
+        actionCtx.fillStyle = "black";
+        actionCtx.beginPath();
+        actionCtx.roundRect(b.left, b.top, b.width, b.height, b.height / 2);
+        actionCtx.fill();
+
+        const centerX = b.left + b.width / 2;
+        const centerY = b.top + b.height / 2;
+        const grad = actionCtx.createConicGradient(barRotation, centerX, centerY);
+        grad.addColorStop(0, "transparent");
+        grad.addColorStop(0.1, "#0000ff");
+        grad.addColorStop(0.2, "#00fff7");
+        grad.addColorStop(0.3, "transparent");
+
+        actionCtx.strokeStyle = grad;
+        actionCtx.lineWidth = 3;
+        actionCtx.shadowBlur = 2;
+        actionCtx.shadowColor = "rgba(0, 0, 255, 0.8)";
+        actionCtx.beginPath();
+        actionCtx.roundRect(b.left, b.top, b.width, b.height, b.height / 2);
+        actionCtx.stroke();
+
+        requestAnimationFrame(renderActionBar);
+      }
+
+      window.addEventListener("resize", resizeActionBarCanvas);
+      resizeActionBarCanvas();
+
+      setTimeout(() => {
+        resizeActionBarCanvas();
+        renderActionBar();
+      }, 100);
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const homePage = document.getElementById("home-page");
+        const gxmesPage = document.getElementById("gxmes-page");
+        const homeBtn = document.getElementById("homeBtn");
+        const gxmesBtn = document.getElementById("gxmesBtn");
+        const buttons = [homeBtn, gxmesBtn];
+        const mainTitle = document.querySelector(".main-title");
+        const subTitle = document.querySelector(".sub-title");
+        const homeSearch = document.getElementById("home-search");
+        const gameSearch = document.getElementById("game-search");
+
+        console.log("Buttons found:", homeBtn, gxmesBtn);
+
+        let currentPage = "home";
+
+      const pageMap = {
+        home: {page: homePage, btn: homeBtn},
+        gxmes: {page: gxmesPage, btn: gxmesBtn},
+      };
+
+      function updateButtons() {
+        Object.keys(pageMap).forEach((pageName) => {
+          const btn = pageMap[pageName].btn;
+          if (pageName === currentPage) {
+            btn.classList.add("active");
+            btn.disabled = true;
+            btn.style.cursor = "pointer";
+            btn.style.pointerEvents = "none";
+            btn.style.color = "var(--primary-color)";
+            btn.style.transform = "translateY(-5px) scale(1.2)";
+            btn.style.filter = "drop-shadow(0 0 10px var(--primary-color))";
+          } else {
+            btn.classList.remove("active");
+            btn.disabled = false;
+            btn.style.cursor = "";
+            btn.style.pointerEvents = "";
+            btn.style.color = "";
+            btn.style.transform = "";
+            btn.style.filter = "";
+          }
+        });
+      }
+
+      function switchPage(targetPage) {
+        if (targetPage === currentPage) return;
+
+        const prevPage = pageMap[currentPage].page;
+        const nextPage = pageMap[targetPage].page;
+        const canvas = document.getElementById("home-canvas");
+
+        prevPage.style.display = "none";
+        nextPage.style.display = "flex";
+        nextPage.classList.remove("page-fade");
+        void nextPage.offsetWidth;
+        nextPage.classList.add("page-fade");
+
+        if (targetPage === "home") {
+          canvas.classList.remove("hidden");
+        } else {
+          canvas.classList.add("hidden");
+        }
+
+        currentPage = targetPage;
+        updateButtons();
+
+        if (targetPage === "home") {
+          if (mainTitle) {
+            mainTitle.style.animation = "none";
+            void mainTitle.offsetWidth;
+            mainTitle.style.animation = "glitch 2s infinite";
+          }
+          if (subTitle) {
+            subTitle.style.animation = "none";
+            void subTitle.offsetWidth;
+            subTitle.style.animation = "glitch 2s infinite";
+          }
+        } else if (targetPage === "gxmes") {
+          gameSearch.focus();
+        }
+      }
+
+      function showDelayedTooltip(btn) {
+        btn.classList.add("show-tooltip");
+        setTimeout(() => {
+          btn.classList.remove("show-tooltip");
+        }, 300);
+      }
+
+      homeBtn.addEventListener("click", () => {
+        console.log("Home button clicked");
+        showDelayedTooltip(homeBtn);
+        switchPage("home");
+      });
+      gxmesBtn.addEventListener("click", () => {
+        console.log("Gxmes button clicked");
+        showDelayedTooltip(gxmesBtn);
+        switchPage("gxmes");
+      });
+
+      updateButtons();
+
+      document.addEventListener("keydown", (e) => {
+        const overlay = document.getElementById("game-overlay");
+
+        if (e.key === "Escape" && overlay.classList.contains("active")) {
+          e.preventDefault();
+          document.getElementById("btn-exit").click();
+          return;
+        }
+
+        if (e.target.tagName === "INPUT") return;
+
+        if (e.key === "/") {
+          e.preventDefault();
+          if (currentPage === "home") {
+            homeSearch.focus();
+          } else if (currentPage === "gxmes") {
+            gameSearch.focus();
+          } else {
+            switchPage("gxmes");
+            setTimeout(() => gameSearch.focus(), 100);
+          }
+        }
+      });
+
+      homeSearch.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          gameSearch.value = homeSearch.value;
+          gameSearch.dispatchEvent(new Event("input", {bubbles: true}));
+          homeSearch.value = "";
+          switchPage("gxmes");
+        } else if (!/[a-zA-Z0-9 ]/.test(e.key)) {
+          e.preventDefault();
+        }
+      });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const gameGrid = document.getElementById("game-grid");
+        const searchInput = document.getElementById("game-search");
+        const overlay = document.getElementById("game-overlay");
+        const frameContainer = document.getElementById("game-frame-container");
+        const globalActionBar = document.querySelector(".action-bar");
+
+        let currentGame = null;
+        let gamesList = [];
+
+      async function fetchGames() {
+        try {
+          const response = await fetch("https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/gxmes-list.json");
+          const data = await response.json();
+          gamesList = Array.isArray(data) ? data : (data ? [data] : []);
+          gamesList.sort((a, b) => (a.name || "").localeCompare(b.name || "", undefined, {numeric: true, sensitivity: "base"}));
+          renderGames(gamesList);
+        } catch (error) {
+          console.error("Failed to fetch games:", error);
+          gameGrid.innerHTML = '<p style="color:white;text-align:center;font-family:Orbitron;">Failed to load games</p>';
+        }
+      }
+
+      function renderGames(games) {
+        gameGrid.innerHTML = "";
+        games.forEach((game) => {
+          const item = document.createElement("div");
+          item.className = "game-item game-pop";
+          item.onclick = () => openGameModal(game);
+          item.innerHTML = `
+            <img src="${game.image}" alt="${game.name}" loading="lazy">
+            <div class="game-title">${game.name}</div>
+          `;
+          gameGrid.appendChild(item);
+        });
+      }
+
+      function normalizeForSearch(str) {
+        return str.toLowerCase().replace(/[^a-z0-9]/g, "");
+      }
+
+      let searchDebounce;
+      searchInput.addEventListener("input", (e) => {
+        clearTimeout(searchDebounce);
+        searchDebounce = setTimeout(() => {
+          const term = normalizeForSearch(e.target.value);
+          renderGames(gamesList.filter((game) => normalizeForSearch(game.name).includes(term)));
+        }, 250);
+      });
+
+      searchInput.addEventListener("keypress", (e) => {
+        if (!/[a-zA-Z0-9 ]/.test(e.key)) {
+          e.preventDefault();
+        }
+      });
+
+      async function fetchText(url) {
+        try {
+          const response = await fetch(url);
+          return await response.text();
+        } catch (err) {
+          console.error("Fetch failed:", err);
+          return null;
+        }
+      }
+
+      async function openGameModal(game) {
+        currentGame = game;
+        overlay.classList.add("active");
+        globalActionBar.style.display = "none";
+        frameContainer.innerHTML = '<div style="color:white; text-align:center; margin-top:20%; font-family:Orbitron;">LOADING...</div>';
+
+        if (game.method === "code") {
+          const fetchedCode = await fetchText(game.url);
+          frameContainer.innerHTML = "";
+
+          if (fetchedCode) {
+            const wrapper = document.createElement("div");
+            wrapper.id = "game-content-wrapper";
+            wrapper.style.cssText = "width:100%; height:100%; overflow:auto; background:#000;";
+            frameContainer.appendChild(wrapper);
+
+            const baseUrl = game.url.substring(0, game.url.lastIndexOf("/") + 1);
+            const patchedCode = fetchedCode.replace(/(src|href)=(["'])(?!https?:\/\/|data:|\/\/)([^"']+)\2/gi, `$1=$2${baseUrl}$3$2`);
+
+            const parser = new DOMParser();
+            const parsedDoc = parser.parseFromString(patchedCode, "text/html");
+
+            parsedDoc.head.querySelectorAll("style").forEach((style) => {
+              wrapper.appendChild(style.cloneNode(true));
+            });
+
+            parsedDoc.head.querySelectorAll("link[rel='stylesheet']").forEach((link) => {
+              const newLink = document.createElement("link");
+              newLink.rel = "stylesheet";
+              newLink.href = link.href;
+              wrapper.appendChild(newLink);
+            });
+
+            const bodyContent = document.createElement("div");
+            bodyContent.innerHTML = parsedDoc.body.innerHTML;
+            wrapper.appendChild(bodyContent);
+            if (wrapper.dataset.scriptsLoaded) return;
+            wrapper.dataset.scriptsLoaded = "true";
+
+            parsedDoc.body.querySelectorAll("script").forEach((script) => {
+              const newScript = document.createElement("script");
+              if (script.src) {
+                newScript.src = script.src;
+              } else {
+                newScript.textContent = script.textContent;
+              }
+              wrapper.appendChild(newScript);
+            });
+          }
+        } else if (game.method === "webgl") {
+          frameContainer.innerHTML = `
+            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; color:white; text-align:center; font-family:sans-serif; padding: 20px; width: 100%;">
+              <h2 style="margin-bottom: 10px;">WebGL Mode</h2>
+              <p style="opacity: 0.8; max-width: 400px; margin-bottom: 20px;">This game requires a new window to run correctly.</p>
+              <button onclick="document.getElementById('btn-fullscreen').click()" style="padding: 15px 15px; background: #3066BE; color: white; border: none; border-radius: 100px; cursor: pointer; font-size: 20px; transition: 0.2s;"><i class="fa-solid fa-expand"></i></button>
+            </div>
+          `;
+        } else {
+          try {
+            const code = await fetchText(game.url);
+            frameContainer.innerHTML = "";
+            const iframe = document.createElement("iframe");
+            iframe.className = "newtab-iframe";
+            iframe.setAttribute("allow", "autoplay; fullscreen; keyboard-events; gamepad");
+            iframe.allowFullscreen = true;
+            const blob = new Blob([code], {type: "text/html"});
+            iframe.src = URL.createObjectURL(blob);
+            frameContainer.appendChild(iframe);
+          } catch (error) {
+            console.error("Load error:", error);
+          }
+        }
+      }
+
+      document.getElementById("btn-exit").addEventListener("click", () => {
+        overlay.classList.remove("active");
+        frameContainer.innerHTML = "";
+        globalActionBar.style.display = "flex";
+        currentGame = null;
+      });
+
+      document.getElementById("btn-fullscreen").addEventListener("click", async () => {
+        if (!currentGame) return;
+
+        const targetUrl = currentGame.url;
+        const fetchedContent = await fetchText(targetUrl);
+
+        if (fetchedContent) {
+          const newWin = window.open("about:blank", "_blank");
+          if (newWin) {
+            newWin.document.open();
+            newWin.document.write(fetchedContent);
+            newWin.document.close();
+
+            setTimeout(function () {
+              const docEl = newWin.document.documentElement;
+              const requestFs = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullscreen || docEl.msRequestFullscreen;
+              if (requestFs) requestFs.call(docEl);
+            }, 500);
+          } else {
+            alert("Popup blocked! Please allow popups to launch the game.");
+          }
+        }
+      });
+
+
+      fetchGames();
+      });
+    </script>
+  </body>
+</html>
