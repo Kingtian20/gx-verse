@@ -38,7 +38,7 @@
   {
     "name": "amongus",
     "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/7.png",
-    "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/amongus/amongus.html",
+    "url": "https://gx-vxrse.firebaseapp.com/amongus.html",
     "method": "iframe"
   },
   {
@@ -51,6 +51,18 @@
     "name": "adofai",
     "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/9.png",
     "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/adofai/adofai.html",
+    "method": "iframe"
+  },
+  {
+    "name": "allocation",
+    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/10.png",
+    "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/allocation/allocation.html",
+    "method": "iframe"
+  },
+  {
+    "name": "batterup",
+    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/11.png",
+    "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/batterup/batterup.html",
     "method": "iframe"
   }
 ]
