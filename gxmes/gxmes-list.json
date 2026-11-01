@@ -24,21 +24,33 @@
     "method": "iframe"
   },
   {
-    "name": "99nightsintheforest",
-    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/5.png",
-    "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/99nightsintheforest/99nightsintheforest.html",
-    "method": "iframe"
-  },
-    {
     "name": "8ballpool",
-    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/6.png",
+    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/5.png",
     "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/8ballpool/8ballpool.html",
     "method": "iframe"
   },
   {
     "name": "angrybirds",
-    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/7.png",
+    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/6.png",
     "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/angrybirds/angrybirds.html",
+    "method": "iframe"
+  },
+  {
+    "name": "amongus",
+    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/7.png",
+    "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/amongus/amongus.html",
+    "method": "iframe"
+  },
+  {
+    "name": "ancientsins",
+    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/8.png",
+    "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/ancientsins/ancientsins.html",
+    "method": "iframe"
+  },
+  {
+    "name": "adofai",
+    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/9.png",
+    "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/adofai/adofai.html",
     "method": "iframe"
   }
 ]
