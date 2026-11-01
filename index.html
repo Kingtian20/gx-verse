@@ -1156,6 +1156,23 @@
 
       homeSearch.addEventListener("keypress", (e) => {
         if (e.key === "Enter") {
+          const query = homeSearch.value.trim().toLowerCase();
+          if (query === "devmode" || query === "dev mode") {
+            window.isDevMode = !window.isDevMode;
+            homeSearch.value = "";
+            if (typeof showToast === "function") {
+              if (window.isDevMode) {
+                showToast("You're in dev mode", "casual");
+              } else {
+                showToast("Dev mode disabled", "info");
+              }
+            }
+            if (typeof window.fetchGames === "function") {
+              window.fetchGames();
+            }
+            return;
+          }
+
           gameSearch.value = homeSearch.value;
           gameSearch.dispatchEvent(new Event("input", {bubbles: true}));
           homeSearch.value = "";
@@ -1175,7 +1192,6 @@
           return;
         }
 
-        // Remove oldest toast if we have 5 or more
         const existingToasts = container.querySelectorAll(".toast");
         if (existingToasts.length >= 5) {
           const oldestToast = existingToasts[0];
@@ -1223,10 +1239,14 @@
 
         let currentGame = null;
         let gamesList = [];
+        window.isDevMode = false;
 
       async function fetchGames() {
         try {
-          const response = await fetch("https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/gxmes-list.json");
+          const url = window.isDevMode
+            ? "gxmes-list.json"
+            : "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/gxmes-list.json";
+          const response = await fetch(url);
           const data = await response.json();
           gamesList = Array.isArray(data) ? data : (data ? [data] : []);
           gamesList.sort((a, b) => (a.name || "").localeCompare(b.name || "", undefined, {numeric: true, sensitivity: "base"}));
@@ -1234,8 +1254,12 @@
         } catch (error) {
           console.error("Failed to fetch games:", error);
           gameGrid.innerHTML = '<p style="color:white;text-align:center;font-family:Orbitron;">Failed to load games</p>';
+          if (window.isDevMode && typeof showToast === "function") {
+            showToast("Failed to load local gxmes-list.json", "warn");
+          }
         }
       }
+      window.fetchGames = fetchGames;
 
       function renderGames(games) {
         gameGrid.innerHTML = "";
@@ -1329,6 +1353,14 @@
               wrapper.appendChild(newScript);
             });
           }
+        } else if (game.method === "sandbox") {
+          frameContainer.innerHTML = "";
+          const iframe = document.createElement("iframe");
+          iframe.className = "newtab-iframe";
+          iframe.setAttribute("allow", "autoplay; fullscreen; keyboard-events; gamepad");
+          iframe.allowFullscreen = true;
+          iframe.src = game.url;
+          frameContainer.appendChild(iframe);
         } else if (game.method === "webgl") {
           frameContainer.innerHTML = `
             <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; color:white; text-align:center; font-family:sans-serif; padding: 20px; width: 100%;">
