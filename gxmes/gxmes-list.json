@@ -1,68 +1,98 @@
 [
   {
-    "name": "1v1soccer",
+    "name": "1v1 Soccer",
     "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/1.png",
     "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/1v1soccer/1v1soccer.html",
     "method": "iframe"
   },
   {
-    "name": "1v1tennis",
+    "name": "1v1 Tennis",
     "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/2.png",
     "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/1v1tennis/1v1tennis.html",
     "method": "iframe"
   },
   {
-    "name": "1v1lol",
+    "name": "1v1 Lol",
     "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/3.png",
     "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/1v1lol/1v1lol.html",
     "method": "iframe"
   },
   {
-    "name": "10bullets",
+    "name": "10 Bullets",
     "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/4.png",
     "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/10bullets/10bullets.html",
     "method": "iframe"
   },
   {
-    "name": "8ballpool",
+    "name": "8 Ball Pool",
     "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/5.png",
     "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/8ballpool/8ballpool.html",
     "method": "iframe"
   },
   {
-    "name": "angrybirds",
+    "name": "Angry Birds",
     "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/6.png",
     "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/angrybirds/angrybirds.html",
     "method": "iframe"
   },
   {
-    "name": "amongus",
+    "name": "Among Us",
     "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/7.png",
     "url": "https://gx-vxrse.firebaseapp.com/amongus.html",
     "method": "iframe"
   },
   {
-    "name": "ancientsins",
+    "name": "Ancient Sins",
     "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/8.png",
     "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/ancientsins/ancientsins.html",
     "method": "iframe"
   },
   {
-    "name": "adofai",
+    "name": "ADOFAI",
     "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/9.png",
     "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/adofai/adofai.html",
     "method": "iframe"
   },
   {
-    "name": "allocation",
+    "name": "Allocation",
     "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/10.png",
     "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/allocation/allocation.html",
     "method": "iframe"
   },
   {
-    "name": "batterup",
+    "name": "Batter Up",
     "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/11.png",
     "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/batterup/batterup.html",
     "method": "iframe"
+  },
+  {
+    "name": "Basket Random",
+    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/12.png",
+    "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/basketrandom/basketrandom.html",
+    "method": "iframe"
+  },
+  {
+    "name": "Basketball Stars",
+    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/13.png",
+    "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/basketballstars/basketballstars.html",
+    "method": "iframe"
+  },
+  {
+    "name": "Bad Parenting",
+    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/14.png",
+    "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/badparenting/badparenting.html",
+    "method": "iframe"
+  },
+  {
+    "name": "Drift Hunters",
+    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/15.png",
+    "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/drifthunters/drifthunters.html",
+    "method": "iframe"
+  },
+  {
+    "name": "Hollow Knight Demake",
+    "image": "https://raw.githubusercontent.com/Kingtian20/gx-imgs/main/gxmes/16.png",
+    "url": "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/hollowknightdemake/hollowknightdemake.html",
+    "method": "code"
   }
 ]
