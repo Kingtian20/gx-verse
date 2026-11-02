@@ -187,17 +187,20 @@
       .search-wrapper {
         position: sticky;
         top: 20px;
-        width: 100%;
+        width: 100vw;
+        max-width: 1200px;
         display: flex;
         justify-content: center;
         padding: 15px 0;
         z-index: 100;
         background: transparent;
         pointer-events: none;
+        margin: 0 auto;
+        flex-shrink: 0;
       }
 
       #gxmes-page .search-box {
-        width: 80%;
+        width: 100%;
         max-width: 800px;
         height: 60px;
         pointer-events: all;
@@ -219,15 +222,17 @@
       #gxmes-page {
         background-color: #000 !important;
         min-height: 100vh;
+        min-width: 100vw;
       }
 
       .grid {
         width: 90%;
         max-width: 1200px;
+        min-width: 800px;
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 30px;
-        margin-top: 80px;
+        margin: 80px auto 100px auto;
         padding-bottom: 100px;
       }
 
@@ -304,7 +309,9 @@
       }
 
       #game-overlay.active ~ .action-bar,
-      #game-overlay.active ~ #action-bar-canvas {
+      #game-overlay.active ~ #action-bar-canvas,
+      #settings-page.active ~ .action-bar,
+      #settings-page.active ~ #action-bar-canvas {
         display: none !important;
       }
 
@@ -489,16 +496,6 @@
 
       .action-bar button.active {
         color: var(--primary-color) !important;
-        transform: translateY(-5px) scale(1.2);
-        filter: drop-shadow(0 0 10px var(--primary-color));
-      }
-
-      .actionbarBtn {
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      }
-
-      .actionbarBtn:hover {
-        color: var(--primary-color);
         transform: translateY(-5px) scale(1.2);
         filter: drop-shadow(0 0 10px var(--primary-color));
       }
@@ -716,6 +713,544 @@
         opacity: 0.5;
       }
 
+      .login-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-family: "Orbitron", sans-serif;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.6);
+        background: transparent;
+        border: 1px solid transparent;
+        padding: 10px;
+        width: 40px;
+        height: 40px;
+        border-radius: 100px;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      }
+
+      .login-btn:hover {
+        color: rgba(255, 255, 255, 0.9);
+        border-color: rgba(255, 255, 255, 0.3);
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      .settings-btn {
+        position: absolute;
+        top: 20px;
+        left: 70px;
+        font-family: "Orbitron", sans-serif;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.6);
+        background: transparent;
+        border: 1px solid transparent;
+        padding: 10px;
+        width: 40px;
+        height: 40px;
+        border-radius: 100px;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      }
+
+      .settings-btn:hover {
+        color: rgba(255, 255, 255, 0.9);
+        border-color: rgba(255, 255, 255, 0.3);
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      #settings-page {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #0a0a0a;
+        z-index: 1000;
+        display: none;
+        flex-direction: column;
+      }
+
+      #settings-page.active {
+        display: flex;
+      }
+
+      .settings-content {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .settings-sidebar {
+        width: 260px;
+        min-width: 260px;
+        height: 100%;
+        padding: 24px 16px 20px 16px;
+        background: rgba(255, 255, 255, 0.03);
+        border-right: 1px solid rgba(255, 255, 255, 0.06);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .settings-categories {
+        flex: 1;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .settings-search-wrapper {
+        padding-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      #settings-page .search-box {
+        position: relative;
+        width: 100%;
+        height: 44px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 100px;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      #settings-page .search-box:hover {
+        border-color: rgba(255, 255, 255, 0.25);
+        background-color: rgba(255, 255, 255, 0.08);
+      }
+
+      #settings-page .search-box:focus-within {
+        border-color: var(--secondary-color);
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 12px rgba(0, 255, 247, 0.25);
+      }
+
+      #settings-page .search-box input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: transparent;
+        color: #fff;
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.85rem;
+        outline: none;
+        letter-spacing: 0.5px;
+      }
+
+      #settings-page .search-box input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      #settings-page .line-driver {
+        display: none;
+      }
+
+      .settings-main {
+        flex: 1;
+        height: 100%;
+        padding: 40px 60px 60px 40px;
+        overflow-y: auto;
+      }
+
+      .settings-category {
+        padding: 12px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.7);
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
+      }
+
+      .settings-category:hover {
+        color: rgba(255, 255, 255, 0.95);
+        background-color: rgba(255, 255, 255, 0.08);
+      }
+
+      .settings-category.active {
+        color: #fff;
+        background-color: rgba(255, 255, 255, 0.12);
+      }
+
+      .settings-section {
+        display: none;
+        margin-bottom: 30px;
+      }
+
+      .settings-section.active {
+        display: block;
+      }
+
+      .settings-section-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 18px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding-bottom: 8px;
+      }
+
+      .settings-no-results {
+        text-align: center;
+        padding: 60px 20px;
+        color: rgba(255, 255, 255, 0.5);
+        font-family: "Orbitron", sans-serif;
+        font-size: 1rem;
+        letter-spacing: 1px;
+      }
+
+      .settings-no-results i {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        display: block;
+        color: rgba(255, 255, 255, 0.3);
+      }
+
+      .setting-item {
+        position: relative;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 16px;
+        opacity: 0;
+        transform: translateX(30px);
+        animation: slideIn 0.4s ease forwards;
+        z-index: 1;
+      }
+
+      .setting-item:has(.custom-select.open),
+      .setting-item.dropdown-open {
+        z-index: 9999 !important;
+      }
+
+      @keyframes slideIn {
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .setting-item:nth-child(1) {
+        animation-delay: 0.05s;
+      }
+
+      .setting-item:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+
+      .setting-item:nth-child(3) {
+        animation-delay: 0.15s;
+      }
+
+      .setting-item:nth-child(4) {
+        animation-delay: 0.2s;
+      }
+
+      .setting-item:nth-child(5) {
+        animation-delay: 0.25s;
+      }
+
+      .setting-item:nth-child(6) {
+        animation-delay: 0.3s;
+      }
+
+      .setting-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 12px;
+      }
+
+      .setting-tooltip-icon {
+        color: rgba(255, 255, 255, 0.4);
+        cursor: help;
+        font-size: 0.9rem;
+        margin-left: 8px;
+        transition: color 0.2s ease;
+      }
+
+      .setting-tooltip-icon:hover {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .setting-header {
+        display: flex;
+        align-items: center;
+      }
+
+      .custom-tooltip {
+        position: absolute;
+        background: rgba(20, 20, 20, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 8px;
+        padding: 10px 14px;
+        max-width: 250px;
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.4;
+        z-index: 10000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+        pointer-events: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .custom-tooltip::after {
+        content: "";
+        position: absolute;
+        top: -6px;
+        left: 10px;
+        border-width: 6px;
+        border-style: solid;
+        border-color: transparent transparent rgba(20, 20, 20, 0.95) transparent;
+      }
+
+      .setting-control {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+      }
+
+      .custom-checkbox {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+        user-select: none;
+        position: relative;
+      }
+
+      .custom-checkbox input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+        pointer-events: none;
+      }
+
+      .checkbox-box {
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        flex-shrink: 0;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+      }
+
+      .checkbox-box i {
+        font-size: 0.75rem;
+        color: #fff;
+        opacity: 0;
+        transform: scale(0.3) rotate(-15deg);
+        transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .custom-checkbox:hover .checkbox-box {
+        border-color: var(--secondary-color);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 8px rgba(0, 255, 247, 0.25);
+      }
+
+      .custom-checkbox input[type="checkbox"]:checked + .checkbox-box {
+        background: linear-gradient(135deg, var(--primary-color), #0066ff);
+        border-color: var(--secondary-color);
+        box-shadow: 0 0 12px rgba(0, 255, 247, 0.45), inset 0 0 4px rgba(255, 255, 255, 0.3);
+      }
+
+      .custom-checkbox input[type="checkbox"]:checked + .checkbox-box i {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+        text-shadow: 0 0 4px var(--secondary-color);
+      }
+
+      .checkbox-label {
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.5px;
+        transition: color 0.2s ease, text-shadow 0.2s ease;
+      }
+
+      .custom-checkbox:hover .checkbox-label {
+        color: #fff;
+      }
+
+      .custom-checkbox input[type="checkbox"]:checked ~ .checkbox-label {
+        color: #fff;
+        text-shadow: 0 0 8px rgba(0, 255, 247, 0.3);
+      }
+
+      .custom-select {
+        position: relative;
+        width: 220px;
+        user-select: none;
+        z-index: 2;
+      }
+
+      .custom-select.open {
+        z-index: 10000;
+      }
+
+      .custom-select-trigger {
+        width: 100%;
+        height: 44px;
+        padding: 0 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 10px;
+        color: #fff;
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+        outline: none;
+      }
+
+      .custom-select-trigger:hover {
+        border-color: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .custom-select.open .custom-select-trigger {
+        border-color: var(--secondary-color);
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 12px rgba(0, 255, 247, 0.25);
+      }
+
+      .custom-select-arrow {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.5);
+        transition: transform 0.25s ease, color 0.2s ease;
+      }
+
+      .custom-select.open .custom-select-arrow {
+        transform: rotate(180deg);
+        color: var(--secondary-color);
+      }
+
+      .custom-select-dropdown {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        width: 100%;
+        background: #0e0e14;
+        background: rgba(14, 14, 20, 0.98);
+        border: 1px solid rgba(0, 255, 247, 0.4);
+        border-radius: 10px;
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.95), 0 0 20px rgba(0, 255, 247, 0.2);
+        padding: 6px;
+        z-index: 10001;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+        pointer-events: none;
+      }
+
+      .custom-select.open .custom-select-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .custom-select-option {
+        padding: 10px 14px;
+        border-radius: 6px;
+        color: rgba(255, 255, 255, 0.75);
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.82rem;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: all 0.15s ease;
+      }
+
+      .custom-select-option:hover {
+        background: rgba(0, 255, 247, 0.12);
+        color: var(--secondary-color);
+        padding-left: 18px;
+      }
+
+      .custom-select-option.selected {
+        background: rgba(0, 0, 255, 0.25);
+        color: #fff;
+        font-weight: bold;
+      }
+
+      .custom-select-option .option-check {
+        font-size: 0.75rem;
+        color: var(--secondary-color);
+        opacity: 0;
+        transform: scale(0.5);
+        transition: all 0.15s ease;
+      }
+
+      .custom-select-option.selected .option-check {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .settings-close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 100px;
+        background: rgba(255, 255, 255, 0.05);
+        color: rgba(255, 255, 255, 0.7);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        z-index: 100;
+      }
+
+      .settings-close-btn:hover {
+        color: rgba(255, 255, 255, 0.95);
+        border-color: rgba(255, 255, 255, 0.3);
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
       #home-canvas {
         position: fixed;
         top: 0;
@@ -790,6 +1325,8 @@
     <canvas id="home-canvas"></canvas>
 
     <section class="home" id="home-page">
+      <button class="login-btn"><i class="fa-solid fa-right-to-bracket"></i></button>
+      <button class="settings-btn"><i class="fa-solid fa-gear"></i></button>
       <h1 class="main-title"><span class="g-circle">G</span>X VERSE</h1>
       <h1 class="sub-title main-title" style="font-size: 1rem; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%)">Welcome to GX VERSE</h1>
       <div class="search-container">
@@ -801,7 +1338,7 @@
       <label class="version-label">Ver 0.0.3 BETA</label>
     </section>
 
-    <section class="gxmes" id="gxmes-page" style="display: none; width: 100vw; height: 100vh; flex-direction: column; align-items: center; overflow-y: auto">
+    <section class="gxmes" id="gxmes-page" style="display: none; width: 100vw; height: 100vh; flex-direction: column; align-items: stretch; overflow-y: auto">
       <div class="search-wrapper">
         <div class="search-box">
           <div class="line-driver"></div>
@@ -818,6 +1355,134 @@
       <div class="game-controls">
         <button id="btn-fullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
         <button id="btn-exit" title="Exit"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+
+    <div id="settings-page">
+      <button class="settings-close-btn"><i class="fa-solid fa-xmark"></i></button>
+      <div class="settings-content">
+        <div class="settings-sidebar">
+          <div class="settings-categories">
+            <div class="settings-category active" data-category="general">General</div>
+            <div class="settings-category" data-category="appearance">Appearance</div>
+          </div>
+          <div class="settings-search-wrapper">
+            <div class="search-box">
+              <div class="line-driver"></div>
+              <input type="text" id="settings-search" placeholder="Search..." autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" />
+            </div>
+          </div>
+        </div>
+        <div class="settings-main">
+          <div class="settings-section active" id="section-general">
+            <h2 class="settings-section-title">General</h2>
+            <div class="setting-item">
+              <div class="setting-header">
+                <div class="setting-title">Dark Mode <i class="fa-regular fa-circle-question setting-tooltip-icon" data-tooltip="Enable dark mode for the interface"></i></div>
+              </div>
+              <div class="setting-control">
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="setting-dark-mode" checked />
+                  <span class="checkbox-box"><i class="fa-solid fa-check"></i></span>
+                  <span class="checkbox-label">Enabled</span>
+                </label>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-header">
+                <div class="setting-title">Notifications <i class="fa-regular fa-circle-question setting-tooltip-icon" data-tooltip="Manage push notifications and alerts"></i></div>
+              </div>
+              <div class="setting-control">
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="setting-notifications" checked />
+                  <span class="checkbox-box"><i class="fa-solid fa-check"></i></span>
+                  <span class="checkbox-label">Enabled</span>
+                </label>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-header">
+                <div class="setting-title">Auto-Save <i class="fa-regular fa-circle-question setting-tooltip-icon" data-tooltip="Automatically save your progress"></i></div>
+              </div>
+              <div class="setting-control">
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="setting-autosave" checked />
+                  <span class="checkbox-box"><i class="fa-solid fa-check"></i></span>
+                  <span class="checkbox-label">Enabled</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="settings-section" id="section-appearance">
+            <h2 class="settings-section-title">Appearance</h2>
+            <div class="setting-item">
+              <div class="setting-header">
+                <div class="setting-title">Accent Color <i class="fa-regular fa-circle-question setting-tooltip-icon" data-tooltip="Choose your preferred accent color"></i></div>
+              </div>
+              <div class="setting-control">
+                <div class="custom-select" id="setting-accent-color">
+                  <button type="button" class="custom-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                    <span class="custom-select-value">Blue</span>
+                    <i class="fa-solid fa-chevron-down custom-select-arrow"></i>
+                  </button>
+                  <div class="custom-select-dropdown" role="listbox">
+                    <div class="custom-select-option selected" data-value="blue" role="option" aria-selected="true">
+                      <span>Blue</span>
+                      <i class="fa-solid fa-check option-check"></i>
+                    </div>
+                    <div class="custom-select-option" data-value="cyan" role="option" aria-selected="false">
+                      <span>Cyan</span>
+                      <i class="fa-solid fa-check option-check"></i>
+                    </div>
+                    <div class="custom-select-option" data-value="purple" role="option" aria-selected="false">
+                      <span>Purple</span>
+                      <i class="fa-solid fa-check option-check"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-header">
+                <div class="setting-title">Font Size <i class="fa-regular fa-circle-question setting-tooltip-icon" data-tooltip="Adjust the font size for better readability"></i></div>
+              </div>
+              <div class="setting-control">
+                <div class="custom-select" id="setting-font-size">
+                  <button type="button" class="custom-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                    <span class="custom-select-value">Medium</span>
+                    <i class="fa-solid fa-chevron-down custom-select-arrow"></i>
+                  </button>
+                  <div class="custom-select-dropdown" role="listbox">
+                    <div class="custom-select-option" data-value="small" role="option" aria-selected="false">
+                      <span>Small</span>
+                      <i class="fa-solid fa-check option-check"></i>
+                    </div>
+                    <div class="custom-select-option selected" data-value="medium" role="option" aria-selected="true">
+                      <span>Medium</span>
+                      <i class="fa-solid fa-check option-check"></i>
+                    </div>
+                    <div class="custom-select-option" data-value="large" role="option" aria-selected="false">
+                      <span>Large</span>
+                      <i class="fa-solid fa-check option-check"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-header">
+                <div class="setting-title">Animations <i class="fa-regular fa-circle-question setting-tooltip-icon" data-tooltip="Enable or disable UI animations"></i></div>
+              </div>
+              <div class="setting-control">
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="setting-animations" checked />
+                  <span class="checkbox-box"><i class="fa-solid fa-check"></i></span>
+                  <span class="checkbox-label">Enabled</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1132,11 +1797,20 @@
 
       document.addEventListener("keydown", (e) => {
         const overlay = document.getElementById("game-overlay");
+        const settingsPage = document.getElementById("settings-page");
 
-        if (e.key === "Escape" && overlay.classList.contains("active")) {
-          e.preventDefault();
-          document.getElementById("btn-exit").click();
-          return;
+        if (e.key === "Escape") {
+          if (overlay && overlay.classList.contains("active")) {
+            e.preventDefault();
+            document.getElementById("btn-exit").click();
+            return;
+          }
+          if (settingsPage && settingsPage.classList.contains("active")) {
+            e.preventDefault();
+            const settingsCloseBtn = document.querySelector(".settings-close-btn");
+            if (settingsCloseBtn) settingsCloseBtn.click();
+            return;
+          }
         }
 
         if (e.target.tagName === "INPUT") return;
@@ -1263,6 +1937,10 @@
 
       function renderGames(games) {
         gameGrid.innerHTML = "";
+        if (games.length === 0) {
+          gameGrid.innerHTML = '<p style="color: rgba(255, 255, 255, 0.5); text-align: center; font-family: Orbitron; font-size: 1.2rem; grid-column: 1 / -1; padding: 40px;">No gxmes found</p>';
+          return;
+        }
         games.forEach((game) => {
           const item = document.createElement("div");
           item.className = "game-item game-pop";
@@ -1419,6 +2097,255 @@
       });
 
       fetchGames();
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const settingsBtn = document.querySelector(".settings-btn");
+        const settingsPage = document.getElementById("settings-page");
+        const settingsCloseBtn = document.querySelector(".settings-close-btn");
+        const settingsCategories = document.querySelectorAll(".settings-category");
+        const settingsSections = document.querySelectorAll(".settings-section");
+        const settingsSearch = document.getElementById("settings-search");
+        const settingsMain = document.querySelector(".settings-main");
+
+        let lastActiveCategory = "general";
+
+        function showCategory(categoryName) {
+          lastActiveCategory = categoryName;
+          settingsSearch.value = "";
+
+          const existingNoResults = settingsMain.querySelector(".settings-no-results");
+          if (existingNoResults) existingNoResults.remove();
+
+          settingsCategories.forEach(c => {
+            c.classList.toggle("active", c.dataset.category === categoryName);
+          });
+
+          settingsSections.forEach(section => {
+            section.style.display = "";
+            if (section.id === `section-${categoryName}`) {
+              section.classList.add("active");
+              const items = section.querySelectorAll(".setting-item");
+              items.forEach((item, index) => {
+                item.style.display = "block";
+                item.style.animation = "none";
+                void item.offsetHeight;
+                item.style.animation = `slideIn 0.4s ease forwards ${index * 0.05}s`;
+              });
+            } else {
+              section.classList.remove("active");
+              const items = section.querySelectorAll(".setting-item");
+              items.forEach(item => {
+                item.style.display = "block";
+              });
+            }
+          });
+        }
+
+        settingsBtn.addEventListener("click", () => {
+          settingsPage.classList.add("active");
+          showCategory(lastActiveCategory);
+        });
+
+        settingsCloseBtn.addEventListener("click", () => {
+          settingsPage.classList.remove("active");
+          showCategory(lastActiveCategory);
+        });
+
+        settingsCategories.forEach(category => {
+          category.addEventListener("click", () => {
+            showCategory(category.dataset.category);
+          });
+        });
+
+        function normalizeForSearch(str) {
+          return str.toLowerCase().replace(/[^a-z0-9]/g, "");
+        }
+
+        let searchDebounce;
+        settingsSearch.addEventListener("input", (e) => {
+          clearTimeout(searchDebounce);
+          searchDebounce = setTimeout(() => {
+            const rawVal = e.target.value.trim();
+            const term = normalizeForSearch(rawVal);
+
+            const existingNoResults = settingsMain.querySelector(".settings-no-results");
+            if (existingNoResults) existingNoResults.remove();
+
+            if (term === "") {
+              showCategory(lastActiveCategory);
+              return;
+            }
+
+            settingsCategories.forEach(c => c.classList.remove("active"));
+            let totalMatches = 0;
+
+            settingsSections.forEach(section => {
+              const items = section.querySelectorAll(".setting-item");
+              let sectionMatches = 0;
+
+              items.forEach(item => {
+                const titleEl = item.querySelector(".setting-title");
+                const tooltipIcon = item.querySelector(".setting-tooltip-icon");
+                const title = titleEl ? normalizeForSearch(titleEl.textContent) : "";
+                const description = tooltipIcon && tooltipIcon.dataset.tooltip ? normalizeForSearch(tooltipIcon.dataset.tooltip) : "";
+
+                if (title.includes(term) || description.includes(term)) {
+                  item.style.display = "block";
+                  sectionMatches++;
+                  totalMatches++;
+                } else {
+                  item.style.display = "none";
+                }
+              });
+
+              if (sectionMatches > 0) {
+                section.classList.add("active");
+                section.style.display = "block";
+              } else {
+                section.classList.remove("active");
+                section.style.display = "none";
+              }
+            });
+
+            if (totalMatches === 0) {
+              const noResults = document.createElement("div");
+              noResults.className = "settings-no-results";
+              noResults.innerHTML = `
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <div>No settings found for "${rawVal}"</div>
+              `;
+              settingsMain.appendChild(noResults);
+            }
+          }, 150);
+        });
+
+        settingsSearch.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            e.stopPropagation();
+            if (settingsSearch.value !== "") {
+              settingsSearch.value = "";
+              showCategory(lastActiveCategory);
+            } else {
+              settingsCloseBtn.click();
+            }
+          }
+        });
+
+        settingsSearch.addEventListener("keypress", (e) => {
+          if (!/[a-zA-Z0-9 ]/.test(e.key)) {
+            e.preventDefault();
+          }
+        });
+
+        document.querySelectorAll(".custom-checkbox input[type='checkbox']").forEach(checkbox => {
+          checkbox.addEventListener("change", () => {
+            const label = checkbox.closest(".custom-checkbox").querySelector(".checkbox-label");
+            if (label) {
+              label.textContent = checkbox.checked ? "Enabled" : "Disabled";
+            }
+          });
+        });
+
+        const customSelects = document.querySelectorAll(".custom-select");
+
+        customSelects.forEach(select => {
+          const trigger = select.querySelector(".custom-select-trigger");
+          const valueDisplay = select.querySelector(".custom-select-value");
+          const options = select.querySelectorAll(".custom-select-option");
+
+          trigger.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const isOpen = select.classList.contains("open");
+
+            customSelects.forEach(s => {
+              if (s !== select) {
+                s.classList.remove("open");
+                const p = s.closest(".setting-item");
+                if (p) p.classList.remove("dropdown-open");
+                const sTrigger = s.querySelector(".custom-select-trigger");
+                if (sTrigger) sTrigger.setAttribute("aria-expanded", "false");
+              }
+            });
+
+            select.classList.toggle("open", !isOpen);
+            const parent = select.closest(".setting-item");
+            if (parent) parent.classList.toggle("dropdown-open", !isOpen);
+            trigger.setAttribute("aria-expanded", !isOpen ? "true" : "false");
+          });
+
+          options.forEach(option => {
+            option.addEventListener("click", (e) => {
+              e.stopPropagation();
+              const val = option.dataset.value;
+              const text = option.querySelector("span").textContent;
+
+              options.forEach(opt => {
+                opt.classList.remove("selected");
+                opt.setAttribute("aria-selected", "false");
+              });
+              option.classList.add("selected");
+              option.setAttribute("aria-selected", "true");
+
+              valueDisplay.textContent = text;
+              select.classList.remove("open");
+              const parent = select.closest(".setting-item");
+              if (parent) parent.classList.remove("dropdown-open");
+              trigger.setAttribute("aria-expanded", "false");
+
+              select.dispatchEvent(new CustomEvent("change", { detail: { value: val, text: text } }));
+            });
+          });
+        });
+
+        document.addEventListener("click", (e) => {
+          if (!e.target.closest(".custom-select")) {
+            customSelects.forEach(s => {
+              s.classList.remove("open");
+              const parent = s.closest(".setting-item");
+              if (parent) parent.classList.remove("dropdown-open");
+              const trigger = s.querySelector(".custom-select-trigger");
+              if (trigger) trigger.setAttribute("aria-expanded", "false");
+            });
+          }
+        });
+
+        const tooltipIcons = document.querySelectorAll(".setting-tooltip-icon");
+        tooltipIcons.forEach(icon => {
+          icon.addEventListener("mouseenter", (e) => {
+            const tooltipText = icon.dataset.tooltip;
+            if (!tooltipText) return;
+
+            const existingTooltip = document.querySelector(".custom-tooltip");
+            if (existingTooltip) existingTooltip.remove();
+
+            const tooltip = document.createElement("div");
+            tooltip.className = "custom-tooltip";
+            tooltip.textContent = tooltipText;
+
+            const rect = icon.getBoundingClientRect();
+            tooltip.style.left = `${rect.left}px`;
+            tooltip.style.top = `${rect.bottom + 8}px`;
+
+            document.body.appendChild(tooltip);
+
+            setTimeout(() => {
+              tooltip.style.opacity = "1";
+              tooltip.style.visibility = "visible";
+            }, 10);
+          });
+
+          icon.addEventListener("mouseleave", () => {
+            const tooltip = document.querySelector(".custom-tooltip");
+            if (tooltip) {
+              tooltip.style.opacity = "0";
+              tooltip.style.visibility = "hidden";
+              setTimeout(() => tooltip.remove(), 200);
+            }
+          });
+        });
       });
     </script>
   </body>
