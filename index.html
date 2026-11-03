@@ -20,7 +20,7 @@
       window.isDevMode = isDevMode;
 
       // Set base URL based on devmode
-      const baseUrl = isDevMode ? '' : 'https://unpkg.com/Kingtian20/gx-verse@main';
+      const baseUrl = isDevMode ? '' : 'https://cdn.jsdelivr.net/gh/Kingtian20/gx-verse@main';
 
       // Dynamically load CSS files
       const cssFiles = [
@@ -35,7 +35,7 @@
       cssFiles.forEach(file => {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.href = `${baseUrl}/${file}`;
+        link.href = baseUrl ? `${baseUrl}/${file}` : file;
         document.head.appendChild(link);
       });
     </script>
@@ -302,19 +302,19 @@
     </div>
 
     <script>
-      // Dynamically load JS files (renamed to .txt to avoid MIME issues)
+      // Dynamically load JS files
       const jsFiles = [
-        'js/canvas.txt',
-        'js/actionbar.txt',
-        'js/toast.txt',
-        'js/navigation.txt',
-        'js/games.txt',
-        'js/settings.txt'
+        'js/canvas.js',
+        'js/actionbar.js',
+        'js/toast.js',
+        'js/navigation.js',
+        'js/games.js',
+        'js/settings.js'
       ];
 
       jsFiles.forEach(file => {
         const script = document.createElement('script');
-        script.src = `${baseUrl}/${file}`;
+        script.src = baseUrl ? `${baseUrl}/${file}` : file;
         document.body.appendChild(script);
       });
     </script>
