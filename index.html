@@ -30,7 +30,7 @@
 
       body {
         width: 100vw;
-        height: 100vh;
+        min-height: 100vh;
         background-color: #000;
         color: #fff;
         display: flex;
@@ -131,14 +131,6 @@
         font-size: 1.1rem;
         outline: none;
         font-family: "Orbitron", sans-serif;
-      }
-
-      .search-box:hover {
-        transform: scale(1.05);
-      }
-
-      .search-box:focus-within {
-        transform: scale(1.02);
       }
 
       .search-box:focus-within .line-driver {
@@ -777,6 +769,7 @@
         z-index: 1000;
         display: none;
         flex-direction: column;
+        overflow-y: auto;
       }
 
       #settings-page.active {
@@ -787,20 +780,51 @@
         display: flex;
         flex-direction: row;
         width: 100%;
-        height: 100%;
-        overflow: hidden;
+        min-height: 100%;
+        padding: 40px 15% 80px 15%;
+        box-sizing: border-box;
+        gap: 40px;
       }
 
       .settings-sidebar {
-        width: 260px;
-        min-width: 260px;
-        height: 100%;
-        padding: 24px 16px 20px 16px;
-        background: rgba(255, 255, 255, 0.03);
-        border-right: 1px solid rgba(255, 255, 255, 0.06);
+        width: 220px;
+        min-width: 220px;
+        padding: 20px 0;
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 20px;
+        flex-shrink: 0;
+      }
+
+      .settings-back-link {
+        padding: 0 0 8px 0;
+        margin-bottom: 8px;
+      }
+
+      .settings-back-link a {
+        color: rgba(255, 255, 255, 0.5);
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.85rem;
+        text-decoration: none;
+        transition: color 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .settings-back-link a:hover {
+        color: var(--secondary-color);
+      }
+
+      .settings-sidebar-title {
+        padding: 0;
+        font-family: "Orbitron", sans-serif;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #fff;
+        text-transform: lowercase;
+        letter-spacing: 2px;
+        margin-bottom: 16px;
       }
 
       .settings-categories {
@@ -808,12 +832,8 @@
         overflow-y: auto;
         display: flex;
         flex-direction: column;
-        gap: 6px;
-      }
-
-      .settings-search-wrapper {
-        padding-top: 16px;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        gap: 4px;
+        padding: 0;
       }
 
       #settings-page .search-box {
@@ -862,34 +882,44 @@
 
       .settings-main {
         flex: 1;
-        height: 100%;
-        padding: 40px 60px 60px 40px;
-        overflow-y: auto;
+        padding-top: 0;
+      }
+
+      .settings-main .settings-search-wrapper {
+        margin-top: 10px;
+        margin-bottom: 30px;
+        border-top: none;
       }
 
       .settings-category {
-        padding: 12px 16px;
-        border-radius: 8px;
+        padding: 10px 12px;
+        border-radius: 6px;
         cursor: pointer;
-        color: rgba(255, 255, 255, 0.7);
+        color: rgba(255, 255, 255, 0.6);
         font-family: "Orbitron", sans-serif;
         font-size: 0.9rem;
         transition: all 0.2s ease;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
       }
 
       .settings-category:hover {
-        color: rgba(255, 255, 255, 0.95);
-        background-color: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.9);
+        background-color: rgba(255, 255, 255, 0.06);
       }
 
       .settings-category.active {
-        color: #fff;
-        background-color: rgba(255, 255, 255, 0.12);
+        color: var(--secondary-color);
+        background-color: rgba(0, 255, 247, 0.15);
+        border: solid 1px rgba(0, 255, 247, 0.3);
       }
 
       .settings-section {
         display: none;
         margin-bottom: 30px;
+        padding-bottom: 60px;
       }
 
       .settings-section.active {
@@ -898,103 +928,26 @@
 
       .settings-section-title {
         font-family: "Orbitron", sans-serif;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: 700;
         color: #fff;
-        margin-bottom: 18px;
+        margin-bottom: 8px;
         letter-spacing: 1px;
         text-transform: uppercase;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        padding-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
       }
 
-      .settings-no-results {
-        text-align: center;
-        padding: 60px 20px;
-        color: rgba(255, 255, 255, 0.5);
-        font-family: "Orbitron", sans-serif;
-        font-size: 1rem;
-        letter-spacing: 1px;
-      }
-
-      .settings-no-results i {
-        font-size: 2.5rem;
-        margin-bottom: 15px;
-        display: block;
-        color: rgba(255, 255, 255, 0.3);
-      }
-
-      .setting-item {
-        position: relative;
-        background: rgba(255, 255, 255, 0.08);
-        border-radius: 12px;
-        padding: 20px;
-        margin-bottom: 16px;
-        opacity: 0;
-        transform: translateX(30px);
-        animation: slideIn 0.4s ease forwards;
-        z-index: 1;
-      }
-
-      .setting-item:has(.custom-select.open),
-      .setting-item.dropdown-open {
-        z-index: 9999 !important;
-      }
-
-      @keyframes slideIn {
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-
-      .setting-item:nth-child(1) {
-        animation-delay: 0.05s;
-      }
-
-      .setting-item:nth-child(2) {
-        animation-delay: 0.1s;
-      }
-
-      .setting-item:nth-child(3) {
-        animation-delay: 0.15s;
-      }
-
-      .setting-item:nth-child(4) {
-        animation-delay: 0.2s;
-      }
-
-      .setting-item:nth-child(5) {
-        animation-delay: 0.25s;
-      }
-
-      .setting-item:nth-child(6) {
-        animation-delay: 0.3s;
-      }
-
-      .setting-title {
-        font-family: "Orbitron", sans-serif;
-        font-size: 1rem;
-        font-weight: bold;
-        color: #fff;
-        margin-bottom: 12px;
-      }
-
-      .setting-tooltip-icon {
+      .settings-tooltip-icon {
         color: rgba(255, 255, 255, 0.4);
         cursor: help;
-        font-size: 0.9rem;
-        margin-left: 8px;
+        font-size: 0.85rem;
         transition: color 0.2s ease;
       }
 
-      .setting-tooltip-icon:hover {
+      .settings-tooltip-icon:hover {
         color: rgba(255, 255, 255, 0.8);
-      }
-
-      .setting-header {
-        display: flex;
-        align-items: center;
       }
 
       .custom-tooltip {
@@ -1026,229 +979,223 @@
         border-color: transparent transparent rgba(20, 20, 20, 0.95) transparent;
       }
 
-      .setting-control {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        position: relative;
-      }
-
-      .custom-checkbox {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        cursor: pointer;
-        user-select: none;
-        position: relative;
-      }
-
-      .custom-checkbox input[type="checkbox"] {
-        position: absolute;
-        opacity: 0;
-        width: 0;
-        height: 0;
-        pointer-events: none;
-      }
-
-      .checkbox-box {
-        width: 22px;
-        height: 22px;
-        border-radius: 6px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        flex-shrink: 0;
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
-      }
-
-      .checkbox-box i {
-        font-size: 0.75rem;
-        color: #fff;
-        opacity: 0;
-        transform: scale(0.3) rotate(-15deg);
-        transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      }
-
-      .custom-checkbox:hover .checkbox-box {
-        border-color: var(--secondary-color);
-        background: rgba(255, 255, 255, 0.08);
-        box-shadow: 0 0 8px rgba(0, 255, 247, 0.25);
-      }
-
-      .custom-checkbox input[type="checkbox"]:checked + .checkbox-box {
-        background: linear-gradient(135deg, var(--primary-color), #0066ff);
-        border-color: var(--secondary-color);
-        box-shadow: 0 0 12px rgba(0, 255, 247, 0.45), inset 0 0 4px rgba(255, 255, 255, 0.3);
-      }
-
-      .custom-checkbox input[type="checkbox"]:checked + .checkbox-box i {
-        opacity: 1;
-        transform: scale(1) rotate(0deg);
-        text-shadow: 0 0 4px var(--secondary-color);
-      }
-
-      .checkbox-label {
+      .settings-section-description {
         font-family: "Orbitron", sans-serif;
         font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 20px;
+        line-height: 1.5;
+      }
+
+      .settings-group {
+        margin-bottom: 40px;
+        opacity: 0;
+        transform: translateX(30px) translateY(15px);
+        animation: slideIn 0.4s ease forwards;
+      }
+
+      .settings-group:nth-child(1) {
+        animation-delay: 0.05s;
+      }
+
+      .settings-group:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+
+      .settings-group:nth-child(3) {
+        animation-delay: 0.15s;
+      }
+
+      .settings-group:nth-child(4) {
+        animation-delay: 0.2s;
+      }
+
+      .settings-group:nth-child(5) {
+        animation-delay: 0.25s;
+      }
+
+      .settings-group:nth-child(6) {
+        animation-delay: 0.3s;
+      }
+
+      .mode-selector {
+        display: flex;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .mode-btn {
+        flex: 1;
+        padding: 12px 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
         color: rgba(255, 255, 255, 0.7);
-        letter-spacing: 0.5px;
-        transition: color 0.2s ease, text-shadow 0.2s ease;
-      }
-
-      .custom-checkbox:hover .checkbox-label {
-        color: #fff;
-      }
-
-      .custom-checkbox input[type="checkbox"]:checked ~ .checkbox-label {
-        color: #fff;
-        text-shadow: 0 0 8px rgba(0, 255, 247, 0.3);
-      }
-
-      .custom-select {
-        position: relative;
-        width: 220px;
-        user-select: none;
-        z-index: 2;
-      }
-
-      .custom-select.open {
-        z-index: 10000;
-      }
-
-      .custom-select-trigger {
-        width: 100%;
-        height: 44px;
-        padding: 0 16px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 10px;
-        color: #fff;
         font-family: "Orbitron", sans-serif;
-        font-size: 0.85rem;
-        letter-spacing: 0.5px;
+        font-size: 0.9rem;
         cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-        outline: none;
+        transition: all 0.2s ease;
       }
 
-      .custom-select-trigger:hover {
-        border-color: rgba(255, 255, 255, 0.3);
+      .mode-btn:hover {
         background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+        color: #fff;
       }
 
-      .custom-select.open .custom-select-trigger {
+      .mode-btn.active {
+        background: rgba(0, 255, 247, 0.15);
         border-color: var(--secondary-color);
-        background: rgba(255, 255, 255, 0.1);
-        box-shadow: 0 0 12px rgba(0, 255, 247, 0.25);
+        color: var(--secondary-color);
       }
 
-      .custom-select-arrow {
+      .theme-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+        margin-top: 12px;
+      }
+
+      .theme-option {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 14px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+      }
+
+      .theme-option:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .theme-option.active {
+        background: rgba(0, 255, 247, 0.1);
+        border-color: var(--secondary-color);
+      }
+
+      .theme-option.active::after {
+        content: "\f00c";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: var(--secondary-color);
+        font-size: 0.9rem;
+      }
+
+      .theme-swatch {
+        width: 100%;
+        height: 40px;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        display: flex;
+        overflow: hidden;
+      }
+
+      .theme-swatch-color {
+        flex: 1;
+        height: 100%;
+      }
+
+      .theme-name {
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.95rem;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 4px;
+      }
+
+      .theme-desc {
+        font-family: "Orbitron", sans-serif;
         font-size: 0.75rem;
         color: rgba(255, 255, 255, 0.5);
-        transition: transform 0.25s ease, color 0.2s ease;
       }
 
-      .custom-select.open .custom-select-arrow {
-        transform: rotate(180deg);
-        color: var(--secondary-color);
-      }
-
-      .custom-select-dropdown {
-        position: absolute;
-        top: calc(100% + 8px);
-        left: 0;
-        width: 100%;
-        background: #0e0e14;
-        background: rgba(14, 14, 20, 0.98);
-        border: 1px solid rgba(0, 255, 247, 0.4);
-        border-radius: 10px;
-        backdrop-filter: blur(24px);
-        -webkit-backdrop-filter: blur(24px);
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.95), 0 0 20px rgba(0, 255, 247, 0.2);
-        padding: 6px;
-        z-index: 10001;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-8px);
-        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
-        pointer-events: none;
-      }
-
-      .custom-select.open .custom-select-dropdown {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-        pointer-events: auto;
-      }
-
-      .custom-select-option {
-        padding: 10px 14px;
-        border-radius: 6px;
-        color: rgba(255, 255, 255, 0.75);
-        font-family: "Orbitron", sans-serif;
-        font-size: 0.82rem;
-        letter-spacing: 0.5px;
-        cursor: pointer;
+      .performance-slider {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        transition: all 0.15s ease;
+        gap: 12px;
+        margin-top: 12px;
       }
 
-      .custom-select-option:hover {
-        background: rgba(0, 255, 247, 0.12);
-        color: var(--secondary-color);
-        padding-left: 18px;
-      }
-
-      .custom-select-option.selected {
-        background: rgba(0, 0, 255, 0.25);
-        color: #fff;
-        font-weight: bold;
-      }
-
-      .custom-select-option .option-check {
-        font-size: 0.75rem;
-        color: var(--secondary-color);
-        opacity: 0;
-        transform: scale(0.5);
-        transition: all 0.15s ease;
-      }
-
-      .custom-select-option.selected .option-check {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      .settings-close-btn {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 100px;
+      .performance-option {
+        flex: 1;
         background: rgba(255, 255, 255, 0.05);
-        color: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 16px;
         cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         transition: all 0.2s ease;
-        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
       }
 
-      .settings-close-btn:hover {
-        color: rgba(255, 255, 255, 0.95);
-        border-color: rgba(255, 255, 255, 0.3);
-        background-color: rgba(255, 255, 255, 0.1);
+      .performance-option:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .performance-option.active {
+        background: rgba(0, 255, 247, 0.1);
+        border-color: var(--secondary-color);
+      }
+
+      .performance-icon {
+        font-size: 1.5rem;
+        color: rgba(255, 255, 255, 0.7);
+        transition: color 0.2s ease;
+      }
+
+      .performance-option.active .performance-icon {
+        color: var(--secondary-color);
+      }
+
+      .performance-info {
+        text-align: center;
+      }
+
+      .performance-name {
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.95rem;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 4px;
+      }
+
+      .performance-desc {
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .settings-no-results {
+        text-align: center;
+        padding: 60px 20px;
+        color: rgba(255, 255, 255, 0.5);
+        font-family: "Orbitron", sans-serif;
+        font-size: 1rem;
+        letter-spacing: 1px;
+      }
+
+      .settings-no-results i {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        display: block;
+        color: rgba(255, 255, 255, 0.3);
+      }
+
+      @keyframes slideIn {
+        to {
+          opacity: 1;
+          transform: translateX(0) translateY(0);
+        }
       }
 
       #home-canvas {
@@ -1359,126 +1306,128 @@
     </div>
 
     <div id="settings-page">
-      <button class="settings-close-btn"><i class="fa-solid fa-xmark"></i></button>
       <div class="settings-content">
         <div class="settings-sidebar">
-          <div class="settings-categories">
-            <div class="settings-category active" data-category="general">General</div>
-            <div class="settings-category" data-category="appearance">Appearance</div>
+          <div class="settings-back-link">
+            <a href="#"><i class="fa-solid fa-arrow-left"></i> Back to GX Verse</a>
           </div>
+          <div class="settings-sidebar-title">settings</div>
+          <div class="settings-categories">
+            <div class="settings-category active" data-category="performance"><i class="fa-solid fa-bolt"></i> Performance</div>
+            <div class="settings-category" data-category="appearance"><i class="fa-solid fa-palette"></i> Appearance</div>
+          </div>
+        </div>
+        <div class="settings-main">
           <div class="settings-search-wrapper">
             <div class="search-box">
               <div class="line-driver"></div>
               <input type="text" id="settings-search" placeholder="Search..." autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" />
             </div>
           </div>
-        </div>
-        <div class="settings-main">
-          <div class="settings-section active" id="section-general">
-            <h2 class="settings-section-title">General</h2>
-            <div class="setting-item">
-              <div class="setting-header">
-                <div class="setting-title">Dark Mode <i class="fa-regular fa-circle-question setting-tooltip-icon" data-tooltip="Enable dark mode for the interface"></i></div>
-              </div>
-              <div class="setting-control">
-                <label class="custom-checkbox">
-                  <input type="checkbox" id="setting-dark-mode" checked />
-                  <span class="checkbox-box"><i class="fa-solid fa-check"></i></span>
-                  <span class="checkbox-label">Enabled</span>
-                </label>
-              </div>
-            </div>
-            <div class="setting-item">
-              <div class="setting-header">
-                <div class="setting-title">Notifications <i class="fa-regular fa-circle-question setting-tooltip-icon" data-tooltip="Manage push notifications and alerts"></i></div>
-              </div>
-              <div class="setting-control">
-                <label class="custom-checkbox">
-                  <input type="checkbox" id="setting-notifications" checked />
-                  <span class="checkbox-box"><i class="fa-solid fa-check"></i></span>
-                  <span class="checkbox-label">Enabled</span>
-                </label>
-              </div>
-            </div>
-            <div class="setting-item">
-              <div class="setting-header">
-                <div class="setting-title">Auto-Save <i class="fa-regular fa-circle-question setting-tooltip-icon" data-tooltip="Automatically save your progress"></i></div>
-              </div>
-              <div class="setting-control">
-                <label class="custom-checkbox">
-                  <input type="checkbox" id="setting-autosave" checked />
-                  <span class="checkbox-box"><i class="fa-solid fa-check"></i></span>
-                  <span class="checkbox-label">Enabled</span>
-                </label>
+          <div class="settings-section active" id="section-performance">
+            <div class="settings-group">
+              <h2 class="settings-section-title">Performance Mode <i class="fa-regular fa-circle-question settings-tooltip-icon" data-tooltip="Adjust visual effects and animations for better performance."></i></h2>
+              <div class="performance-slider">
+                <div class="performance-option active" data-mode="full">
+                  <div class="performance-icon"><i class="fa-solid fa-bolt"></i></div>
+                  <div class="performance-info">
+                    <div class="performance-name">Full</div>
+                    <div class="performance-desc">All animations and effects enabled</div>
+                  </div>
+                </div>
+                <div class="performance-option" data-mode="balanced">
+                  <div class="performance-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                  <div class="performance-info">
+                    <div class="performance-name">Balanced</div>
+                    <div class="performance-desc">Reduced background animations</div>
+                  </div>
+                </div>
+                <div class="performance-option" data-mode="lite">
+                  <div class="performance-icon"><i class="fa-solid fa-feather"></i></div>
+                  <div class="performance-info">
+                    <div class="performance-name">Lite</div>
+                    <div class="performance-desc">No animations or background</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           <div class="settings-section" id="section-appearance">
-            <h2 class="settings-section-title">Appearance</h2>
-            <div class="setting-item">
-              <div class="setting-header">
-                <div class="setting-title">Accent Color <i class="fa-regular fa-circle-question setting-tooltip-icon" data-tooltip="Choose your preferred accent color"></i></div>
-              </div>
-              <div class="setting-control">
-                <div class="custom-select" id="setting-accent-color">
-                  <button type="button" class="custom-select-trigger" aria-haspopup="listbox" aria-expanded="false">
-                    <span class="custom-select-value">Blue</span>
-                    <i class="fa-solid fa-chevron-down custom-select-arrow"></i>
-                  </button>
-                  <div class="custom-select-dropdown" role="listbox">
-                    <div class="custom-select-option selected" data-value="blue" role="option" aria-selected="true">
-                      <span>Blue</span>
-                      <i class="fa-solid fa-check option-check"></i>
-                    </div>
-                    <div class="custom-select-option" data-value="cyan" role="option" aria-selected="false">
-                      <span>Cyan</span>
-                      <i class="fa-solid fa-check option-check"></i>
-                    </div>
-                    <div class="custom-select-option" data-value="purple" role="option" aria-selected="false">
-                      <span>Purple</span>
-                      <i class="fa-solid fa-check option-check"></i>
-                    </div>
-                  </div>
-                </div>
+            <div class="settings-group">
+              <h2 class="settings-section-title">Mode <i class="fa-regular fa-circle-question settings-tooltip-icon" data-tooltip="Choose between light, dark, or follow your system preference."></i></h2>
+              <div class="mode-selector">
+                <button class="mode-btn">Light</button>
+                <button class="mode-btn active">Dark</button>
+                <button class="mode-btn">System</button>
               </div>
             </div>
-            <div class="setting-item">
-              <div class="setting-header">
-                <div class="setting-title">Font Size <i class="fa-regular fa-circle-question setting-tooltip-icon" data-tooltip="Adjust the font size for better readability"></i></div>
-              </div>
-              <div class="setting-control">
-                <div class="custom-select" id="setting-font-size">
-                  <button type="button" class="custom-select-trigger" aria-haspopup="listbox" aria-expanded="false">
-                    <span class="custom-select-value">Medium</span>
-                    <i class="fa-solid fa-chevron-down custom-select-arrow"></i>
-                  </button>
-                  <div class="custom-select-dropdown" role="listbox">
-                    <div class="custom-select-option" data-value="small" role="option" aria-selected="false">
-                      <span>Small</span>
-                      <i class="fa-solid fa-check option-check"></i>
-                    </div>
-                    <div class="custom-select-option selected" data-value="medium" role="option" aria-selected="true">
-                      <span>Medium</span>
-                      <i class="fa-solid fa-check option-check"></i>
-                    </div>
-                    <div class="custom-select-option" data-value="large" role="option" aria-selected="false">
-                      <span>Large</span>
-                      <i class="fa-solid fa-check option-check"></i>
-                    </div>
+            <div class="settings-group">
+              <h2 class="settings-section-title">Color Theme <i class="fa-regular fa-circle-question settings-tooltip-icon" data-tooltip="Pick a color palette for the entire interface."></i></h2>
+              <div class="theme-grid">
+                <div class="theme-option active">
+                  <div class="theme-swatch">
+                    <div class="theme-swatch-color" style="background: #0000ff;"></div>
+                    <div class="theme-swatch-color" style="background: #00fff7;"></div>
                   </div>
+                  <div class="theme-name">Default</div>
+                  <div class="theme-desc">Classic blue and cyan</div>
                 </div>
-              </div>
-            </div>
-            <div class="setting-item">
-              <div class="setting-header">
-                <div class="setting-title">Animations <i class="fa-regular fa-circle-question setting-tooltip-icon" data-tooltip="Enable or disable UI animations"></i></div>
-              </div>
-              <div class="setting-control">
-                <label class="custom-checkbox">
-                  <input type="checkbox" id="setting-animations" checked />
-                  <span class="checkbox-box"><i class="fa-solid fa-check"></i></span>
-                  <span class="checkbox-label">Enabled</span>
-                </label>
+                <div class="theme-option">
+                  <div class="theme-swatch">
+                    <div class="theme-swatch-color" style="background: #1a1a2e;"></div>
+                    <div class="theme-swatch-color" style="background: #16213e;"></div>
+                  </div>
+                  <div class="theme-name">Midnight</div>
+                  <div class="theme-desc">Deep dark blue tones</div>
+                </div>
+                <div class="theme-option">
+                  <div class="theme-swatch">
+                    <div class="theme-swatch-color" style="background: #2d1b4e;"></div>
+                    <div class="theme-swatch-color" style="background: #1e3a5f;"></div>
+                  </div>
+                  <div class="theme-name">Dusk</div>
+                  <div class="theme-desc">Purple twilight vibes</div>
+                </div>
+                <div class="theme-option">
+                  <div class="theme-swatch">
+                    <div class="theme-swatch-color" style="background: #ff6b35;"></div>
+                    <div class="theme-swatch-color" style="background: #f7931e;"></div>
+                  </div>
+                  <div class="theme-name">Ember</div>
+                  <div class="theme-desc">Warm fire colors</div>
+                </div>
+                <div class="theme-option">
+                  <div class="theme-swatch">
+                    <div class="theme-swatch-color" style="background: #e91e63;"></div>
+                    <div class="theme-swatch-color" style="background: #ff4081;"></div>
+                  </div>
+                  <div class="theme-name">Rose</div>
+                  <div class="theme-desc">Soft pink tones</div>
+                </div>
+                <div class="theme-option">
+                  <div class="theme-swatch">
+                    <div class="theme-swatch-color" style="background: #2e3440;"></div>
+                    <div class="theme-swatch-color" style="background: #88c0d0;"></div>
+                  </div>
+                  <div class="theme-name">Nord</div>
+                  <div class="theme-desc">Arctic inspired</div>
+                </div>
+                <div class="theme-option">
+                  <div class="theme-swatch">
+                    <div class="theme-swatch-color" style="background: #d4a574;"></div>
+                    <div class="theme-swatch-color" style="background: #c9a66b;"></div>
+                  </div>
+                  <div class="theme-name">Sand</div>
+                  <div class="theme-desc">Desert warmth</div>
+                </div>
+                <div class="theme-option">
+                  <div class="theme-swatch">
+                    <div class="theme-swatch-color" style="background: #ffb7c5;"></div>
+                    <div class="theme-swatch-color" style="background: #ff69b4;"></div>
+                  </div>
+                  <div class="theme-name">Sakura</div>
+                  <div class="theme-desc">Cherry blossom</div>
+                </div>
               </div>
             </div>
           </div>
@@ -1807,8 +1756,7 @@
           }
           if (settingsPage && settingsPage.classList.contains("active")) {
             e.preventDefault();
-            const settingsCloseBtn = document.querySelector(".settings-close-btn");
-            if (settingsCloseBtn) settingsCloseBtn.click();
+            closeSettings();
             return;
           }
         }
@@ -2104,13 +2052,18 @@
       document.addEventListener("DOMContentLoaded", () => {
         const settingsBtn = document.querySelector(".settings-btn");
         const settingsPage = document.getElementById("settings-page");
-        const settingsCloseBtn = document.querySelector(".settings-close-btn");
         const settingsCategories = document.querySelectorAll(".settings-category");
         const settingsSections = document.querySelectorAll(".settings-section");
         const settingsSearch = document.getElementById("settings-search");
         const settingsMain = document.querySelector(".settings-main");
 
-        let lastActiveCategory = "general";
+        function closeSettings() {
+          settingsPage.classList.remove("active");
+          showCategory(lastActiveCategory);
+        }
+
+        let lastActiveCategory = "performance";
+        let performanceMode = "full";
 
         function showCategory(categoryName) {
           lastActiveCategory = categoryName;
@@ -2127,18 +2080,18 @@
             section.style.display = "";
             if (section.id === `section-${categoryName}`) {
               section.classList.add("active");
-              const items = section.querySelectorAll(".setting-item");
-              items.forEach((item, index) => {
-                item.style.display = "block";
-                item.style.animation = "none";
-                void item.offsetHeight;
-                item.style.animation = `slideIn 0.4s ease forwards ${index * 0.05}s`;
+              const groups = section.querySelectorAll(".settings-group");
+              groups.forEach((group, index) => {
+                group.style.display = "block";
+                group.style.animation = "none";
+                void group.offsetHeight;
+                group.style.animation = `slideIn 0.4s ease forwards ${index * 0.05}s`;
               });
             } else {
               section.classList.remove("active");
-              const items = section.querySelectorAll(".setting-item");
-              items.forEach(item => {
-                item.style.display = "block";
+              const groups = section.querySelectorAll(".settings-group");
+              groups.forEach(group => {
+                group.style.display = "none";
               });
             }
           });
@@ -2149,14 +2102,71 @@
           showCategory(lastActiveCategory);
         });
 
-        settingsCloseBtn.addEventListener("click", () => {
-          settingsPage.classList.remove("active");
-          showCategory(lastActiveCategory);
-        });
-
         settingsCategories.forEach(category => {
           category.addEventListener("click", () => {
             showCategory(category.dataset.category);
+          });
+        });
+
+        const modeBtns = document.querySelectorAll(".mode-btn");
+        modeBtns.forEach(btn => {
+          btn.addEventListener("click", () => {
+            modeBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+          });
+        });
+
+        const performanceOptions = document.querySelectorAll(".performance-option");
+        performanceOptions.forEach(option => {
+          option.addEventListener("click", () => {
+            performanceOptions.forEach(o => o.classList.remove("active"));
+            option.classList.add("active");
+            performanceMode = option.dataset.mode;
+            applyPerformanceMode(performanceMode);
+          });
+        });
+
+        function applyPerformanceMode(mode) {
+          const homeCanvas = document.getElementById("home-canvas");
+          const actionBarCanvas = document.getElementById("action-bar-canvas");
+          const lineDrivers = document.querySelectorAll(".line-driver");
+          const barPod = document.getElementById("barPod");
+          const searchBoxes = document.querySelectorAll(".search-box");
+
+          if (mode === "full") {
+            if (homeCanvas) homeCanvas.style.display = "block";
+            if (actionBarCanvas) actionBarCanvas.style.display = "block";
+            lineDrivers.forEach(driver => {
+              driver.style.display = "block";
+              driver.style.background = "";
+            });
+            if (barPod) barPod.style.background = "";
+            searchBoxes.forEach(box => box.style.border = "");
+          } else if (mode === "balanced") {
+            if (homeCanvas) homeCanvas.style.display = "block";
+            if (actionBarCanvas) actionBarCanvas.style.display = "none";
+            lineDrivers.forEach(driver => {
+              driver.style.display = "block";
+              driver.style.background = "";
+            });
+            if (barPod) barPod.style.background = "";
+            searchBoxes.forEach(box => box.style.border = "");
+          } else if (mode === "lite") {
+            if (homeCanvas) homeCanvas.style.display = "none";
+            if (actionBarCanvas) actionBarCanvas.style.display = "none";
+            lineDrivers.forEach(driver => {
+              driver.style.display = "none";
+            });
+            if (barPod) barPod.style.background = "rgba(0, 0, 0, 0.8)";
+            searchBoxes.forEach(box => box.style.border = "1px solid rgba(255, 255, 255, 0.2)");
+          }
+        }
+
+        const themeOptions = document.querySelectorAll(".theme-option");
+        themeOptions.forEach(option => {
+          option.addEventListener("click", () => {
+            themeOptions.forEach(t => t.classList.remove("active"));
+            option.classList.add("active");
           });
         });
 
@@ -2183,21 +2193,21 @@
             let totalMatches = 0;
 
             settingsSections.forEach(section => {
-              const items = section.querySelectorAll(".setting-item");
+              const groups = section.querySelectorAll(".settings-group");
               let sectionMatches = 0;
 
-              items.forEach(item => {
-                const titleEl = item.querySelector(".setting-title");
-                const tooltipIcon = item.querySelector(".setting-tooltip-icon");
+              groups.forEach(group => {
+                const titleEl = group.querySelector(".settings-section-title");
+                const tooltipIcon = group.querySelector(".settings-tooltip-icon");
                 const title = titleEl ? normalizeForSearch(titleEl.textContent) : "";
                 const description = tooltipIcon && tooltipIcon.dataset.tooltip ? normalizeForSearch(tooltipIcon.dataset.tooltip) : "";
 
                 if (title.includes(term) || description.includes(term)) {
-                  item.style.display = "block";
+                  group.style.display = "block";
                   sectionMatches++;
                   totalMatches++;
                 } else {
-                  item.style.display = "none";
+                  group.style.display = "none";
                 }
               });
 
@@ -2229,7 +2239,7 @@
               settingsSearch.value = "";
               showCategory(lastActiveCategory);
             } else {
-              settingsCloseBtn.click();
+              closeSettings();
             }
           }
         });
@@ -2240,79 +2250,15 @@
           }
         });
 
-        document.querySelectorAll(".custom-checkbox input[type='checkbox']").forEach(checkbox => {
-          checkbox.addEventListener("change", () => {
-            const label = checkbox.closest(".custom-checkbox").querySelector(".checkbox-label");
-            if (label) {
-              label.textContent = checkbox.checked ? "Enabled" : "Disabled";
-            }
+        const backLink = document.querySelector(".settings-back-link a");
+        if (backLink) {
+          backLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            closeSettings();
           });
-        });
+        }
 
-        const customSelects = document.querySelectorAll(".custom-select");
-
-        customSelects.forEach(select => {
-          const trigger = select.querySelector(".custom-select-trigger");
-          const valueDisplay = select.querySelector(".custom-select-value");
-          const options = select.querySelectorAll(".custom-select-option");
-
-          trigger.addEventListener("click", (e) => {
-            e.stopPropagation();
-            const isOpen = select.classList.contains("open");
-
-            customSelects.forEach(s => {
-              if (s !== select) {
-                s.classList.remove("open");
-                const p = s.closest(".setting-item");
-                if (p) p.classList.remove("dropdown-open");
-                const sTrigger = s.querySelector(".custom-select-trigger");
-                if (sTrigger) sTrigger.setAttribute("aria-expanded", "false");
-              }
-            });
-
-            select.classList.toggle("open", !isOpen);
-            const parent = select.closest(".setting-item");
-            if (parent) parent.classList.toggle("dropdown-open", !isOpen);
-            trigger.setAttribute("aria-expanded", !isOpen ? "true" : "false");
-          });
-
-          options.forEach(option => {
-            option.addEventListener("click", (e) => {
-              e.stopPropagation();
-              const val = option.dataset.value;
-              const text = option.querySelector("span").textContent;
-
-              options.forEach(opt => {
-                opt.classList.remove("selected");
-                opt.setAttribute("aria-selected", "false");
-              });
-              option.classList.add("selected");
-              option.setAttribute("aria-selected", "true");
-
-              valueDisplay.textContent = text;
-              select.classList.remove("open");
-              const parent = select.closest(".setting-item");
-              if (parent) parent.classList.remove("dropdown-open");
-              trigger.setAttribute("aria-expanded", "false");
-
-              select.dispatchEvent(new CustomEvent("change", { detail: { value: val, text: text } }));
-            });
-          });
-        });
-
-        document.addEventListener("click", (e) => {
-          if (!e.target.closest(".custom-select")) {
-            customSelects.forEach(s => {
-              s.classList.remove("open");
-              const parent = s.closest(".setting-item");
-              if (parent) parent.classList.remove("dropdown-open");
-              const trigger = s.querySelector(".custom-select-trigger");
-              if (trigger) trigger.setAttribute("aria-expanded", "false");
-            });
-          }
-        });
-
-        const tooltipIcons = document.querySelectorAll(".setting-tooltip-icon");
+        const tooltipIcons = document.querySelectorAll(".settings-tooltip-icon");
         tooltipIcons.forEach(icon => {
           icon.addEventListener("mouseenter", (e) => {
             const tooltipText = icon.dataset.tooltip;
