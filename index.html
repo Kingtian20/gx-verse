@@ -20,7 +20,7 @@
       window.isDevMode = isDevMode;
 
       // Set base URL based on devmode
-      const baseUrl = isDevMode ? '' : 'https://raw.githubusercontent.com/Kingtian20/gx-verse/main';
+      const baseUrl = isDevMode ? '' : 'https://unpkg.com/Kingtian20/gx-verse@main';
 
       // Dynamically load CSS files
       const cssFiles = [
@@ -302,14 +302,14 @@
     </div>
 
     <script>
-      // Dynamically load JS files
+      // Dynamically load JS files (renamed to .txt to avoid MIME issues)
       const jsFiles = [
-        'js/canvas.js',
-        'js/actionbar.js',
-        'js/toast.js',
-        'js/navigation.js',
-        'js/games.js',
-        'js/settings.js'
+        'js/canvas.txt',
+        'js/actionbar.txt',
+        'js/toast.txt',
+        'js/navigation.txt',
+        'js/games.txt',
+        'js/settings.txt'
       ];
 
       jsFiles.forEach(file => {
