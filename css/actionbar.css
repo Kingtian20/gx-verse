@@ -1,0 +1,108 @@
+.action-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 20px;
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.pod {
+  display: flex;
+  pointer-events: auto;
+  background: rgba(0, 0, 0, 0);
+  border-radius: 100px;
+  position: relative;
+}
+
+.bar-pod {
+  flex-direction: row;
+  gap: 10px;
+  padding: 10px 20px;
+  align-items: center;
+  height: 65px;
+}
+
+.action-bar button {
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.3rem;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  z-index: 2;
+  position: relative;
+}
+
+.action-bar button:hover {
+  color: var(--primary-color);
+  transform: translateY(-5px) scale(1.2);
+  filter: drop-shadow(0 0 10px var(--primary-color));
+}
+
+.action-bar button.active {
+  color: var(--primary-color) !important;
+  transform: translateY(-5px) scale(1.2);
+  filter: drop-shadow(0 0 10px var(--primary-color));
+}
+
+#action-bar-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9;
+  pointer-events: none;
+}
+
+.action-bar button::after {
+  content: attr(title);
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: #000;
+  background: var(--primary-color);
+  padding: 4px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.action-bar button:hover::after,
+.action-bar button.show-tooltip::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  top: -50px;
+}
+
+.action-bar button::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--primary-color) transparent transparent transparent;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.action-bar button:hover::before,
+.action-bar button.show-tooltip::before {
+  opacity: 1;
+}

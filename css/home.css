@@ -1,0 +1,214 @@
+.main-title {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: bold;
+  font-family: "Orbitron", sans-serif;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: clamp(2px, 1vw, 4px);
+  animation: glitch 2s infinite;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 5;
+}
+
+.main-title::before,
+.main-title::after {
+  content: "GX VERSE";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.sub-title::before,
+.sub-title::after {
+  content: "Welcome to GX VERSE";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.main-title::before,
+.sub-title::before {
+  color: var(--secondary-color);
+  z-index: -1;
+}
+
+.main-title::after,
+.sub-title::after {
+  color: var(--primary-color);
+  z-index: -2;
+}
+
+.home {
+  width: 100vw;
+  height: 100vh;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.search-box {
+  position: relative;
+  width: 100%;
+  height: 54px;
+  background: #000;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.search-box input {
+  width: 100%;
+  height: 100%;
+  padding: 0 25px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 1.1rem;
+  outline: none;
+  font-family: "Orbitron", sans-serif;
+}
+
+.search-box:focus-within .line-driver {
+  filter: drop-shadow(0 0 12px var(--secondary-color));
+}
+
+.line-driver {
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  z-index: -1;
+  overflow: hidden;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 2px;
+}
+
+.line-driver::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(from 0deg, transparent 0%, var(--primary-color) 10%, var(--secondary-color) 20%, transparent 25%);
+  animation: rotate 3s linear infinite;
+  filter: drop-shadow(0 0 15px var(--primary-color)) drop-shadow(0 0 5px var(--secondary-color)) drop-shadow(0 0 50px var(--primary-color));
+}
+
+@keyframes rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.version-label {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: #ffffffb7;
+  background: transparent;
+  padding: 4px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0.5;
+}
+
+.login-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.login-btn:hover {
+  color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.settings-btn {
+  position: absolute;
+  top: 20px;
+  left: 70px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.settings-btn:hover {
+  color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+#home-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+  pointer-events: none;
+}
