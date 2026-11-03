@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+function initNavigation() {
   const homePage = document.getElementById("home-page");
   const gxmesPage = document.getElementById("gxmes-page");
   const homeBtn = document.getElementById("homeBtn");
@@ -160,4 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
     }
   });
-});
+}
+
+initNavigation();

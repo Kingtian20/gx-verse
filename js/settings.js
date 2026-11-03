@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+function initSettings() {
   const settingsBtn = document.querySelector(".settings-btn");
   const settingsPage = document.getElementById("settings-page");
   const settingsCategories = document.querySelectorAll(".settings-category");
@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     settingsPage.classList.remove("active");
     showCategory(lastActiveCategory);
   }
+  window.closeSettings = closeSettings;
 
   settingsBtn.addEventListener("click", () => {
     settingsPage.classList.add("active");
@@ -249,4 +250,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-});
+}
+
+initSettings();

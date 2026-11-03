@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+function initGames() {
   const gameGrid = document.getElementById("game-grid");
   const searchInput = document.getElementById("game-search");
   const overlay = document.getElementById("game-overlay");
@@ -191,4 +191,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   fetchGames();
-});
+}
+
+initGames();
