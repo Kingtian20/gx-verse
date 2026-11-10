@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+  <!-- EVERY COMMENT HERE IS INTENTIONAL -->
   <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9S5S41LCR"></script>
     <script>
@@ -732,6 +733,21 @@
         background-color: rgba(255, 255, 255, 0.05);
       }
 
+      .login-btn.logged-in {
+        background: linear-gradient(135deg, rgba(0, 0, 255, 0.5), rgba(0, 255, 247, 0.5));
+        border: 1px solid var(--secondary-color);
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+        font-family: 'Orbitron', sans-serif;
+      }
+
+      .login-btn.logged-in:hover {
+        border-color: #fff;
+        color: #fff;
+      }
+
       .settings-btn {
         position: absolute;
         top: 20px;
@@ -1018,102 +1034,1280 @@
         animation-delay: 0.3s;
       }
 
-      .mode-selector {
-        display: flex;
-        gap: 10px;
-        margin-top: 12px;
-      }
-
-      .mode-btn {
-        flex: 1;
-        padding: 12px 20px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
-        color: rgba(255, 255, 255, 0.7);
-        font-family: "Orbitron", sans-serif;
-        font-size: 0.9rem;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      .mode-btn:hover {
-        background: rgba(255, 255, 255, 0.08);
-        border-color: rgba(255, 255, 255, 0.2);
-        color: #fff;
-      }
-
-      .mode-btn.active {
-        background: rgba(0, 255, 247, 0.15);
-        border-color: var(--secondary-color);
-        color: var(--secondary-color);
-      }
-
-      .theme-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 12px;
-        margin-top: 12px;
-      }
-
-      .theme-option {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        padding: 14px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        position: relative;
-      }
-
-      .theme-option:hover {
-        background: rgba(255, 255, 255, 0.08);
-        border-color: rgba(255, 255, 255, 0.2);
-        transform: translateY(-2px);
-      }
-
-      .theme-option.active {
-        background: rgba(0, 255, 247, 0.1);
-        border-color: var(--secondary-color);
-      }
-
-      .theme-option.active::after {
-        content: "\f00c";
-        font-family: "Font Awesome 6 Free";
-        font-weight: 900;
+      /* User Dropdown */
+      .user-dropdown {
         position: absolute;
-        top: 10px;
-        right: 10px;
-        color: var(--secondary-color);
-        font-size: 0.9rem;
+        top: 70px;
+        left: 20px;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        padding: 14px;
+        min-width: 230px;
+        z-index: 10001;
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 255, 247, 0.1);
       }
 
-      .theme-swatch {
-        width: 100%;
-        height: 40px;
-        border-radius: 6px;
-        margin-bottom: 10px;
+      .user-dropdown.active {
         display: flex;
+      }
+
+      .user-dropdown-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .user-dropdown-avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: #fff;
+        flex-shrink: 0;
+      }
+
+      .user-dropdown-info {
         overflow: hidden;
       }
 
-      .theme-swatch-color {
-        flex: 1;
-        height: 100%;
+      .user-dropdown-email {
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.75rem;
+        color: #fff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
-      .theme-name {
+      .user-dropdown-status {
         font-family: "Orbitron", sans-serif;
-        font-size: 0.95rem;
+        font-size: 0.65rem;
+        color: var(--secondary-color);
+        letter-spacing: 0.5px;
+      }
+
+      .user-dropdown-btn {
+        width: 100%;
+        padding: 9px 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        color: #ff5555;
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.8rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s ease;
+      }
+
+      .user-dropdown-btn:hover {
+        background: rgba(255, 50, 50, 0.15);
+        border-color: #ff5555;
+        color: #ff7777;
+        box-shadow: 0 0 10px rgba(255, 50, 50, 0.2);
+      }
+
+      .user-dropdown-btn.staff-btn {
+        color: var(--secondary-color);
+        border-color: rgba(0, 255, 247, 0.25);
+        margin-bottom: 2px;
+      }
+
+      .user-dropdown-btn.staff-btn:hover {
+        background: rgba(0, 255, 247, 0.15);
+        border-color: var(--secondary-color);
+        color: #fff;
+        box-shadow: 0 0 12px rgba(0, 255, 247, 0.35);
+      }
+
+      .owner-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: #fff;
+        font-size: 0.6rem;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        margin-left: 6px;
+        text-transform: uppercase;
+      }
+
+      /* Auth Modal */
+      .auth-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(8px);
+        z-index: 10002;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.25s ease;
+      }
+
+      .auth-modal.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .auth-card {
+        background: #0d0d0d;
+        border: 1px solid rgba(0, 255, 247, 0.3);
+        border-radius: 16px;
+        width: 90%;
+        max-width: 400px;
+        padding: 30px;
+        position: relative;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 255, 247, 0.15);
+        animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      }
+
+      .auth-close-btn {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: none;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+      }
+
+      .auth-close-btn:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .auth-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1.6rem;
         font-weight: bold;
         color: #fff;
-        margin-bottom: 4px;
+        text-align: center;
+        letter-spacing: 2px;
+        margin-bottom: 6px;
       }
 
-      .theme-desc {
+      .auth-subtitle {
         font-family: "Orbitron", sans-serif;
         font-size: 0.75rem;
         color: rgba(255, 255, 255, 0.5);
+        text-align: center;
+        margin-bottom: 22px;
+        letter-spacing: 0.5px;
+      }
+
+      .auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .auth-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .auth-field label {
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.5px;
+      }
+
+      .auth-field input {
+        width: 100%;
+        height: 44px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 8px;
+        padding: 0 14px;
+        color: #fff;
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.85rem;
+        outline: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .auth-field input:focus {
+        border-color: var(--secondary-color);
+        box-shadow: 0 0 10px rgba(0, 255, 247, 0.25);
+      }
+
+      .auth-error {
+        color: #ff5555;
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.75rem;
+        min-height: 18px;
+        text-align: center;
+        letter-spacing: 0.3px;
+        display: none;
+      }
+
+      .auth-error.visible {
+        display: block;
+      }
+
+      .auth-submit-btn {
+        width: 100%;
+        height: 46px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border: none;
+        border-radius: 8px;
+        color: #fff;
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.9rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: transform 0.2s ease, filter 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .auth-submit-btn:hover {
+        filter: brightness(1.2);
+        transform: translateY(-2px);
+      }
+
+      .auth-submit-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* Staff Panel Modal */
+      .staff-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(6px);
+        z-index: 10003;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      .staff-modal.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .staff-card {
+        background: #141416;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        width: 95%;
+        max-width: 860px;
+        height: 85vh;
+        max-height: 85vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+        animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        overflow: hidden;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+
+      .staff-header {
+        padding: 18px 24px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .staff-title-group {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .staff-title-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #e2e8f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.05rem;
+      }
+
+      .staff-title {
+        font-family: inherit;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #f8fafc;
+        letter-spacing: normal;
+      }
+
+      .staff-subtitle {
+        font-family: inherit;
+        font-size: 0.78rem;
+        color: #94a3b8;
+        letter-spacing: normal;
+        margin-top: 2px;
+      }
+
+      .staff-body {
+        padding: 20px 24px;
+        overflow-y: auto;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .staff-nav {
+        display: flex;
+        gap: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding-bottom: 12px;
+      }
+
+      .staff-nav-btn {
+        padding: 8px 14px;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 6px;
+        color: #94a3b8;
+        font-family: inherit;
+        font-size: 0.82rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .staff-nav-btn:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: #f1f5f9;
+        border-color: rgba(255, 255, 255, 0.15);
+      }
+
+      .staff-nav-btn.active {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+        color: #f8fafc;
+        font-weight: 600;
+      }
+
+      .staff-controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .staff-search-box {
+        flex: 1;
+        min-width: 220px;
+        position: relative;
+      }
+
+      .staff-search-box input {
+        width: 100%;
+        height: 38px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        padding: 0 12px 0 36px;
+        color: #f8fafc;
+        font-family: inherit;
+        font-size: 0.82rem;
+        outline: none;
+        transition: border-color 0.15s ease;
+      }
+
+      .staff-search-box input:focus {
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .staff-search-icon {
+        position: absolute;
+        top: 50%;
+        left: 12px;
+        transform: translateY(-50%);
+        color: #64748b;
+        font-size: 0.82rem;
+      }
+
+      .staff-action-btn {
+        padding: 8px 14px;
+        background: #2563eb;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        color: #fff;
+        font-family: inherit;
+        font-size: 0.8rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+      }
+
+      .staff-action-btn:hover {
+        background: #1d4ed8;
+      }
+
+      .staff-user-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        flex: 1;
+        padding-top: 17px;
+        overflow-y: auto;
+      }
+
+      .staff-filter-select {
+        height: 38px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        color: #f8fafc;
+        font-family: inherit;
+        font-size: 0.82rem;
+        padding: 0 10px;
+        outline: none;
+        cursor: pointer;
+      }
+
+      .staff-filter-select:focus {
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .staff-filter-select option {
+        background: #141416;
+        color: #f8fafc;
+      }
+
+      .mgmt-section {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .mgmt-card {
+        background: #18181b;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 10px;
+        padding: 16px;
+      }
+
+      .mgmt-card-title {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #f1f5f9;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .mgmt-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .mgmt-input {
+        width: 100%;
+        height: 38px;
+        box-sizing: border-box;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        padding: 0 12px;
+        color: #f8fafc;
+        font-family: inherit;
+        font-size: 0.82rem;
+        outline: none;
+      }
+
+      .mgmt-input:focus {
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .mgmt-select {
+        cursor: pointer;
+      }
+
+      .mgmt-select option {
+        background: #18181b;
+        color: #f8fafc;
+      }
+
+      .mgmt-submit {
+        align-self: flex-start;
+      }
+
+      .mgmt-msg {
+        font-size: 0.78rem;
+        min-height: 1em;
+      }
+
+      .mgmt-msg.ok {
+        color: #4ade80;
+      }
+
+      .mgmt-msg.err {
+        color: #f87171;
+      }
+
+      .staff-user-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #18181b;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 8px;
+        padding: 12px 16px;
+        gap: 14px;
+        transition: background-color 0.15s ease, border-color 0.15s ease;
+      }
+
+      .staff-user-card:hover {
+        background: #202024;
+        border-color: rgba(255, 255, 255, 0.12);
+      }
+
+      .staff-user-card.banned {
+        border-color: rgba(239, 68, 68, 0.2);
+        background: rgba(239, 68, 68, 0.03);
+      }
+
+      .staff-user-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #27272a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: inherit;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #e4e4e7;
+        flex-shrink: 0;
+      }
+
+      .staff-user-card.banned .staff-user-avatar {
+        background: rgba(239, 68, 68, 0.15);
+        color: #f87171;
+        border: 1px solid rgba(239, 68, 68, 0.25);
+      }
+
+      .staff-user-info {
+        flex: 1;
+        overflow: hidden;
+      }
+
+      .staff-user-email {
+        font-family: inherit;
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: #f4f4f5;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .staff-user-meta {
+        font-family: inherit;
+        font-size: 0.75rem;
+        color: #71717a;
+        margin-top: 3px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .staff-badge {
+        font-size: 0.65rem;
+        padding: 2px 7px;
+        border-radius: 4px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+        font-family: inherit;
+      }
+
+      .staff-badge.active-badge {
+        background: rgba(34, 197, 94, 0.12);
+        color: #4ade80;
+        border: 1px solid rgba(34, 197, 94, 0.25);
+      }
+
+      .staff-badge.banned-badge {
+        background: rgba(239, 68, 68, 0.12);
+        color: #f87171;
+        border: 1px solid rgba(239, 68, 68, 0.25);
+      }
+
+      .staff-user-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .staff-ban-btn {
+        padding: 6px 12px;
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: 6px;
+        color: #f87171;
+        font-family: inherit;
+        font-size: 0.78rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .staff-ban-btn:hover {
+        background: #dc2626;
+        color: #fff;
+        border-color: #dc2626;
+      }
+
+      .staff-unban-btn {
+        padding: 6px 12px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 6px;
+        color: #e4e4e7;
+        font-family: inherit;
+        font-size: 0.78rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .staff-unban-btn:hover {
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.25);
+      }
+
+      /* Ban Prompt Modal */
+      .ban-prompt-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
+        z-index: 10005;
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .ban-prompt-overlay.active {
+        display: flex;
+      }
+
+      .ban-prompt-card {
+        background: #18181b;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        width: 90%;
+        max-width: 440px;
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+
+      .ban-prompt-title {
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #f87171;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .ban-prompt-target {
+        font-family: inherit;
+        font-size: 0.84rem;
+        color: #d4d4d8;
+        word-break: break-all;
+      }
+
+      .ban-prompt-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .ban-prompt-field label {
+        font-family: inherit;
+        font-size: 0.78rem;
+        color: #a1a1aa;
+      }
+
+      .ban-prompt-field input {
+        width: 100%;
+        height: 38px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 6px;
+        padding: 0 12px;
+        color: #f4f4f5;
+        font-family: inherit;
+        font-size: 0.84rem;
+        outline: none;
+        transition: border-color 0.15s ease;
+      }
+
+      .ban-prompt-field input:focus {
+        border-color: #f87171;
+      }
+
+      .ban-prompt-input {
+        width: 100%;
+        height: 80px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 6px;
+        padding: 10px 12px;
+        color: #f4f4f5;
+        font-family: inherit;
+        font-size: 0.84rem;
+        outline: none;
+        resize: none;
+        transition: border-color 0.15s ease;
+      }
+
+      .ban-prompt-input:focus {
+        border-color: #f87171;
+      }
+
+      .ban-prompt-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      .ban-prompt-cancel {
+        padding: 8px 14px;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 6px;
+        color: #a1a1aa;
+        font-family: inherit;
+        font-size: 0.82rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .ban-prompt-cancel:hover {
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+      }
+
+      .ban-prompt-confirm {
+        padding: 8px 16px;
+        background: #dc2626;
+        border: none;
+        border-radius: 6px;
+        color: #fff;
+        font-family: inherit;
+        font-size: 0.82rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+      }
+
+      .ban-prompt-confirm:hover {
+        background: #b91c1c;
+      }
+
+      /* Banned Notice Modal */
+      .banned-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(8px);
+        z-index: 10006;
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .banned-modal-overlay.active {
+        display: flex;
+      }
+
+      .banned-modal-card {
+        background: #18181b;
+        border: 1px solid rgba(239, 68, 68, 0.35);
+        border-radius: 12px;
+        width: 90%;
+        max-width: 420px;
+        padding: 26px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        text-align: center;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(239, 68, 68, 0.12);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      }
+
+      .banned-modal-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: rgba(239, 68, 68, 0.12);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        color: #f87171;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+      }
+
+      .banned-modal-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-direction: row;
+      }
+
+      .banned-modal-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1.15rem;
+        font-weight: bold;
+        color: #f87171;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .banned-modal-text {
+        font-size: 0.85rem;
+        color: #d4d4d8;
+        line-height: 1.5;
+      }
+
+      .banned-modal-time {
+        color: #a1a1aa;
+      }
+
+      .banned-modal-reason {
+        width: 100%;
+        background: rgba(239, 68, 68, 0.06);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.85rem;
+        color: #fca5a5;
+        font-weight: 500;
+        word-break: break-word;
+      }
+
+      .banned-modal-note {
+        font-size: 0.78rem;
+        color: #71717a;
+        line-height: 1.5;
+      }
+
+      .banned-modal-continue {
+        margin-top: 6px;
+        padding: 10px 28px;
+        background: #dc2626;
+        border: none;
+        border-radius: 6px;
+        color: #fff;
+        font-family: inherit;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+      }
+
+      .banned-modal-continue:hover {
+        background: #b91c1c;
+      }
+
+      /* Custom Dropdown (customDropdown) */
+      .gx-dd {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        font-family: inherit;
+        text-align: left;
+      }
+
+      .gx-dd-trigger {
+        width: 100%;
+        height: 38px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 0 12px;
+        background: var(--gx-dd-bg, rgba(255, 255, 255, 0.04));
+        border: 1px solid var(--gx-dd-border, rgba(255, 255, 255, 0.12));
+        border-radius: var(--gx-dd-radius, 6px);
+        color: var(--gx-dd-text, #f4f4f5);
+        font-family: inherit;
+        font-size: 0.84rem;
+        cursor: pointer;
+        transition: border-color 0.15s ease;
+      }
+
+      .gx-dd-trigger:hover {
+        border-color: rgba(255, 255, 255, 0.25);
+      }
+
+      .gx-dd.open .gx-dd-trigger,
+      .gx-dd-trigger:focus-visible {
+        border-color: var(--gx-dd-focus, rgba(255, 255, 255, 0.4));
+        outline: none;
+      }
+
+      .gx-dd[disabled] .gx-dd-trigger {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .gx-dd-label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .gx-dd-label.is-placeholder {
+        color: var(--gx-dd-placeholder, #71717a);
+      }
+
+      .gx-dd-arrow {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 6px solid currentColor;
+        flex-shrink: 0;
+        transition: transform 0.2s ease;
+      }
+
+      .gx-dd.open .gx-dd-arrow {
+        transform: rotate(180deg);
+      }
+
+      .gx-dd-panel {
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        right: 0;
+        z-index: 60;
+        display: none;
+        background: var(--gx-dd-panel-bg, #18181b);
+        border: 1px solid var(--gx-dd-border, rgba(255, 255, 255, 0.12));
+        border-radius: var(--gx-dd-radius, 6px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+        overflow: hidden;
+      }
+
+      .gx-dd.open .gx-dd-panel {
+        display: block;
+      }
+
+      .gx-dd.drop-up .gx-dd-panel {
+        top: auto;
+        bottom: calc(100% + 4px);
+      }
+
+      .gx-dd-search {
+        width: 100%;
+        height: 36px;
+        padding: 0 12px;
+        background: rgba(255, 255, 255, 0.04);
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        color: #f4f4f5;
+        font-family: inherit;
+        font-size: 0.82rem;
+        outline: none;
+        box-sizing: border-box;
+      }
+
+      .gx-dd-search::placeholder {
+        color: #71717a;
+      }
+
+      .gx-dd-list {
+        list-style: none;
+        margin: 0;
+        padding: 4px;
+        max-height: 240px;
+        overflow-y: auto;
+      }
+
+      .gx-dd-option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: 4px;
+        font-size: 0.84rem;
+        color: #d4d4d8;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .gx-dd-option-icon {
+        width: 14px;
+        text-align: center;
+        flex-shrink: 0;
+        color: #a1a1aa;
+      }
+
+      .gx-dd-option-label {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .gx-dd-option-extra {
+        margin-left: auto;
+        font-size: 0.72rem;
+        color: #71717a;
+      }
+
+      .gx-dd-option:hover,
+      .gx-dd-option.kb-active {
+        background: rgba(255, 255, 255, 0.07);
+        color: #fff;
+      }
+
+      .gx-dd-option.selected {
+        color: var(--gx-dd-accent, #f87171);
+      }
+
+      .gx-dd-option.selected .gx-dd-option-icon {
+        color: var(--gx-dd-accent, #f87171);
+      }
+
+      .gx-dd-option.disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      .gx-dd-option.disabled:hover {
+        background: transparent;
+        color: #d4d4d8;
+      }
+
+      .gx-dd-empty {
+        padding: 14px 10px;
+        font-size: 0.8rem;
+        color: #71717a;
+        text-align: center;
+      }
+
+      .gx-dd-auto {
+        width: auto;
+        min-width: 170px;
+      }
+
+      .gx-dd-native {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        opacity: 0 !important;
+        overflow: hidden !important;
+        pointer-events: none !important;
+      }
+
+      /* Staff Privileges Context Menu */
+      .staff-ctx-menu {
+        position: fixed;
+        z-index: 10010;
+        min-width: 240px;
+        max-width: 300px;
+        background: #18181b;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 10px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+        padding: 10px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        animation: popIn 0.15s ease forwards;
+      }
+
+      .staff-ctx-header {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: #f4f4f5;
+        padding: 4px 6px 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        margin-bottom: 8px;
+        word-break: break-all;
+      }
+
+      .staff-ctx-header small {
+        display: block;
+        font-weight: 400;
+        color: #71717a;
+        margin-top: 2px;
+      }
+
+      .staff-priv-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 6px;
+        border-radius: 6px;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .staff-priv-row:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .staff-priv-toggle {
+        width: 32px;
+        height: 18px;
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.12);
+        position: relative;
+        flex-shrink: 0;
+        transition: background-color 0.15s ease;
+      }
+
+      .staff-priv-toggle::after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #a1a1aa;
+        transition: transform 0.15s ease, background-color 0.15s ease;
+      }
+
+      .staff-priv-row.on .staff-priv-toggle {
+        background: rgba(99, 102, 241, 0.5);
+      }
+
+      .staff-priv-row.on .staff-priv-toggle::after {
+        transform: translateX(14px);
+        background: #fff;
+      }
+
+      .staff-priv-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .staff-priv-label {
+        font-size: 0.82rem;
+        font-weight: 500;
+        color: #e4e4e7;
+      }
+
+      .staff-priv-desc {
+        font-size: 0.7rem;
+        color: #71717a;
+        margin-top: 1px;
+      }
+
+      .staff-ctx-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .staff-ctx-save {
+        flex: 1;
+        padding: 8px 12px;
+        background: #4f46e5;
+        border: none;
+        border-radius: 6px;
+        color: #fff;
+        font-family: inherit;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+      }
+
+      .staff-ctx-save:hover {
+        background: #4338ca;
+      }
+
+      .staff-ctx-remove {
+        padding: 8px 12px;
+        background: transparent;
+        border: 1px solid rgba(239, 68, 68, 0.35);
+        border-radius: 6px;
+        color: #f87171;
+        font-family: inherit;
+        font-size: 0.8rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .staff-ctx-remove:hover {
+        background: rgba(239, 68, 68, 0.12);
+      }
+
+      .staff-ctx-note {
+        font-size: 0.75rem;
+        color: #71717a;
+        padding: 6px;
+        line-height: 1.5;
       }
 
       .performance-slider {
@@ -1272,7 +2466,18 @@
     <canvas id="home-canvas"></canvas>
 
     <section class="home" id="home-page">
-      <button class="login-btn"><i class="fa-solid fa-right-to-bracket"></i></button>
+      <button class="login-btn" id="loginBtn" title="Log In"><i class="fa-solid fa-right-to-bracket"></i></button>
+      <div class="user-dropdown" id="userDropdown">
+        <div class="user-dropdown-header">
+          <div class="user-dropdown-avatar" id="userDropdownAvatar">?</div>
+          <div class="user-dropdown-info">
+            <div class="user-dropdown-email" id="userDropdownEmail">user@example.com</div>
+            <div class="user-dropdown-status" id="userDropdownStatus">Online</div>
+          </div>
+        </div>
+        <button class="user-dropdown-btn staff-btn" id="staffPanelBtn" type="button" style="display: none;"><i class="fa-solid fa-shield-halved"></i> Staff Panel</button>
+        <button class="user-dropdown-btn" id="logoutBtn" type="button"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+      </div>
       <button class="settings-btn"><i class="fa-solid fa-gear"></i></button>
       <h1 class="main-title"><span class="g-circle">G</span>X VERSE</h1>
       <h1 class="sub-title main-title" style="font-size: 1rem; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%)">Welcome to GX VERSE</h1>
@@ -1350,86 +2555,141 @@
               </div>
             </div>
           </div>
-          <div class="settings-section" id="section-appearance">
-            <div class="settings-group">
-              <h2 class="settings-section-title">Mode <i class="fa-regular fa-circle-question settings-tooltip-icon" data-tooltip="Choose between light, dark, or follow your system preference."></i></h2>
-              <div class="mode-selector">
-                <button class="mode-btn">Light</button>
-                <button class="mode-btn active">Dark</button>
-                <button class="mode-btn">System</button>
-              </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="auth-modal">
+      <div class="auth-card">
+        <button class="auth-close-btn" id="authCloseBtn" title="Close"><i class="fa-solid fa-xmark"></i></button>
+        <div class="auth-title">GX VERSE</div>
+        <div class="auth-subtitle" id="authSubtitle">Sign in to your account</div>
+        <form class="auth-form" id="authForm">
+          <div class="auth-field">
+            <label for="authEmail">Email</label>
+            <input type="email" id="authEmail" placeholder="first.last@gmail.com" required autocomplete="email" />
+          </div>
+          <div class="auth-field">
+            <label for="authPassword">Password</label>
+            <input type="password" id="authPassword" placeholder="••••••••" required autocomplete="current-password" />
+          </div>
+          <div class="auth-error" id="authError"></div>
+          <button type="submit" class="auth-submit-btn" id="authSubmitBtn">
+            <i class="fa-solid fa-right-to-bracket"></i> <span id="authSubmitText">Log In</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Staff Panel Modal -->
+    <div id="staff-modal" class="staff-modal">
+      <div class="staff-card">
+        <div class="staff-header">
+          <div class="staff-title-group">
+            <div class="staff-title-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div>
+              <div class="staff-title">STAFF PANEL</div>
+              <div class="staff-subtitle">User Management &amp; Access Control</div>
             </div>
-            <div class="settings-group">
-              <h2 class="settings-section-title">Color Theme <i class="fa-regular fa-circle-question settings-tooltip-icon" data-tooltip="Pick a color palette for the entire interface."></i></h2>
-              <div class="theme-grid">
-                <div class="theme-option active">
-                  <div class="theme-swatch">
-                    <div class="theme-swatch-color" style="background: #0000ff;"></div>
-                    <div class="theme-swatch-color" style="background: #00fff7;"></div>
-                  </div>
-                  <div class="theme-name">Default</div>
-                  <div class="theme-desc">Classic blue and cyan</div>
-                </div>
-                <div class="theme-option">
-                  <div class="theme-swatch">
-                    <div class="theme-swatch-color" style="background: #1a1a2e;"></div>
-                    <div class="theme-swatch-color" style="background: #16213e;"></div>
-                  </div>
-                  <div class="theme-name">Midnight</div>
-                  <div class="theme-desc">Deep dark blue tones</div>
-                </div>
-                <div class="theme-option">
-                  <div class="theme-swatch">
-                    <div class="theme-swatch-color" style="background: #2d1b4e;"></div>
-                    <div class="theme-swatch-color" style="background: #1e3a5f;"></div>
-                  </div>
-                  <div class="theme-name">Dusk</div>
-                  <div class="theme-desc">Purple twilight vibes</div>
-                </div>
-                <div class="theme-option">
-                  <div class="theme-swatch">
-                    <div class="theme-swatch-color" style="background: #ff6b35;"></div>
-                    <div class="theme-swatch-color" style="background: #f7931e;"></div>
-                  </div>
-                  <div class="theme-name">Ember</div>
-                  <div class="theme-desc">Warm fire colors</div>
-                </div>
-                <div class="theme-option">
-                  <div class="theme-swatch">
-                    <div class="theme-swatch-color" style="background: #e91e63;"></div>
-                    <div class="theme-swatch-color" style="background: #ff4081;"></div>
-                  </div>
-                  <div class="theme-name">Rose</div>
-                  <div class="theme-desc">Soft pink tones</div>
-                </div>
-                <div class="theme-option">
-                  <div class="theme-swatch">
-                    <div class="theme-swatch-color" style="background: #2e3440;"></div>
-                    <div class="theme-swatch-color" style="background: #88c0d0;"></div>
-                  </div>
-                  <div class="theme-name">Nord</div>
-                  <div class="theme-desc">Arctic inspired</div>
-                </div>
-                <div class="theme-option">
-                  <div class="theme-swatch">
-                    <div class="theme-swatch-color" style="background: #d4a574;"></div>
-                    <div class="theme-swatch-color" style="background: #c9a66b;"></div>
-                  </div>
-                  <div class="theme-name">Sand</div>
-                  <div class="theme-desc">Desert warmth</div>
-                </div>
-                <div class="theme-option">
-                  <div class="theme-swatch">
-                    <div class="theme-swatch-color" style="background: #ffb7c5;"></div>
-                    <div class="theme-swatch-color" style="background: #ff69b4;"></div>
-                  </div>
-                  <div class="theme-name">Sakura</div>
-                  <div class="theme-desc">Cherry blossom</div>
-                </div>
+          </div>
+          <button class="auth-close-btn" id="staffCloseBtn" title="Close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="staff-body">
+          <div class="staff-nav">
+            <button class="staff-nav-btn active" id="staffTabUsers" type="button">
+              <i class="fa-solid fa-users"></i> Users (<span id="staffUserCount">0</span>)
+            </button>
+            <button class="staff-nav-btn" id="staffTabManagement" type="button">
+              <i class="fa-solid fa-gear"></i> Management
+            </button>
+          </div>
+
+          <div id="staffSectionUsers">
+            <div class="staff-controls">
+              <div class="staff-search-box">
+                <i class="fa-solid fa-magnifying-glass staff-search-icon"></i>
+                <input type="text" id="staffSearchInput" placeholder="Search users by email or UID..." autocomplete="off" spellcheck="false" />
               </div>
+              <select id="staffStatusFilter" class="staff-filter-select">
+                <option value="all">All Users</option>
+                <option value="active">Active Only</option>
+                <option value="banned">Banned Only</option>
+              </select>
+              <button class="staff-action-btn" id="staffQuickBanBtn" type="button">
+                <i class="fa-solid fa-user-slash"></i> Ban by Email/UID
+              </button>
+            </div>
+            <!-- User List -->
+            <div class="staff-user-list" id="staffUserList">
+            </div>
+          </div>
+
+          <div id="staffSectionManagement" class="mgmt-section" style="display: none;">
+            <div class="mgmt-card">
+              <div class="mgmt-card-title"><i class="fa-solid fa-user-plus"></i> Create User</div>
+              <form id="mgmtCreateForm" class="mgmt-form">
+                <input type="email" id="mgmtCreateEmail" class="mgmt-input" placeholder="user@example.com" required autocomplete="off" />
+                <input type="password" id="mgmtCreatePassword" class="mgmt-input" placeholder="Password (min. 6 characters)" minlength="6" required autocomplete="new-password" />
+                <button type="submit" class="staff-action-btn mgmt-submit" id="mgmtCreateBtn">
+                  <i class="fa-solid fa-plus"></i> Create User
+                </button>
+                <div class="mgmt-msg" id="mgmtCreateMsg"></div>
+              </form>
+            </div>
+
+            <div class="mgmt-card">
+              <div class="mgmt-card-title"><i class="fa-solid fa-key"></i> Change User Password</div>
+              <form id="mgmtPasswordForm" class="mgmt-form">
+                <select id="mgmtPasswordUser" class="mgmt-input mgmt-select" required></select>
+                <input type="password" id="mgmtPasswordNew" class="mgmt-input" placeholder="New password (min. 6 characters)" minlength="6" required autocomplete="new-password" />
+                <button type="submit" class="staff-action-btn mgmt-submit" id="mgmtPasswordBtn">
+                  <i class="fa-solid fa-rotate"></i> Change Password
+                </button>
+                <div class="mgmt-msg" id="mgmtPasswordMsg"></div>
+              </form>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Ban Prompt -->
+    <div id="ban-prompt-modal" class="ban-prompt-overlay">
+      <div class="ban-prompt-card">
+        <div class="ban-prompt-title">
+          <i class="fa-solid fa-triangle-exclamation"></i> Ban User
+        </div>
+        <div class="ban-prompt-field" id="banPromptTargetField" style="display: none;">
+          <label for="banPromptTargetInput">User Email or UID</label>
+          <input type="text" id="banPromptTargetInput" placeholder="user@gmail.com or UID" autocomplete="off" />
+        </div>
+        <div class="ban-prompt-target" id="banPromptTarget">User: </div>
+        <div class="ban-prompt-field">
+          <label for="banPromptReason">Reason for ban</label>
+          <textarea id="banPromptReason" class="ban-prompt-input" placeholder="Enter reason why this user is being banned..."></textarea>
+        </div>
+        <div class="ban-prompt-buttons">
+          <button type="button" class="ban-prompt-cancel" id="banPromptCancel">Cancel</button>
+          <button type="button" class="ban-prompt-confirm" id="banPromptConfirm">Confirm Ban</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Banned Notice Modal -->
+    <div id="banned-modal" class="banned-modal-overlay">
+      <div class="banned-modal-card">
+        <div class="banned-modal-header">
+          <div class="banned-modal-icon"><i class="fa-solid fa-ban"></i></div>
+          <div class="banned-modal-title">Account Banned</div>
+        </div>
+        <div class="banned-modal-text">
+          Your account was banned at <span class="banned-modal-time" id="bannedModalTime"></span> for:
+        </div>
+        <div class="banned-modal-reason" id="bannedModalReason"></div>
+        <div class="banned-modal-note">You may still play our gxmes but not use other features.</div>
+        <button type="button" class="banned-modal-continue" id="bannedModalContinue">Continue</button>
       </div>
     </div>
 
@@ -1850,6 +3110,413 @@
     </script>
 
     <script>
+      // ============================================================
+      // customDropdown() — reusable custom dropdown library
+      //
+      // Two usage modes:
+      //
+      //   1) Enhance an existing <select> (recommended — keeps .value,
+      //      change events, form behaviour and dynamic option updates):
+      //
+      //        const dd = customDropdown({
+      //          select: "#mySelect",          // selector or element
+      //          placeholder: "Pick one...",
+      //          searchable: true,             // adds a filter input
+      //          className: "my-theme",        // extra CSS class(es)
+      //          onChange: (value, option) => {}
+      //        });
+      //
+      //   2) Create a standalone dropdown:
+      //
+      //        const dd = customDropdown({
+      //          options: ["Red", "Green", "Blue"],
+      //          // or [{ value: "r", label: "Red", icon: "fa-solid fa-circle", disabled: false }]
+      //          placeholder: "Choose a color",
+      //          name: "color",                // submitted with forms
+      //          onChange: (value) => {}
+      //        });
+      //        document.body.appendChild(dd.el);
+      //
+      // Per-option extras on a native <select>: set `option.dataset.icon`
+      // (FontAwesome class) or `option.dataset.html` (small right-side text)
+      // and they'll be rendered automatically.
+      //
+      // Returns: { el, select, open, close, toggle, setOptions, setValue,
+      //            get value(), set disabled, destroy() }
+      //
+      // Theming: style via the .gx-dd-* classes or override these CSS vars:
+      //   --gx-dd-bg, --gx-dd-border, --gx-dd-radius, --gx-dd-text,
+      //   --gx-dd-placeholder, --gx-dd-panel-bg, --gx-dd-accent, --gx-dd-focus
+      // ============================================================
+      function customDropdown(config) {
+        if (typeof config === "string") config = { select: config };
+        config = config || {};
+
+        const {
+          select: selectInput,
+          options: rawOptions,
+          placeholder = "Select...",
+          searchable = false,
+          disabled = false,
+          className = "",
+          name,
+          onChange = null,
+        } = config;
+
+        // --- Resolve / create the backing <select> ---
+        const select = typeof selectInput === "string"
+          ? document.querySelector(selectInput)
+          : (selectInput || document.createElement("select"));
+
+        if (!select || select.tagName !== "SELECT") {
+          throw new Error("customDropdown: `select` must be a <select> element or selector");
+        }
+
+        const isNative = !!selectInput;
+        if (!isNative) {
+          select.classList.add("gx-dd-native");
+          if (name) select.name = name;
+          setSelectOptions(rawOptions || []);
+        }
+
+        function setSelectOptions(list) {
+          select.innerHTML = "";
+          list.forEach((item) => {
+            const opt = document.createElement("option");
+            if (typeof item === "string") {
+              opt.value = item;
+              opt.textContent = item;
+            } else {
+              opt.value = item.value !== undefined ? item.value : item.label;
+              opt.textContent = item.label !== undefined ? item.label : item.value;
+              if (item.icon) opt.dataset.icon = item.icon;
+              if (item.html) opt.dataset.html = item.html;
+              if (item.disabled) opt.disabled = true;
+            }
+            select.appendChild(opt);
+          });
+        }
+
+        // --- Build the custom UI ---
+        const root = document.createElement("div");
+        root.className = `gx-dd${className ? " " + className : ""}`;
+
+        const trigger = document.createElement("div");
+        trigger.className = "gx-dd-trigger";
+        trigger.setAttribute("role", "button");
+        trigger.setAttribute("tabindex", "0");
+        trigger.setAttribute("aria-haspopup", "listbox");
+        trigger.setAttribute("aria-expanded", "false");
+        trigger.innerHTML = `<span class="gx-dd-label"></span><span class="gx-dd-arrow"></span>`;
+
+        const panel = document.createElement("div");
+        panel.className = "gx-dd-panel";
+        panel.setAttribute("role", "presentation");
+
+        let searchInput = null;
+        if (searchable) {
+          searchInput = document.createElement("input");
+          searchInput.type = "text";
+          searchInput.className = "gx-dd-search";
+          searchInput.placeholder = "Search...";
+          searchInput.setAttribute("autocomplete", "off");
+          panel.appendChild(searchInput);
+        }
+
+        const list = document.createElement("ul");
+        list.className = "gx-dd-list";
+        list.setAttribute("role", "listbox");
+        panel.appendChild(list);
+
+        root.appendChild(trigger);
+        root.appendChild(panel);
+        if (isNative) {
+          // Place the wrapper where the select was, hide the select but keep
+          // it functional (validation, .value, events)
+          const parent = select.parentNode;
+          const next = select.nextSibling;
+          select.classList.add("gx-dd-native");
+          select.tabIndex = -1;
+          select.setAttribute("aria-hidden", "true");
+          parent.insertBefore(root, next);
+          root.appendChild(select);
+        } else {
+          root.appendChild(select);
+        }
+
+        const labelEl = trigger.querySelector(".gx-dd-label");
+        let kbIndex = -1;      // keyboard-highlighted option index
+        let typeahead = "";    // typeahead buffer
+        let typeaheadTimer = null;
+
+        // --- Rendering ---
+        function currentOptions() {
+          return [...select.options];
+        }
+
+        function renderOptions() {
+          list.innerHTML = "";
+          kbIndex = -1;
+
+          const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
+          const opts = currentOptions();
+          let visible = 0;
+
+          opts.forEach((opt, i) => {
+            const text = opt.textContent || "";
+            if (query && !text.toLowerCase().includes(query)) return;
+            visible++;
+
+            const li = document.createElement("li");
+            li.className = "gx-dd-option" + (opt.selected ? " selected" : "") + (opt.disabled ? " disabled" : "");
+            li.setAttribute("role", "option");
+            li.dataset.index = i;
+            li.innerHTML =
+              (opt.dataset.icon ? `<i class="${opt.dataset.icon} gx-dd-option-icon"></i>` : "") +
+              `<span class="gx-dd-option-label">${escapeHtml(text)}</span>` +
+              (opt.dataset.html ? `<span class="gx-dd-option-extra">${opt.dataset.html}</span>` : "");
+
+            if (!opt.disabled) {
+              li.addEventListener("mousedown", (e) => {
+                e.preventDefault(); // keep focus on trigger
+                choose(i);
+              });
+              li.addEventListener("mousemove", () => setKbIndex(i, false));
+            }
+            list.appendChild(li);
+          });
+
+          if (visible === 0) {
+            const empty = document.createElement("li");
+            empty.className = "gx-dd-empty";
+            empty.textContent = "No results";
+            list.appendChild(empty);
+          }
+        }
+
+        function escapeHtml(str) {
+          return str.replace(/[&<>"']/g, (c) => ({
+            "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+          }[c]));
+        }
+
+        function syncLabel() {
+          const opt = select.selectedIndex >= 0 ? select.options[select.selectedIndex] : null;
+          const hasValue = opt && opt.value !== "" && !opt.disabled;
+          labelEl.textContent = opt ? opt.textContent : placeholder;
+          labelEl.classList.toggle("is-placeholder", !hasValue);
+        }
+
+        function syncOpenState() {
+          const open = root.classList.contains("open");
+          trigger.setAttribute("aria-expanded", String(open));
+        }
+
+        function setKbIndex(i, scroll = true) {
+          const items = [...list.querySelectorAll(".gx-dd-option:not(.disabled)")];
+          if (!items.length) return;
+          const pos = items.findIndex((el) => Number(el.dataset.index) === i);
+          if (pos === -1) return;
+          items.forEach((el) => el.classList.remove("kb-active"));
+          const el = items[pos];
+          el.classList.add("kb-active");
+          kbIndex = i;
+          if (scroll) el.scrollIntoView({ block: "nearest" });
+        }
+
+        function moveKb(delta) {
+          const items = [...list.querySelectorAll(".gx-dd-option:not(.disabled)")]
+            .map((el) => Number(el.dataset.index));
+          if (!items.length) return;
+          const cur = items.indexOf(kbIndex);
+          const next = cur === -1
+            ? (delta > 0 ? 0 : items.length - 1)
+            : (cur + delta + items.length) % items.length;
+          setKbIndex(items[next]);
+        }
+
+        function typeaheadJump(char) {
+          const needle = (typeahead + char).toLowerCase();
+          typeahead = needle;
+          clearTimeout(typeaheadTimer);
+          typeaheadTimer = setTimeout(() => { typeahead = ""; }, 600);
+
+          const items = [...list.querySelectorAll(".gx-dd-option:not(.disabled)")];
+          const start = items.findIndex((el) => el.classList.contains("kb-active")) + 1;
+          for (let n = 0; n < items.length; n++) {
+            const el = items[(start + n) % items.length];
+            if (el.querySelector(".gx-dd-option-label").textContent.toLowerCase().startsWith(needle)) {
+              setKbIndex(Number(el.dataset.index));
+              return;
+            }
+          }
+        }
+
+        // --- Open / close / choose ---
+        function open() {
+          if (root.hasAttribute("disabled") || select.disabled) return;
+          if (root.classList.contains("open")) return;
+          root.classList.add("open");
+          syncOpenState();
+          renderOptions();
+
+          // Flip upward if there isn't room below
+          const panelH = panel.offsetHeight || 260;
+          const rect = root.getBoundingClientRect();
+          root.classList.toggle("drop-up", rect.bottom + panelH + 8 > window.innerHeight && rect.top > panelH);
+
+          const sel = list.querySelector(".gx-dd-option.selected:not(.disabled)");
+          if (sel) setKbIndex(Number(sel.dataset.index));
+          if (searchInput) setTimeout(() => searchInput.focus(), 0);
+        }
+
+        function close() {
+          if (!root.classList.contains("open")) return;
+          root.classList.remove("open", "drop-up");
+          syncOpenState();
+          if (searchInput) searchInput.value = "";
+        }
+
+        function toggle() {
+          root.classList.contains("open") ? close() : open();
+        }
+
+        function choose(index) {
+          const opt = select.options[index];
+          if (!opt || opt.disabled) return;
+          select.selectedIndex = index;
+          syncLabel();
+          renderOptions();
+          close();
+          trigger.focus();
+          select.dispatchEvent(new Event("change", { bubbles: true }));
+          if (onChange) onChange(select.value, opt);
+        }
+
+        // --- Events ---
+        trigger.addEventListener("click", (e) => {
+          e.stopPropagation();
+          toggle();
+        });
+
+        root.addEventListener("keydown", (e) => {
+          if (searchInput && e.target === searchInput) return; // search input handles its own keys
+          const open = root.classList.contains("open");
+
+          if (e.key === "Escape") {
+            if (open) {
+              e.preventDefault();
+              e.stopPropagation(); // don't trigger page-level Escape handlers
+              close();
+            }
+            return;
+          }
+
+          if (!open) {
+            if (e.key === "ArrowDown" || e.key === "ArrowUp" || e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              open();
+            }
+            return;
+          }
+
+          switch (e.key) {
+            case "ArrowDown": e.preventDefault(); moveKb(1); break;
+            case "ArrowUp":   e.preventDefault(); moveKb(-1); break;
+            case "Home":      e.preventDefault(); { const f = list.querySelector(".gx-dd-option:not(.disabled)"); if (f) setKbIndex(Number(f.dataset.index)); } break;
+            case "End":       e.preventDefault(); { const all = [...list.querySelectorAll(".gx-dd-option:not(.disabled)")]; if (all.length) setKbIndex(Number(all[all.length - 1].dataset.index)); } break;
+            case "Enter":
+            case " ":
+              e.preventDefault();
+              if (kbIndex >= 0) choose(kbIndex);
+              break;
+            case "Tab":
+              close();
+              break;
+            default:
+              if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                typeaheadJump(e.key);
+              }
+          }
+        });
+
+        if (searchInput) {
+          searchInput.addEventListener("input", renderOptions);
+          searchInput.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowDown") { e.preventDefault(); moveKb(1); }
+            else if (e.key === "ArrowUp") { e.preventDefault(); moveKb(-1); }
+            else if (e.key === "Enter") {
+              e.preventDefault();
+              if (kbIndex >= 0) choose(kbIndex);
+            } else if (e.key === "Escape") {
+              e.preventDefault();
+              e.stopPropagation();
+              close();
+              trigger.focus();
+            }
+          });
+        }
+
+        // Click outside closes
+        const onDocClick = (e) => {
+          if (!root.contains(e.target)) close();
+        };
+        document.addEventListener("click", onDocClick);
+
+        // Keep UI in sync when .value / selection changes externally
+        const valueDesc = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, "value");
+        Object.defineProperty(select, "value", {
+          configurable: true,
+          get() { return valueDesc.get.call(this); },
+          set(v) { valueDesc.set.call(this, v); syncLabel(); if (root.classList.contains("open")) renderOptions(); },
+        });
+        const indexDesc = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, "selectedIndex");
+        Object.defineProperty(select, "selectedIndex", {
+          configurable: true,
+          get() { return indexDesc.get.call(this); },
+          set(v) { indexDesc.set.call(this, v); syncLabel(); if (root.classList.contains("open")) renderOptions(); },
+        });
+        select.addEventListener("change", () => { syncLabel(); if (root.classList.contains("open")) renderOptions(); });
+
+        // Rebuild when options are added/removed/edited dynamically
+        const observer = new MutationObserver(() => { renderOptions(); syncLabel(); });
+        observer.observe(select, {
+          childList: true, subtree: true, characterData: true,
+          attributes: true, attributeFilter: ["selected", "disabled", "value", "data-icon", "data-html"],
+        });
+
+        // Initial state
+        syncLabel();
+        setDisabled(disabled || select.disabled);
+
+        function setDisabled(v) {
+          root.toggleAttribute("disabled", v);
+          trigger.setAttribute("aria-disabled", String(v));
+          trigger.tabIndex = v ? -1 : 0;
+          select.disabled = v;
+        }
+
+        // --- Public API ---
+        return {
+          el: root,
+          select,
+          open, close, toggle,
+          setOptions(list) { setSelectOptions(list); renderOptions(); syncLabel(); },
+          setValue(v) { select.value = v; },
+          get value() { return select.value; },
+          set disabled(v) { setDisabled(v); },
+          destroy() {
+            observer.disconnect();
+            document.removeEventListener("click", onDocClick);
+            root.replaceWith(select);
+            select.classList.remove("gx-dd-native");
+            select.removeAttribute("aria-hidden");
+          },
+        };
+      }
+    </script>
+
+    <script>
       document.addEventListener("DOMContentLoaded", () => {
         const gameGrid = document.getElementById("game-grid");
         const searchInput = document.getElementById("game-search");
@@ -2106,14 +3773,6 @@
           });
         });
 
-        const modeBtns = document.querySelectorAll(".mode-btn");
-        modeBtns.forEach(btn => {
-          btn.addEventListener("click", () => {
-            modeBtns.forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-          });
-        });
-
         const performanceOptions = document.querySelectorAll(".performance-option");
         performanceOptions.forEach(option => {
           option.addEventListener("click", () => {
@@ -2159,14 +3818,6 @@
             searchBoxes.forEach(box => box.style.border = "1px solid rgba(255, 255, 255, 0.2)");
           }
         }
-
-        const themeOptions = document.querySelectorAll(".theme-option");
-        themeOptions.forEach(option => {
-          option.addEventListener("click", () => {
-            themeOptions.forEach(t => t.classList.remove("active"));
-            option.classList.add("active");
-          });
-        });
 
         function normalizeForSearch(str) {
           return str.toLowerCase().replace(/[^a-z0-9]/g, "");
@@ -2290,6 +3941,1123 @@
             }
           });
         });
+      });
+    </script>
+
+    <!-- SDK's; JS Begins here -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+    <script>
+      (function() {
+        const firebaseConfig = {
+          apiKey: "AIzaSyCEFw3lmLUyb4wetAoGb9Qwx5WDlMO5VlY",
+          authDomain: "gx-vxrse.firebaseapp.com",
+          databaseURL: "https://gx-vxrse-default-rtdb.firebaseio.com",
+          projectId: "gx-vxrse",
+          storageBucket: "gx-vxrse.firebasestorage.app",
+          messagingSenderId: "23886185732",
+          appId: "1:23886185732:web:d2d4499018d5e5ff3e3c51"
+        };
+
+        if (!firebase.apps.length) {
+          firebase.initializeApp(firebaseConfig);
+        }
+        const auth = firebase.auth();
+        const rtdb = firebase.database();
+
+        // Supabase URL
+        const SUPABASE_URL = "https://ebyidsosbtzdpkmyhypv.supabase.co";
+
+        // Login & User Dropdown
+        const loginBtn = document.getElementById("loginBtn");
+        const userDropdown = document.getElementById("userDropdown");
+        const userDropdownAvatar = document.getElementById("userDropdownAvatar");
+        const userDropdownEmail = document.getElementById("userDropdownEmail");
+        const userDropdownStatus = document.getElementById("userDropdownStatus");
+        const staffPanelBtn = document.getElementById("staffPanelBtn");
+        const logoutBtn = document.getElementById("logoutBtn");
+
+        // Auth Modal
+        const authModal = document.getElementById("auth-modal");
+        const authCloseBtn = document.getElementById("authCloseBtn");
+        const authForm = document.getElementById("authForm");
+        const authEmail = document.getElementById("authEmail");
+        const authPassword = document.getElementById("authPassword");
+        const authError = document.getElementById("authError");
+        const authSubmitBtn = document.getElementById("authSubmitBtn");
+        const authSubmitText = document.getElementById("authSubmitText");
+
+        // Staff Panel
+        const staffModal = document.getElementById("staff-modal");
+        const staffCloseBtn = document.getElementById("staffCloseBtn");
+        const staffTabUsers = document.getElementById("staffTabUsers");
+        const staffTabManagement = document.getElementById("staffTabManagement");
+        const staffSectionUsers = document.getElementById("staffSectionUsers");
+        const staffSectionManagement = document.getElementById("staffSectionManagement");
+        const staffUserCount = document.getElementById("staffUserCount");
+        const staffStatusFilter = document.getElementById("staffStatusFilter");
+        const staffSearchInput = document.getElementById("staffSearchInput");
+        const staffQuickBanBtn = document.getElementById("staffQuickBanBtn");
+        const staffUserList = document.getElementById("staffUserList");
+
+        // Management Forms
+        const mgmtCreateForm = document.getElementById("mgmtCreateForm");
+        const mgmtCreateEmail = document.getElementById("mgmtCreateEmail");
+        const mgmtCreatePassword = document.getElementById("mgmtCreatePassword");
+        const mgmtCreateBtn = document.getElementById("mgmtCreateBtn");
+        const mgmtCreateMsg = document.getElementById("mgmtCreateMsg");
+        const mgmtPasswordForm = document.getElementById("mgmtPasswordForm");
+        const mgmtPasswordUser = document.getElementById("mgmtPasswordUser");
+        const mgmtPasswordNew = document.getElementById("mgmtPasswordNew");
+        const mgmtPasswordBtn = document.getElementById("mgmtPasswordBtn");
+        const mgmtPasswordMsg = document.getElementById("mgmtPasswordMsg");
+
+        // Ban Prompt
+        const banPromptModal = document.getElementById("ban-prompt-modal");
+        const banPromptTarget = document.getElementById("banPromptTarget");
+        const banPromptTargetField = document.getElementById("banPromptTargetField");
+        const banPromptTargetInput = document.getElementById("banPromptTargetInput");
+        const banPromptReason = document.getElementById("banPromptReason");
+        const banPromptCancel = document.getElementById("banPromptCancel");
+        const banPromptConfirm = document.getElementById("banPromptConfirm");
+        const bannedModal = document.getElementById("banned-modal");
+        const bannedModalTime = document.getElementById("bannedModalTime");
+        const bannedModalReason = document.getElementById("bannedModalReason");
+        const bannedModalContinue = document.getElementById("bannedModalContinue");
+
+        let currentUser = null;
+        let isOwner = false;
+        let staffTab = "users";
+        let allUsersMap = {};
+        let bannedUsersMap = {};
+        let staffUsersMap = {};
+        let banTargetUser = null;
+
+        // Catalog of delegable staff privileges. Owners implicitly have all of
+        // these plus user management (create user / change password), which is
+        // never delegable.
+        const STAFF_PRIVILEGES = [
+          { key: "banUsers",   label: "Ban Users",   icon: "fa-user-slash", desc: "Ban users from the staff panel" },
+          { key: "unbanUsers", label: "Unban Users", icon: "fa-unlock",     desc: "Lift bans from the staff panel" },
+        ];
+
+        // Find the staff-users entry matching a uid/email. Returns { key, val }.
+        function findStaffEntry(uid, email) {
+          if ((!uid && !email) || !staffUsersMap || typeof staffUsersMap !== "object") return null;
+
+          const cleanEmail = (email || "").replace(/\./g, "_").toLowerCase();
+          const rawEmail = (email || "").toLowerCase();
+
+          for (const [key, val] of Object.entries(staffUsersMap)) {
+            const keyMatch = (uid && key === uid) || key.toLowerCase() === cleanEmail || key.toLowerCase() === rawEmail;
+            const valMatch = val && typeof val === "object" && (
+              (uid && val.uid === uid) || (val.email && val.email.toLowerCase() === rawEmail)
+            );
+            if (keyMatch || valMatch) return { key, val };
+          }
+          return null;
+        }
+
+        function isStaffMember(uid, email) {
+          return !!findStaffEntry(uid, email);
+        }
+
+        function isOwnerEntry(val) {
+          if (val === true || val === "owner") return true;
+          return !!(val && typeof val === "object" &&
+            (val.role === "owner" || val.isOwner || val.owner));
+        }
+
+        // Does this staff entry grant a specific privilege?
+        function entryHasPrivilege(val, privKey) {
+          return !!(val && typeof val === "object" &&
+            val.privileges && val.privileges[privKey] === true);
+        }
+
+        // Does the staff entry for this user grant a specific privilege?
+        // Owner entries implicitly pass every check.
+        function hasPrivilege(uid, email, privKey) {
+          const entry = findStaffEntry(uid, email);
+          if (!entry) return false;
+          if (isOwnerEntry(entry.val)) return true;
+          return entryHasPrivilege(entry.val, privKey);
+        }
+
+        // Privileges of the currently signed-in staff member (for UI gating).
+        function myPrivilege(privKey) {
+          if (!currentUser) return false;
+          if (isOwner) return true;
+          const entry = findStaffEntry(currentUser.uid, currentUser.email);
+          return !!entry && entryHasPrivilege(entry.val, privKey);
+        }
+
+        function canAccessStaffPanel() {
+          if (!currentUser) return false;
+          return isOwner || isStaffMember(currentUser.uid, currentUser.email);
+        }
+
+        function getInitialsFromEmail(email) {
+          if (!email || typeof email !== "string") return "?";
+          const namePart = email.split("@")[0] || "";
+          const dotParts = namePart.split(".").filter(p => p.length > 0);
+          if (dotParts.length >= 2) {
+            return (dotParts[0].charAt(0) + dotParts[1].charAt(0)).toUpperCase();
+          }
+          return (namePart.charAt(0) || email.charAt(0) || "?").toUpperCase();
+        }
+
+        function openAuthModal() {
+          if (userDropdown) userDropdown.classList.remove("active");
+          authModal.classList.add("active");
+          clearAuthError();
+          setTimeout(() => authEmail && authEmail.focus(), 100);
+        }
+
+        function closeAuthModal() {
+          authModal.classList.remove("active");
+          if (authForm) authForm.reset();
+          clearAuthError();
+        }
+
+        function showAuthError(msg) {
+          authError.textContent = msg;
+          authError.classList.add("visible");
+        }
+
+        function clearAuthError() {
+          authError.textContent = "";
+          authError.classList.remove("visible");
+        }
+
+        function formatFirebaseError(err) {
+          switch (err.code) {
+            case "auth/invalid-email":
+              return "Invalid email address format.";
+            case "auth/user-not-found":
+              return "No account found with this email.";
+            case "auth/wrong-password":
+              return "Incorrect password.";
+            case "auth/invalid-credential":
+              return "Invalid email or password.";
+            case "auth/too-many-requests":
+              return "Too many attempts. Please try again later.";
+            case "auth/network-request-failed":
+              return "Network error. Please check your connection.";
+            default:
+              return err.message || "An authentication error occurred.";
+          }
+        }
+
+        // Toggle user dropdown
+        loginBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (currentUser) {
+            userDropdown.classList.toggle("active");
+          } else {
+            openAuthModal();
+          }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", (e) => {
+          if (userDropdown && userDropdown.classList.contains("active")) {
+            if (!userDropdown.contains(e.target) && !loginBtn.contains(e.target)) {
+              userDropdown.classList.remove("active");
+            }
+          }
+        });
+
+        // Close modal on other click
+        authModal.addEventListener("click", (e) => {
+          if (e.target === authModal) {
+            closeAuthModal();
+          }
+        });
+
+        authCloseBtn.addEventListener("click", closeAuthModal);
+
+        // Sign-in Form Submission
+        authForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          clearAuthError();
+
+          const email = authEmail.value.trim();
+          const password = authPassword.value;
+
+          if (!email || !password) {
+            showAuthError("Please fill in both email and password.");
+            return;
+          }
+
+          authSubmitBtn.disabled = true;
+          const originalText = authSubmitText.textContent;
+          authSubmitText.textContent = "Verifying...";
+
+          try {
+            await auth.signInWithEmailAndPassword(email, password);
+            closeAuthModal();
+            if (typeof showToast === "function") {
+              showToast(`Welcome back, ${email.split("@")[0].replace(/\./g, " ")}!`, "casual");
+            }
+          } catch (err) {
+            console.error("Auth error:", err);
+            const userMsg = formatFirebaseError(err);
+            showAuthError(userMsg);
+            if (typeof showToast === "function") {
+              showToast(userMsg, "error");
+            }
+          } finally {
+            authSubmitBtn.disabled = false;
+            authSubmitText.textContent = originalText;
+          }
+        });
+
+        // Logout
+        logoutBtn.addEventListener("click", () => {
+          auth.signOut()
+            .then(() => {
+              userDropdown.classList.remove("active");
+              if (staffModal) staffModal.classList.remove("active");
+              if (typeof showToast === "function") {
+                showToast("Signed out successfully", "info");
+              }
+            })
+            .catch((err) => {
+              console.error("Sign out error:", err);
+              if (typeof showToast === "function") {
+                showToast("Failed to sign out", "error");
+              }
+            });
+        });
+
+        // ==========================================
+        // Realtime Database: Staff & Ban Logic
+        // ==========================================
+
+        // Check if user is banned
+        async function checkIsBanned(user) {
+          if (!user) return null;
+          try {
+            // 1. UID check
+            const uidSnap = await rtdb.ref(`banned-users/${user.uid}`).once("value");
+            if (uidSnap.exists()) {
+              return uidSnap.val() || { reason: "Account suspended" };
+            }
+
+            // 2. Clean email check
+            const cleanEmail = (user.email || "").replace(/\./g, "_").toLowerCase();
+            const emailSnap = await rtdb.ref(`banned-users/${cleanEmail}`).once("value");
+            if (emailSnap.exists()) {
+              return emailSnap.val() || { reason: "Account suspended" };
+            }
+
+            // 3. Scan banned-users list
+            const rootSnap = await rtdb.ref("banned-users").once("value");
+            if (rootSnap.exists()) {
+              const list = rootSnap.val();
+              for (const [key, val] of Object.entries(list)) {
+                if (key === user.uid || key.toLowerCase() === cleanEmail) return val;
+                if (val && typeof val === "object") {
+                  if ((val.email || "").toLowerCase() === (user.email || "").toLowerCase() || val.uid === user.uid) {
+                    return val;
+                  }
+                }
+              }
+            }
+          } catch (e) {
+            console.warn("banned-users lookup warning:", e);
+          }
+          return null;
+        }
+
+        // Check if user is an Owner in staff-users (READ ONLY since write would create massive vulnerability)
+        async function checkIsOwner(user) {
+          if (!user) return false;
+          try {
+            // Check UID
+            const uidSnap = await rtdb.ref(`staff-users/${user.uid}`).once("value");
+            if (uidSnap.exists()) {
+              const val = uidSnap.val();
+              if (val === true || val === "owner" || (val && (val.role === "owner" || val.isOwner || val.owner))) {
+                return true;
+              }
+            }
+
+            // Clean email key
+            const cleanEmail = (user.email || "").replace(/\./g, "_").toLowerCase();
+            const emailSnap = await rtdb.ref(`staff-users/${cleanEmail}`).once("value");
+            if (emailSnap.exists()) {
+              const val = emailSnap.val();
+              if (val === true || val === "owner" || (val && (val.role === "owner" || val.isOwner || val.owner))) {
+                return true;
+              }
+            }
+
+            // Check staff-users root
+            const rootSnap = await rtdb.ref("staff-users").once("value");
+            if (rootSnap.exists()) {
+              const staffObj = rootSnap.val();
+              if (staffObj && typeof staffObj === "object") {
+                for (const [k, v] of Object.entries(staffObj)) {
+                  const matchKey = k === user.uid || k.toLowerCase() === cleanEmail || k.toLowerCase() === (user.email || "").toLowerCase();
+                  const matchEmail = v && typeof v === "object" && (v.email || "").toLowerCase() === (user.email || "").toLowerCase();
+                  if (matchKey || matchEmail) {
+                    if (v === true || v === "owner" || (v && (v.role === "owner" || v.isOwner || v.owner))) {
+                      return true;
+                    }
+                  }
+                }
+              }
+            }
+          } catch (e) {
+            console.warn("staff-users lookup warning:", e);
+          }
+          return false;
+        }
+
+        // Record presence in users/
+        function recordUserPresence(user) {
+          if (!user) return;
+          try {
+            rtdb.ref(`users/${user.uid}`).update({
+              uid: user.uid,
+              email: user.email,
+              lastSeen: Date.now()
+            }).catch(() => {});
+          } catch (e) {}
+        }
+
+        // ==========================================
+        // Staff Panel UI
+        // ==========================================
+
+        // Show/hide staff UI based on the signed-in user's privileges
+        function refreshStaffAccess() {
+          if (!currentUser) return;
+          const staff = canAccessStaffPanel();
+          if (staffPanelBtn) staffPanelBtn.style.display = staff ? "flex" : "none";
+          if (staffTabManagement) staffTabManagement.style.display = isOwner ? "" : "none";
+          if (staffQuickBanBtn) staffQuickBanBtn.style.display = myPrivilege("banUsers") ? "" : "none";
+          if (userDropdownStatus) {
+            userDropdownStatus.innerHTML = isOwner
+              ? `Online <span class="owner-badge">Owner</span>`
+              : (isStaffMember(currentUser.uid, currentUser.email)
+                ? `Online <span class="owner-badge">Staff</span>`
+                : "Online");
+          }
+        }
+
+        function openStaffPanel() {
+          if (!canAccessStaffPanel()) {
+            if (typeof showToast === "function") {
+              showToast("Access Denied: Staff privileges required", "error");
+            }
+            return;
+          }
+          if (userDropdown) userDropdown.classList.remove("active");
+          staffModal.classList.add("active");
+          staffSearchInput.value = "";
+          staffStatusFilter.value = "all";
+          refreshStaffAccess();
+          setStaffTab(isOwner ? staffTab : "users");
+          setupStaffListeners();
+          renderStaffUserList();
+        }
+
+        function closeStaffPanel() {
+          staffModal.classList.remove("active");
+        }
+
+        staffPanelBtn.addEventListener("click", openStaffPanel);
+        staffCloseBtn.addEventListener("click", closeStaffPanel);
+
+        staffModal.addEventListener("click", (e) => {
+          if (e.target === staffModal) closeStaffPanel();
+        });
+
+        function setStaffTab(tab) {
+          if (tab === "management" && !isOwner) tab = "users";
+          staffTab = tab;
+          staffTabUsers.classList.toggle("active", tab === "users");
+          staffTabManagement.classList.toggle("active", tab === "management");
+          staffSectionUsers.style.display = tab === "users" ? "" : "none";
+          staffSectionManagement.style.display = tab === "management" ? "" : "none";
+        }
+
+        staffTabUsers.addEventListener("click", () => setStaffTab("users"));
+        staffTabManagement.addEventListener("click", () => setStaffTab("management"));
+
+        staffSearchInput.addEventListener("input", () => {
+          renderStaffUserList();
+        });
+
+        staffStatusFilter.addEventListener("change", () => {
+          renderStaffUserList();
+        });
+
+        // Realtime database listeners for Staff Panel
+        let staffListenersAttached = false;
+        function setupStaffListeners() {
+          if (staffListenersAttached) return;
+          staffListenersAttached = true;
+
+          // Listen to users
+          rtdb.ref("users").on("value", (snap) => {
+            allUsersMap = snap.val() || {};
+            renderStaffUserList();
+          }, (err) => console.warn("RTDB users listener:", err));
+
+          // Listen to staff-users
+          rtdb.ref("staff-users").on("value", (snap) => {
+            staffUsersMap = snap.val() || {};
+            refreshStaffAccess();
+            renderStaffUserList();
+          }, (err) => console.warn("RTDB staff-users listener:", err));
+
+          // Listen to banned-users
+          rtdb.ref("banned-users").on("value", (snap) => {
+            bannedUsersMap = snap.val() || {};
+            renderStaffUserList();
+          }, (err) => console.warn("RTDB banned-users listener:", err));
+        }
+
+        // Render staff user list
+        function renderStaffUserList() {
+          if (!staffUserList) return;
+          refreshStaffAccess();
+
+          const query = (staffSearchInput.value || "").trim().toLowerCase();
+          const mergedUsers = {};
+
+          // Add all known users from users/
+          Object.entries(allUsersMap).forEach(([uid, uData]) => {
+            const email = (uData && uData.email) || "Unknown User";
+            mergedUsers[uid] = {
+              uid: uid,
+              email: email,
+              lastSeen: uData && uData.lastSeen ? uData.lastSeen : null,
+              isBanned: false,
+              banInfo: null
+            };
+          });
+
+          // Add / update with banned-users
+          Object.entries(bannedUsersMap).forEach(([banKey, banData]) => {
+            const email = (banData && banData.email) || banKey;
+            const uid = (banData && banData.uid) || banKey;
+            const targetKey = uid && mergedUsers[uid] ? uid : banKey;
+
+            if (mergedUsers[targetKey]) {
+              mergedUsers[targetKey].isBanned = true;
+              mergedUsers[targetKey].banInfo = banData;
+              mergedUsers[targetKey].banKey = banKey;
+            } else {
+              mergedUsers[banKey] = {
+                uid: uid,
+                email: email,
+                lastSeen: banData && banData.bannedAt ? banData.bannedAt : null,
+                isBanned: true,
+                banInfo: banData,
+                banKey: banKey
+              };
+            }
+          });
+
+          const userArray = Object.values(mergedUsers);
+          staffUserCount.textContent = userArray.length;
+          populateMgmtUserSelect(userArray);
+
+          // Filter by status
+          const statusFilter = staffStatusFilter.value;
+          let filtered = userArray;
+          if (statusFilter === "banned") {
+            filtered = filtered.filter(u => u.isBanned);
+          } else if (statusFilter === "active") {
+            filtered = filtered.filter(u => !u.isBanned);
+          }
+
+          // Filter by search query
+          if (query) {
+            filtered = filtered.filter(u => {
+              const emailMatch = (u.email || "").toLowerCase().includes(query);
+              const uidMatch = (u.uid || "").toLowerCase().includes(query);
+              const reasonMatch = u.banInfo && (u.banInfo.reason || "").toLowerCase().includes(query);
+              return emailMatch || uidMatch || reasonMatch;
+            });
+          }
+
+          staffUserList.innerHTML = "";
+
+          if (filtered.length === 0) {
+            staffUserList.innerHTML = `
+              <div style="text-align:center; padding: 40px; color: #71717a; font-size: 0.85rem;">
+                <i class="fa-solid fa-user-xmark" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                No users found
+              </div>
+            `;
+            return;
+          }
+
+          filtered.forEach((userItem) => {
+            const card = document.createElement("div");
+            card.className = `staff-user-card ${userItem.isBanned ? "banned" : ""}`;
+
+            const initials = getInitialsFromEmail(userItem.email);
+            const isStaff = isStaffMember(userItem.uid, userItem.email);
+            const statusBadge = userItem.isBanned
+              ? `<span class="staff-badge banned-badge">BANNED</span>`
+              : (isStaff
+                ? `<span class="staff-badge" style="background: rgba(99, 102, 241, 0.15); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.3);">STAFF</span>`
+                : `<span class="staff-badge active-badge">ACTIVE</span>`);
+
+            let metaText = userItem.uid ? `UID: ${userItem.uid.substring(0, 14)}...` : "";
+            if (userItem.isBanned && userItem.banInfo) {
+              const reason = userItem.banInfo.reason || "No reason specified";
+              metaText += ` &bull; <span style="color: #ff7777;">Reason: ${reason}</span>`;
+            } else if (userItem.lastSeen) {
+              metaText += ` &bull; Seen: ${new Date(userItem.lastSeen).toLocaleDateString()}`;
+            }
+
+            const canBan = myPrivilege("banUsers");
+            const canUnban = myPrivilege("unbanUsers");
+
+            let actionHtml = "";
+            if (userItem.isBanned) {
+              actionHtml = canUnban
+                ? `<button class="staff-unban-btn" data-bankey="${userItem.banKey || userItem.uid}" data-email="${userItem.email}"><i class="fa-solid fa-unlock"></i> Unban</button>`
+                : "";
+            } else if (isStaff) {
+              actionHtml = `<span style="font-size: 0.75rem; color: #64748b; font-weight: 500; display: flex; align-items: center; gap: 5px;"><i class="fa-solid fa-shield"></i> Protected</span>`;
+            } else {
+              actionHtml = canBan
+                ? `<button class="staff-ban-btn" data-uid="${userItem.uid}" data-email="${userItem.email}"><i class="fa-solid fa-ban"></i> Ban</button>`
+                : "";
+            }
+
+            card.innerHTML = `
+              <div class="staff-user-avatar">${initials}</div>
+              <div class="staff-user-info">
+                <div class="staff-user-email">
+                  <span>${userItem.email}</span>
+                  ${statusBadge}
+                </div>
+                <div class="staff-user-meta">${metaText}</div>
+              </div>
+              <div class="staff-user-actions">
+                ${actionHtml}
+              </div>
+            `;
+
+            // Attach action listeners
+            const banBtn = card.querySelector(".staff-ban-btn");
+            if (banBtn) {
+              banBtn.addEventListener("click", () => {
+                openBanPrompt({ uid: userItem.uid, email: userItem.email });
+              });
+            }
+
+            const unbanBtn = card.querySelector(".staff-unban-btn");
+            if (unbanBtn) {
+              unbanBtn.addEventListener("click", () => {
+                handleUnbanUser(unbanBtn.dataset.bankey, unbanBtn.dataset.email);
+              });
+            }
+
+            // Right-click opens the privileges editor (owners only)
+            card.addEventListener("contextmenu", (e) => {
+              if (!isOwner) return;
+              e.preventDefault();
+              e.stopPropagation(); // don't let the document handler close it instantly
+              openPrivMenu(userItem, e.clientX, e.clientY);
+            });
+
+            staffUserList.appendChild(card);
+          });
+        }
+
+        // ==========================================
+        // Management (User Creation / Password Reset)
+        // ==========================================
+
+        async function callUserManagement(payload) {
+          const token = await currentUser.getIdToken();
+          const res = await fetch(`${SUPABASE_URL}/functions/v1/user-management`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || data.ok === false) {
+            throw new Error(data.error || `Request failed (${res.status})`);
+          }
+          return data;
+        }
+
+        function setMgmtMsg(el, msg, isError) {
+          el.textContent = msg || "";
+          el.className = "mgmt-msg" + (msg ? (isError ? " err" : " ok") : "");
+        }
+
+        function populateMgmtUserSelect(userArray) {
+          if (!mgmtPasswordUser) return;
+          const prev = mgmtPasswordUser.value;
+          const options = userArray
+            .filter(u => u.email && u.email !== "Unknown User")
+            .map(u => `<option value="${u.email}">${u.email}</option>`)
+            .join("");
+          mgmtPasswordUser.innerHTML =
+            `<option value="" disabled ${prev ? "" : "selected"}>Select a user...</option>` + options;
+          if (prev && [...mgmtPasswordUser.options].some(o => o.value === prev)) {
+            mgmtPasswordUser.value = prev;
+          }
+        }
+
+        mgmtCreateForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const email = mgmtCreateEmail.value.trim();
+          const password = mgmtCreatePassword.value;
+          if (!email || !password) return;
+
+          mgmtCreateBtn.disabled = true;
+          setMgmtMsg(mgmtCreateMsg, "Creating user...", false);
+          try {
+            await callUserManagement({ action: "createUser", email, password });
+            setMgmtMsg(mgmtCreateMsg, `User ${email} created successfully.`, false);
+            mgmtCreateForm.reset();
+            if (typeof showToast === "function") {
+              showToast(`User ${email} created.`, "casual");
+            }
+          } catch (err) {
+            console.error("Create user error:", err);
+            setMgmtMsg(mgmtCreateMsg, err.message || "Failed to create user.", true);
+          } finally {
+            mgmtCreateBtn.disabled = false;
+          }
+        });
+
+        mgmtPasswordForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const email = mgmtPasswordUser.value;
+          const password = mgmtPasswordNew.value;
+          if (!email || !password) return;
+
+          mgmtPasswordBtn.disabled = true;
+          setMgmtMsg(mgmtPasswordMsg, "Updating password...", false);
+          try {
+            await callUserManagement({ action: "updatePassword", email, password });
+            setMgmtMsg(mgmtPasswordMsg, `Password updated for ${email}.`, false);
+            mgmtPasswordForm.reset();
+            if (typeof showToast === "function") {
+              showToast(`Password updated for ${email}.`, "casual");
+            }
+          } catch (err) {
+            console.error("Password update error:", err);
+            setMgmtMsg(mgmtPasswordMsg, err.message || "Failed to update password.", true);
+          } finally {
+            mgmtPasswordBtn.disabled = false;
+          }
+        });
+
+        // ==========================================
+        // Staff Privileges Context Menu (owner only)
+        // ==========================================
+
+        let privMenu = null;
+        let privMenuUser = null;
+        let privMenuState = {};
+
+        function closePrivMenu() {
+          if (privMenu) privMenu.remove();
+          privMenu = null;
+          privMenuUser = null;
+        }
+
+        function openPrivMenu(userItem, x, y) {
+          closePrivMenu();
+          privMenuUser = userItem;
+
+          const entry = findStaffEntry(userItem.uid, userItem.email);
+          const ownerEntry = entry && isOwnerEntry(entry.val);
+          privMenuState = {};
+          STAFF_PRIVILEGES.forEach(p => {
+            privMenuState[p.key] = ownerEntry || entryHasPrivilege(entry && entry.val, p.key);
+          });
+
+          privMenu = document.createElement("div");
+          privMenu.className = "staff-ctx-menu";
+
+          const header = document.createElement("div");
+          header.className = "staff-ctx-header";
+          header.innerHTML = `${userItem.email || userItem.uid}<small>Staff Privileges</small>`;
+          privMenu.appendChild(header);
+
+          if (ownerEntry) {
+            const note = document.createElement("div");
+            note.className = "staff-ctx-note";
+            note.textContent = "This user is an owner and already has every privilege, including user management.";
+            privMenu.appendChild(note);
+          } else {
+            STAFF_PRIVILEGES.forEach(p => {
+              const row = document.createElement("div");
+              row.className = "staff-priv-row" + (privMenuState[p.key] ? " on" : "");
+              row.innerHTML = `
+                <span class="staff-priv-toggle"></span>
+                <span class="staff-priv-info">
+                  <span class="staff-priv-label">${p.label}</span>
+                  <span class="staff-priv-desc">${p.desc}</span>
+                </span>
+              `;
+              row.addEventListener("click", () => {
+                privMenuState[p.key] = !privMenuState[p.key];
+                row.classList.toggle("on", privMenuState[p.key]);
+              });
+              privMenu.appendChild(row);
+            });
+
+            const actions = document.createElement("div");
+            actions.className = "staff-ctx-actions";
+
+            const saveBtn = document.createElement("button");
+            saveBtn.type = "button";
+            saveBtn.className = "staff-ctx-save";
+            saveBtn.textContent = entry ? "Save Changes" : "Make Staff";
+            saveBtn.addEventListener("click", () => saveStaffPrivileges(userItem));
+
+            actions.appendChild(saveBtn);
+
+            if (entry) {
+              const removeBtn = document.createElement("button");
+              removeBtn.type = "button";
+              removeBtn.className = "staff-ctx-remove";
+              removeBtn.textContent = "Remove";
+              removeBtn.addEventListener("click", () => removeStaffEntry(userItem));
+              actions.appendChild(removeBtn);
+            }
+
+            privMenu.appendChild(actions);
+          }
+
+          document.body.appendChild(privMenu);
+
+          // Clamp inside viewport
+          const rect = privMenu.getBoundingClientRect();
+          const left = Math.min(x, window.innerWidth - rect.width - 8);
+          const top = Math.min(y, window.innerHeight - rect.height - 8);
+          privMenu.style.left = `${Math.max(8, left)}px`;
+          privMenu.style.top = `${Math.max(8, top)}px`;
+        }
+
+        async function saveStaffPrivileges(userItem) {
+          if (!privMenuUser) return;
+          const privileges = {};
+          STAFF_PRIVILEGES.forEach(p => { privileges[p.key] = !!privMenuState[p.key]; });
+
+          const entry = findStaffEntry(userItem.uid, userItem.email);
+          const key = entry ? entry.key
+            : (userItem.uid || (userItem.email || "").replace(/\./g, "_").toLowerCase());
+
+          const payload = {
+            privileges,
+            updatedAt: Date.now(),
+            updatedBy: currentUser ? currentUser.email : "owner",
+          };
+          if (userItem.uid) payload.uid = userItem.uid;
+          if (userItem.email) payload.email = userItem.email;
+
+          try {
+            await rtdb.ref(`staff-users/${key}`).update(payload);
+            closePrivMenu();
+            if (typeof showToast === "function") {
+              showToast(`Privileges updated for ${userItem.email || userItem.uid}.`, "casual");
+            }
+          } catch (err) {
+            console.error("Save privileges error:", err);
+            if (typeof showToast === "function") {
+              showToast("Failed to save privileges: " + err.message, "error");
+            }
+          }
+        }
+
+        async function removeStaffEntry(userItem) {
+          const entry = findStaffEntry(userItem.uid, userItem.email);
+          if (!entry) return;
+          try {
+            await rtdb.ref(`staff-users/${entry.key}`).remove();
+            closePrivMenu();
+            if (typeof showToast === "function") {
+              showToast(`${userItem.email || userItem.uid} removed from staff.`, "info");
+            }
+          } catch (err) {
+            console.error("Remove staff error:", err);
+            if (typeof showToast === "function") {
+              showToast("Failed to remove staff: " + err.message, "error");
+            }
+          }
+        }
+
+        // Close menu on outside click / scroll / Escape
+        document.addEventListener("click", (e) => {
+          if (privMenu && !privMenu.contains(e.target)) closePrivMenu();
+        });
+        document.addEventListener("scroll", closePrivMenu, true);
+        document.addEventListener("contextmenu", (e) => {
+          if (privMenu && !privMenu.contains(e.target)) closePrivMenu();
+        });
+
+        // ==========================================
+        // Ban / Unban Handlers
+        // ==========================================
+
+        function openBanPrompt(userObj) {
+          if (userObj && isStaffMember(userObj.uid, userObj.email)) {
+            if (typeof showToast === "function") {
+              showToast("Staff members cannot be banned.", "warn");
+            }
+            return;
+          }
+
+          banTargetUser = userObj;
+          banPromptReason.value = "";
+
+          if (userObj && (userObj.email || userObj.uid)) {
+            banPromptTargetField.style.display = "none";
+            banPromptTarget.style.display = "block";
+            banPromptTarget.textContent = `User: ${userObj.email || userObj.uid}`;
+          } else {
+            // Quick ban mode
+            banPromptTarget.style.display = "none";
+            banPromptTargetField.style.display = "flex";
+            banPromptTargetInput.value = "";
+            setTimeout(() => banPromptTargetInput.focus(), 100);
+          }
+
+          banPromptModal.classList.add("active");
+          setTimeout(() => banPromptReason.focus(), 150);
+        }
+
+        function closeBanPrompt() {
+          banPromptModal.classList.remove("active");
+          banTargetUser = null;
+          banPromptReason.value = "";
+        }
+
+        function openBannedModal(banInfo) {
+          const reason = (banInfo && typeof banInfo === "object" && banInfo.reason)
+            ? banInfo.reason
+            : "Violation of community rules";
+
+          let timeText = "an unknown time";
+          const bannedAt = banInfo && banInfo.bannedAt;
+          if (bannedAt) {
+            const d = new Date(typeof bannedAt === "number" ? bannedAt : bannedAt);
+            if (!isNaN(d.getTime())) {
+              timeText = d.toLocaleString();
+            }
+          }
+
+          bannedModalTime.textContent = timeText;
+          bannedModalReason.textContent = reason;
+          bannedModal.classList.add("active");
+        }
+
+        function closeBannedModal() {
+          bannedModal.classList.remove("active");
+        }
+
+        bannedModalContinue.addEventListener("click", closeBannedModal);
+
+        staffQuickBanBtn.addEventListener("click", () => {
+          openBanPrompt(null);
+        });
+
+        banPromptCancel.addEventListener("click", closeBanPrompt);
+        banPromptModal.addEventListener("click", (e) => {
+          if (e.target === banPromptModal) closeBanPrompt();
+        });
+
+        banPromptConfirm.addEventListener("click", async () => {
+          let email = "";
+          let uid = "";
+
+          if (banTargetUser) {
+            email = banTargetUser.email || "";
+            uid = banTargetUser.uid || "";
+          } else {
+            const rawTarget = banPromptTargetInput.value.trim();
+            if (!rawTarget) {
+              if (typeof showToast === "function") {
+                showToast("Please enter a target Email or UID.", "warn");
+              }
+              return;
+            }
+            if (rawTarget.includes("@")) {
+              email = rawTarget;
+            } else {
+              uid = rawTarget;
+            }
+          }
+
+          // Safety check: Ensure target is not a staff member
+          if (isStaffMember(uid, email)) {
+            if (typeof showToast === "function") {
+              showToast("Staff members cannot be banned.", "warn");
+            }
+            return;
+          }
+
+          const reason = banPromptReason.value.trim() || "Violation of rules";
+          const banKey = uid || email.replace(/\./g, "_").toLowerCase();
+
+          try {
+            // Direct database check to ensure target is not in staff-users
+            const staffCheck = await rtdb.ref(`staff-users/${banKey}`).once("value");
+            if (staffCheck.exists()) {
+              if (typeof showToast === "function") {
+                showToast("Staff members cannot be banned.", "warn");
+              }
+              return;
+            }
+
+            await rtdb.ref(`banned-users/${banKey}`).set({
+              uid: uid,
+              email: email,
+              reason: reason,
+              bannedAt: Date.now(),
+              bannedBy: currentUser ? currentUser.email : "Owner"
+            });
+
+            closeBanPrompt();
+            if (typeof showToast === "function") {
+              showToast(`User ${email || uid} has been banned.`, "casual");
+            }
+          } catch (err) {
+            console.error("Ban write error:", err);
+            if (typeof showToast === "function") {
+              showToast("Failed to ban user: " + err.message, "error");
+            }
+          }
+        });
+
+        async function handleUnbanUser(banKey, email) {
+          if (!confirm(`Are you sure you want to unban ${email || banKey}?`)) return;
+
+          try {
+            await rtdb.ref(`banned-users/${banKey}`).remove();
+            if (typeof showToast === "function") {
+              showToast(`User ${email || banKey} has been unbanned.`, "info");
+            }
+          } catch (err) {
+            console.error("Unban error:", err);
+            if (typeof showToast === "function") {
+              showToast("Failed to unban user: " + err.message, "error");
+            }
+          }
+        }
+
+        // ==========================================
+        // Keyboard Shortcuts (Escape)
+        // ==========================================
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            if (privMenu) {
+              e.preventDefault();
+              closePrivMenu();
+              return;
+            }
+            if (bannedModal && bannedModal.classList.contains("active")) {
+              e.preventDefault();
+              closeBannedModal();
+              return;
+            }
+            if (banPromptModal && banPromptModal.classList.contains("active")) {
+              e.preventDefault();
+              closeBanPrompt();
+              return;
+            }
+            if (staffModal && staffModal.classList.contains("active")) {
+              e.preventDefault();
+              closeStaffPanel();
+              return;
+            }
+            if (authModal && authModal.classList.contains("active")) {
+              e.preventDefault();
+              closeAuthModal();
+              return;
+            }
+            if (userDropdown && userDropdown.classList.contains("active")) {
+              userDropdown.classList.remove("active");
+            }
+          }
+        });
+
+        // ==========================================
+        // Auth State Observer
+        // ==========================================
+
+        auth.onAuthStateChanged(async (user) => {
+          currentUser = user;
+
+          if (user) {
+            // 1. Immediate Ban Check
+            const banInfo = await checkIsBanned(user);
+            if (banInfo) {
+              await auth.signOut();
+              openBannedModal(banInfo);
+              return;
+            }
+
+            // 2. Record Presence in users/
+            recordUserPresence(user);
+
+            // 3. Update Avatar & Details
+            const initials = getInitialsFromEmail(user.email);
+            loginBtn.classList.add("logged-in");
+            loginBtn.setAttribute("title", user.email || "Account");
+            loginBtn.innerHTML = initials;
+
+            if (userDropdownAvatar) userDropdownAvatar.textContent = initials;
+            if (userDropdownEmail) userDropdownEmail.textContent = user.email || "User";
+
+            // 4. Verify Owner in staff-users (READ ONLY)
+            isOwner = await checkIsOwner(user);
+
+            // Staff listeners run for every signed-in user so privilege
+            // checks (staffUsersMap) work for non-owner staff too
+            setupStaffListeners();
+            refreshStaffAccess();
+          } else {
+            isOwner = false;
+            loginBtn.classList.remove("logged-in");
+            loginBtn.setAttribute("title", "Log In");
+            loginBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i>';
+            if (userDropdown) userDropdown.classList.remove("active");
+            if (staffPanelBtn) staffPanelBtn.style.display = "none";
+            if (staffModal) staffModal.classList.remove("active");
+          }
+        });
+      })();
+    </script>
+
+    <script>
+      // Make <select> elements with customDropdown()
+      document.addEventListener("DOMContentLoaded", () => {
+        const statusFilter = document.getElementById("staffStatusFilter");
+        if (statusFilter && !statusFilter.dataset.gxDd) {
+          statusFilter.dataset.gxDd = "1";
+          customDropdown({ select: statusFilter, placeholder: "Filter users...", className: "gx-dd-auto" });
+        }
+
+        const mgmtPasswordUser = document.getElementById("mgmtPasswordUser");
+        if (mgmtPasswordUser && !mgmtPasswordUser.dataset.gxDd) {
+          mgmtPasswordUser.dataset.gxDd = "1";
+          customDropdown({ select: mgmtPasswordUser, placeholder: "Select a user...", searchable: true });
+        }
       });
     </script>
   </body>
