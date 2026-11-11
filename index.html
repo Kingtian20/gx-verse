@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <!-- EVERY COMMENT HERE IS INTENTIONAL(exept for mini dropdown library from AI.) -->
+  <!-- EVERY COMMENT HERE IS INTENTIONAL -->
   <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9S5S41LCR"></script>
     <script>
@@ -2166,6 +2166,68 @@
         pointer-events: none !important;
       }
 
+      /* Announcement Banners */
+      .announce-container {
+        position: fixed;
+        top: 72px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 99998;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        pointer-events: none;
+      }
+
+      .announce-banner {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 30px;
+        background: rgba(12, 12, 18, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 999px;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+        color: #f4f4f5;
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.78rem;
+        letter-spacing: 0.6px;
+        max-width: min(560px, 88vw);
+        animation: announceIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        /* Feathered edges: solid-ish center fading to transparent at borders */
+        -webkit-mask-image: linear-gradient(to right, transparent, black 16%, black 84%, transparent);
+        mask-image: linear-gradient(to right, transparent, black 16%, black 84%, transparent);
+      }
+
+      .announce-banner.leaving {
+        animation: announceOut 0.3s ease forwards;
+      }
+
+      .announce-banner i {
+        color: #22d3ee;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+      }
+
+      .announce-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      @keyframes announceIn {
+        from { opacity: 0; transform: translateY(-14px) scale(0.96); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+
+      @keyframes announceOut {
+        from { opacity: 1; transform: translateY(0) scale(1); }
+        to { opacity: 0; transform: translateY(-10px) scale(0.97); }
+      }
+
       /* Staff Privileges Context Menu */
       .staff-ctx-menu {
         position: fixed;
@@ -2454,6 +2516,7 @@
   <body>
     <canvas id="action-bar-canvas"></canvas>
     <div class="toast-container" id="toast-container"></div>
+    <div class="announce-container" id="announce-container"></div>
     <div class="action-bar">
       <div class="pod bar-pod" id="barPod">
         <button title="Home" id="homeBtn" class="active"><i class="fa-solid fa-house actionbarBtn"></i></button>
@@ -2620,6 +2683,9 @@
               <button class="staff-action-btn" id="staffQuickBanBtn" type="button">
                 <i class="fa-solid fa-user-slash"></i> Ban by Email/UID
               </button>
+              <button class="staff-action-btn" id="staffAnnounceBtn" type="button" style="display: none;">
+                <i class="fa-solid fa-bullhorn"></i> Announce
+              </button>
             </div>
             <!-- User List -->
             <div class="staff-user-list" id="staffUserList">
@@ -2673,6 +2739,23 @@
         <div class="ban-prompt-buttons">
           <button type="button" class="ban-prompt-cancel" id="banPromptCancel">Cancel</button>
           <button type="button" class="ban-prompt-confirm" id="banPromptConfirm">Confirm Ban</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Announcement Composer -->
+    <div id="announce-modal" class="ban-prompt-overlay">
+      <div class="ban-prompt-card">
+        <div class="ban-prompt-title">
+          <i class="fa-solid fa-bullhorn"></i> New Announcement
+        </div>
+        <div class="ban-prompt-field">
+          <label for="announceInput">Message <span style="color:#71717a; font-weight:400;">(shown for 3 seconds)</span></label>
+          <textarea id="announceInput" class="ban-prompt-input" placeholder="Type your announcement..." maxlength="200"></textarea>
+        </div>
+        <div class="ban-prompt-buttons">
+          <button type="button" class="ban-prompt-cancel" id="announceCancel">Cancel</button>
+          <button type="button" class="ban-prompt-confirm" id="announceSend">Send</button>
         </div>
       </div>
     </div>
@@ -4000,6 +4083,7 @@
         const staffStatusFilter = document.getElementById("staffStatusFilter");
         const staffSearchInput = document.getElementById("staffSearchInput");
         const staffQuickBanBtn = document.getElementById("staffQuickBanBtn");
+        const staffAnnounceBtn = document.getElementById("staffAnnounceBtn");
         const staffUserList = document.getElementById("staffUserList");
 
         // Management Forms
@@ -4026,6 +4110,11 @@
         const bannedModalTime = document.getElementById("bannedModalTime");
         const bannedModalReason = document.getElementById("bannedModalReason");
         const bannedModalContinue = document.getElementById("bannedModalContinue");
+        const announceModal = document.getElementById("announce-modal");
+        const announceInput = document.getElementById("announceInput");
+        const announceCancel = document.getElementById("announceCancel");
+        const announceSend = document.getElementById("announceSend");
+        const announceContainer = document.getElementById("announce-container");
 
         let currentUser = null;
         let isOwner = false;
@@ -4041,6 +4130,7 @@
         const STAFF_PRIVILEGES = [
           { key: "banUsers",   label: "Ban Users",   icon: "fa-user-slash", desc: "Ban users from the staff panel" },
           { key: "unbanUsers", label: "Unban Users", icon: "fa-unlock",     desc: "Lift bans from the staff panel" },
+          { key: "postAnnouncements", label: "Announcements", icon: "fa-bullhorn", desc: "Broadcast announcements to all users" },
         ];
 
         // Find the staff-users entry matching a uid/email. Returns { key, val }.
@@ -4236,6 +4326,26 @@
         // Realtime Database: Staff & Ban Logic
         // ==========================================
 
+        // Pure matcher: given a user and the banned-users object, return the
+        // ban entry if the user is banned (mirrors checkIsBanned's logic).
+        function detectBanInfo(user, bannedMap) {
+          if (!user || !bannedMap || typeof bannedMap !== "object") return null;
+
+          const cleanEmail = (user.email || "").replace(/\./g, "_").toLowerCase();
+          const rawEmail = (user.email || "").toLowerCase();
+
+          for (const [key, val] of Object.entries(bannedMap)) {
+            const keyMatch = key === user.uid || key.toLowerCase() === cleanEmail || key.toLowerCase() === rawEmail;
+            const valMatch = val && typeof val === "object" && (
+              val.uid === user.uid || (val.email || "").toLowerCase() === rawEmail
+            );
+            if (keyMatch || valMatch) {
+              return val || { reason: "Account suspended" };
+            }
+          }
+          return null;
+        }
+
         // Check if user is banned
         async function checkIsBanned(user) {
           if (!user) return null;
@@ -4340,6 +4450,7 @@
           if (staffPanelBtn) staffPanelBtn.style.display = staff ? "flex" : "none";
           if (staffTabManagement) staffTabManagement.style.display = isOwner ? "" : "none";
           if (staffQuickBanBtn) staffQuickBanBtn.style.display = myPrivilege("banUsers") ? "" : "none";
+          if (staffAnnounceBtn) staffAnnounceBtn.style.display = myPrivilege("postAnnouncements") ? "" : "none";
           if (userDropdownStatus) {
             userDropdownStatus.innerHTML = isOwner
               ? `Online <span class="owner-badge">Owner</span>`
@@ -4664,6 +4775,105 @@
         });
 
         // ==========================================
+        // Announcements (realtime broadcast banners)
+        // ==========================================
+
+        const ANNOUNCE_TTL = 3000;   // ms each banner lives in RTDB
+        const ANNOUNCE_MAX = 4;      // max simultaneous banners
+        const shownAnnouncements = new Set();
+
+        function showAnnouncementBanner(text, duration = ANNOUNCE_TTL) {
+          if (!announceContainer || !text) return;
+
+          // Cap at ANNOUNCE_MAX — drop the oldest
+          while (announceContainer.children.length >= ANNOUNCE_MAX) {
+            const oldest = announceContainer.firstElementChild;
+            oldest.classList.add("leaving");
+            setTimeout(() => oldest.remove(), 300);
+          }
+
+          const banner = document.createElement("div");
+          banner.className = "announce-banner";
+          banner.innerHTML = `<i class="fa-solid fa-bullhorn"></i><span class="announce-text"></span>`;
+          banner.querySelector(".announce-text").textContent = text;
+          announceContainer.appendChild(banner);
+
+          setTimeout(() => {
+            banner.classList.add("leaving");
+            setTimeout(() => banner.remove(), 320);
+          }, duration);
+        }
+
+        // Realtime listener — runs for every visitor (announcements are public)
+        rtdb.ref("announcements").on("value", (snap) => {
+          const data = snap.val() || {};
+          const now = Date.now();
+
+          Object.entries(data).forEach(([id, a]) => {
+            if (!a || typeof a !== "object") return;
+            const remaining = ANNOUNCE_TTL - (now - (a.createdAt || 0));
+
+            if (remaining <= 0) {
+              // Expired — clean it up (delete is allowed for any signed-in user)
+              rtdb.ref(`announcements/${id}`).remove().catch(() => {});
+              shownAnnouncements.delete(id);
+              return;
+            }
+            if (shownAnnouncements.has(id)) return;
+
+            shownAnnouncements.add(id);
+            showAnnouncementBanner(a.text || "", remaining);
+
+            // Remove the RTDB node once its lifetime is over
+            setTimeout(() => {
+              rtdb.ref(`announcements/${id}`).remove().catch(() => {});
+              shownAnnouncements.delete(id);
+            }, remaining);
+          });
+        }, (err) => console.warn("RTDB announcements listener:", err));
+
+        // Composer (staff with postAnnouncements privilege)
+        function openAnnounceModal() {
+          if (userDropdown) userDropdown.classList.remove("active");
+          announceModal.classList.add("active");
+          announceInput.value = "";
+          setTimeout(() => announceInput.focus(), 100);
+        }
+
+        function closeAnnounceModal() {
+          announceModal.classList.remove("active");
+        }
+
+        staffAnnounceBtn.addEventListener("click", openAnnounceModal);
+        announceCancel.addEventListener("click", closeAnnounceModal);
+        announceModal.addEventListener("click", (e) => {
+          if (e.target === announceModal) closeAnnounceModal();
+        });
+
+        announceSend.addEventListener("click", async () => {
+          const text = announceInput.value.trim();
+          if (!text) {
+            if (typeof showToast === "function") showToast("Announcement cannot be empty.", "warn");
+            return;
+          }
+          announceSend.disabled = true;
+          try {
+            await rtdb.ref("announcements").push({
+              text: text,
+              author: currentUser ? currentUser.email : "staff",
+              createdAt: Date.now(),
+            });
+            closeAnnounceModal();
+            if (typeof showToast === "function") showToast("Announcement sent!", "casual");
+          } catch (err) {
+            console.error("Announcement error:", err);
+            if (typeof showToast === "function") showToast("Failed to send announcement: " + err.message, "error");
+          } finally {
+            announceSend.disabled = false;
+          }
+        });
+
+        // ==========================================
         // Staff Privileges Context Menu (owner only)
         // ==========================================
 
@@ -4914,7 +5124,7 @@
           const banKey = uid || email.replace(/\./g, "_").toLowerCase();
 
           try {
-            // Direct database check to ensure target is not in staff-users
+            // Database check to make suretarget is not in staff-users
             const staffCheck = await rtdb.ref(`staff-users/${banKey}`).once("value");
             if (staffCheck.exists()) {
               if (typeof showToast === "function") {
@@ -4970,6 +5180,11 @@
               closePrivMenu();
               return;
             }
+            if (announceModal && announceModal.classList.contains("active")) {
+              e.preventDefault();
+              closeAnnounceModal();
+              return;
+            }
             if (bannedModal && bannedModal.classList.contains("active")) {
               e.preventDefault();
               closeBannedModal();
@@ -5000,11 +5215,12 @@
         // Auth State Observer
         // ==========================================
 
+        let realtimeBanListenerAttached = false;
+
         auth.onAuthStateChanged(async (user) => {
           currentUser = user;
 
           if (user) {
-            // 1. Immediate Ban Check
             const banInfo = await checkIsBanned(user);
             if (banInfo) {
               await auth.signOut();
@@ -5012,10 +5228,8 @@
               return;
             }
 
-            // 2. Record Presence in users/
             recordUserPresence(user);
 
-            // 3. Update Avatar & Details
             const initials = getInitialsFromEmail(user.email);
             loginBtn.classList.add("logged-in");
             loginBtn.setAttribute("title", user.email || "Account");
@@ -5024,13 +5238,21 @@
             if (userDropdownAvatar) userDropdownAvatar.textContent = initials;
             if (userDropdownEmail) userDropdownEmail.textContent = user.email || "User";
 
-            // 4. Verify Owner in staff-users (READ ONLY)
             isOwner = await checkIsOwner(user);
-
-            // Staff listeners run for every signed-in user so privilege
-            // checks (staffUsersMap) work for non-owner staff too
             setupStaffListeners();
             refreshStaffAccess();
+            if (!realtimeBanListenerAttached) {
+              realtimeBanListenerAttached = true;
+              rtdb.ref("banned-users").on("value", (snap) => {
+                const u = currentUser;
+                if (!u) return;
+                const banInfo = detectBanInfo(u, snap.val() || {});
+                if (banInfo) {
+                  auth.signOut();
+                  openBannedModal(banInfo);
+                }
+              }, (err) => console.warn("RTDB banned-users realtime listener:", err));
+            }
           } else {
             isOwner = false;
             loginBtn.classList.remove("logged-in");
@@ -5045,7 +5267,6 @@
     </script>
 
     <script>
-      // Make <select> elements with customDropdown()
       document.addEventListener("DOMContentLoaded", () => {
         const statusFilter = document.getElementById("staffStatusFilter");
         if (statusFilter && !statusFilter.dataset.gxDd) {
