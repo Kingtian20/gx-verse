@@ -2732,6 +2732,14 @@
       <div class="grid proxy-grid" id="proxy-grid"></div>
     </section>
 
+    <section class="staff" id="staff-page" style="display: none; width: 100vw; height: 100vh; flex-direction: column">
+      <iframe id="staff-frame" title="Staff" style="flex: 1; width: 100%; border: none; background: #000"></iframe>
+    </section>
+
+    <section class="soundboard" id="soundboard-page" style="display: none; width: 100vw; height: 100vh; flex-direction: column">
+      <iframe id="soundboard-frame" title="Sound Board" style="flex: 1; width: 100%; border: none; background: #000"></iframe>
+    </section>
+
     <div id="game-overlay" class="game-overlay">
       <div id="game-frame-container"></div>
 
@@ -3162,10 +3170,16 @@
         const homePage = document.getElementById("home-page");
         const gxmesPage = document.getElementById("gxmes-page");
         const pr0xysPage = document.getElementById("pr0xys-page");
+        const staffPage = document.getElementById("staff-page");
+        const staffFrame = document.getElementById("staff-frame");
+        const soundboardPage = document.getElementById("soundboard-page");
+        const soundboardFrame = document.getElementById("soundboard-frame");
         const homeBtn = document.getElementById("homeBtn");
         const gxmesBtn = document.getElementById("gxmesBtn");
         const proxyBtn = document.getElementById("proxyBtn");
-        const buttons = [homeBtn, gxmesBtn, proxyBtn];
+        const infoBtn = document.getElementById("infoBtn");
+        const soundboardBtn = document.getElementById("soundboardBtn");
+        const buttons = [homeBtn, gxmesBtn, proxyBtn, infoBtn, soundboardBtn];
         const mainTitle = document.querySelector(".main-title");
         const subTitle = document.querySelector(".sub-title");
         const homeSearch = document.getElementById("home-search");
@@ -3179,7 +3193,44 @@
         home: {page: homePage, btn: homeBtn},
         gxmes: {page: gxmesPage, btn: gxmesBtn},
         pr0xys: {page: pr0xysPage, btn: proxyBtn},
+        staff: {
+          page: staffPage,
+          btn: infoBtn,
+          frame: staffFrame,
+          url: "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/subpages/staff.html",
+        },
+        soundboard: {
+          page: soundboardPage,
+          btn: soundboardBtn,
+          frame: soundboardFrame,
+          url: "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/subpages/soundboard.html",
+        },
       };
+
+      const loadedRemotePages = new Set();
+
+      function loadRemotePage(pageName, entry) {
+        if (loadedRemotePages.has(pageName)) return;
+        loadedRemotePages.add(pageName);
+        entry.frame.srcdoc =
+          "<!doctype html><html><body style='margin:0;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;height:100vh;font-family:Orbitron,sans-serif;'>Loading...</body></html>";
+        fetch(entry.url)
+          .then((res) => {
+            if (!res.ok) throw new Error("HTTP " + res.status);
+            return res.text();
+          })
+          .then((html) => {
+            entry.frame.srcdoc = html;
+          })
+          .catch(() => {
+            loadedRemotePages.delete(pageName);
+            entry.frame.srcdoc =
+              "<!doctype html><html><body style='margin:0;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;height:100vh;font-family:Orbitron,sans-serif;'>Failed to load page.</body></html>";
+            if (typeof showToast === "function") {
+              showToast("Failed to load staff page.", "error");
+            }
+          });
+      }
 
       function updateButtons() {
         Object.keys(pageMap).forEach((pageName) => {
@@ -3216,6 +3267,11 @@
         nextPage.classList.remove("page-fade");
         void nextPage.offsetWidth;
         nextPage.classList.add("page-fade");
+
+        const remoteEntry = pageMap[targetPage];
+        if (remoteEntry.url) {
+          loadRemotePage(targetPage, remoteEntry);
+        }
 
         if (targetPage === "home") {
           canvas.classList.remove("hidden");
@@ -3263,6 +3319,16 @@
         console.log("Pr0xys button clicked");
         showDelayedTooltip(proxyBtn);
         switchPage("pr0xys");
+      });
+      infoBtn.addEventListener("click", () => {
+        console.log("Info button clicked");
+        showDelayedTooltip(infoBtn);
+        switchPage("staff");
+      });
+      soundboardBtn.addEventListener("click", () => {
+        console.log("Sound Board button clicked");
+        showDelayedTooltip(soundboardBtn);
+        switchPage("soundboard");
       });
 
       updateButtons();
