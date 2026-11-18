@@ -3857,47 +3857,208 @@
         const overlay = document.getElementById("game-overlay");
         const frameContainer = document.getElementById("game-frame-container");
         const globalActionBar = document.querySelector(".action-bar");
+        const gxmesPage = document.getElementById("gxmes-page");
 
         let currentGame = null;
         let gamesList = [];
         window.isDevMode = false;
 
+        const GAME_BATCH_SIZE = 120;
+        let renderedGames = [];
+        let renderedCount = 0;
+        let loadMoreObserver = null;
+        let loadMoreSentinel = null;
+
+        const GNM_ZONE_URLS = [
+          "https://cdn.jsdelivr.net/gh/freebuisness/assets@main/zones.json",
+          "https://cdn.jsdelivr.net/gh/freebuisness/assets@latest/zones.json",
+          "https://cdn.jsdelivr.net/gh/freebuisness/assets@master/zones.json",
+          "https://cdn.jsdelivr.net/gh/freebuisness/assets/zones.json"
+        ];
+        const GNM_COVER_URL = "https://cdn.jsdelivr.net/gh/freebuisness/covers@main";
+        const GNM_HTML_URL = "https://cdn.jsdelivr.net/gh/freebuisness/html@main";
+
+        function resolveGnmUrl(url) {
+          return String(url || "").replaceAll("{COVER_URL}", GNM_COVER_URL).replaceAll("{HTML_URL}", GNM_HTML_URL);
+        }
+
+        async function fetchGnmZones() {
+          let zonesURL = GNM_ZONE_URLS[Math.floor(Math.random() * GNM_ZONE_URLS.length)];
+          try {
+            let sharesponse;
+            let shajson;
+            let sha;
+            try {
+              sharesponse = await fetch("https://api.github.com/repos/freebuisness/assets/commits?t=" + Date.now());
+            } catch (error) {}
+            if (sharesponse && sharesponse.status === 200) {
+              try {
+                shajson = await sharesponse.json();
+                sha = shajson[0] && shajson[0].sha;
+                if (sha) {
+                  zonesURL = `https://cdn.jsdelivr.net/gh/freebuisness/assets@${sha}/zones.json`;
+                }
+              } catch (error) {
+                try {
+                  const secondarysharesponse = await fetch("https://raw.githubusercontent.com/freebuisness/xml/refs/heads/main/sha.txt?t=" + Date.now());
+                  if (secondarysharesponse && secondarysharesponse.status === 200) {
+                    sha = (await secondarysharesponse.text()).trim();
+                    if (sha) {
+                      zonesURL = `https://cdn.jsdelivr.net/gh/freebuisness/assets@${sha}/zones.json`;
+                    }
+                  }
+                } catch (error) {}
+              }
+            }
+          } catch (error) {}
+          const response = await fetch(zonesURL + "?t=" + Date.now());
+          const json = await response.json();
+          return Array.isArray(json) ? json : [];
+        }
+
+        function gnmZoneToGame(zone) {
+          return {
+            name: zone.name,
+            image: resolveGnmUrl(zone.cover),
+            url: resolveGnmUrl(zone.url),
+            method: "gnmath",
+            gnmId: zone.id,
+            author: zone.author,
+            authorLink: zone.authorLink,
+            special: zone.special
+          };
+        }
+
       async function fetchGames() {
-        try {
-          const url = window.isDevMode
-            ? "gxmes-list.json"
-            : "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/gxmes-list.json";
-          const response = await fetch(url);
-          const data = await response.json();
-          gamesList = Array.isArray(data) ? data : (data ? [data] : []);
-          gamesList.sort((a, b) => (a.name || "").localeCompare(b.name || "", undefined, {numeric: true, sensitivity: "base"}));
-          renderGames(gamesList);
-        } catch (error) {
-          console.error("Failed to fetch games:", error);
-          gameGrid.innerHTML = '<p style="color:white;text-align:center;font-family:Orbitron;">Failed to load games</p>';
-          if (window.isDevMode && typeof showToast === "function") {
-            showToast("Failed to load local gxmes-list.json", "warn");
+        const localPromise = (async () => {
+          try {
+            const url = window.isDevMode
+              ? "gxmes-list.json"
+              : "https://raw.githubusercontent.com/Kingtian20/gx-verse/main/gxmes/gxmes-list.json";
+            const response = await fetch(url);
+            const data = await response.json();
+            return Array.isArray(data) ? data : (data ? [data] : []);
+          } catch (error) {
+            console.error("Failed to fetch gxmes list:", error);
+            if (window.isDevMode && typeof showToast === "function") {
+              showToast("Failed to load local gxmes-list.json", "warn");
+            }
+            return [];
+          }
+        })();
+
+        const gnmPromise = fetchGnmZones().catch((error) => {
+          console.error("Failed to fetch gn-math zones:", error);
+          return [];
+        });
+
+        const [localGames, gnmZones] = await Promise.all([localPromise, gnmPromise]);
+
+        const seen = new Set();
+        const combined = [];
+        for (const game of localGames) {
+          const key = normalizeForSearch(game && game.name ? game.name : "");
+          if (key && !seen.has(key)) {
+            seen.add(key);
+            combined.push(game);
           }
         }
+        for (const zone of gnmZones) {
+          if (!zone || zone.id === -1 || !zone.name || !zone.cover || !zone.url || String(zone.url).startsWith("http")) continue;
+          const game = gnmZoneToGame(zone);
+          const key = normalizeForSearch(game.name);
+          if (!key || seen.has(key)) continue;
+          seen.add(key);
+          combined.push(game);
+        }
+
+        gamesList = combined;
+        gamesList.sort((a, b) => (a.name || "").localeCompare(b.name || "", undefined, {numeric: true, sensitivity: "base"}));
+        renderGames(gamesList);
       }
       window.fetchGames = fetchGames;
 
+      function createGameItem(game) {
+        const item = document.createElement("div");
+        item.className = "game-item game-pop";
+        item.onclick = () => openGameModal(game);
+
+        const img = document.createElement("img");
+        img.src = game.image || "";
+        img.alt = game.name || "game";
+        img.loading = "lazy";
+        img.decoding = "async";
+        item.appendChild(img);
+
+        const title = document.createElement("div");
+        title.className = "game-title";
+        title.textContent = game.name || "Untitled";
+        item.appendChild(title);
+        return item;
+      }
+
+      function disconnectLoadMore() {
+        if (loadMoreObserver) {
+          loadMoreObserver.disconnect();
+          loadMoreObserver = null;
+        }
+        if (loadMoreSentinel && loadMoreSentinel.parentNode) {
+          loadMoreSentinel.parentNode.removeChild(loadMoreSentinel);
+        }
+        loadMoreSentinel = null;
+      }
+
+      function appendGameBatch(games, start, end) {
+        const fragment = document.createDocumentFragment();
+        for (let i = start; i < end; i++) {
+          fragment.appendChild(createGameItem(games[i]));
+        }
+        gameGrid.appendChild(fragment);
+      }
+
+      function loadMoreGames() {
+        if (renderedCount >= renderedGames.length) {
+          disconnectLoadMore();
+          return;
+        }
+        const nextCount = Math.min(renderedCount + GAME_BATCH_SIZE, renderedGames.length);
+        appendGameBatch(renderedGames, renderedCount, nextCount);
+        renderedCount = nextCount;
+        if (renderedCount >= renderedGames.length) {
+          disconnectLoadMore();
+        }
+      }
+
       function renderGames(games) {
+        disconnectLoadMore();
         gameGrid.innerHTML = "";
+        renderedGames = games;
+        renderedCount = 0;
+
         if (games.length === 0) {
           gameGrid.innerHTML = '<p style="color: rgba(255, 255, 255, 0.5); text-align: center; font-family: Orbitron; font-size: 1.2rem; grid-column: 1 / -1; padding: 40px;">No gxmes found</p>';
           return;
         }
-        games.forEach((game) => {
-          const item = document.createElement("div");
-          item.className = "game-item game-pop";
-          item.onclick = () => openGameModal(game);
-          item.innerHTML = `
-            <img src="${game.image}" alt="${game.name}" loading="lazy">
-            <div class="game-title">${game.name}</div>
-          `;
-          gameGrid.appendChild(item);
-        });
+
+        const initialCount = Math.min(GAME_BATCH_SIZE, games.length);
+        appendGameBatch(games, 0, initialCount);
+        renderedCount = initialCount;
+
+        if (renderedCount < games.length) {
+          loadMoreSentinel = document.createElement("div");
+          loadMoreSentinel.className = "game-grid-sentinel";
+          loadMoreSentinel.style.height = "1px";
+          gameGrid.after(loadMoreSentinel);
+          loadMoreObserver = new IntersectionObserver((entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) {
+              loadMoreGames();
+            }
+          }, {
+            root: gxmesPage,
+            rootMargin: "800px 0px"
+          });
+          loadMoreObserver.observe(loadMoreSentinel);
+        }
       }
 
       function normalizeForSearch(str) {
@@ -3935,7 +4096,28 @@
         globalActionBar.style.display = "none";
         frameContainer.innerHTML = '<div style="color:white; text-align:center; margin-top:20%; font-family:Orbitron;">LOADING...</div>';
 
-        if (game.method === "code") {
+        if (game.method === "gnmath") {
+          const code = await fetchText(game.url + "?t=" + Date.now());
+          frameContainer.innerHTML = "";
+          if (code != null) {
+            const iframe = document.createElement("iframe");
+            iframe.className = "newtab-iframe";
+            iframe.setAttribute("allow", "autoplay; fullscreen; keyboard-events; gamepad");
+            iframe.allowFullscreen = true;
+            frameContainer.appendChild(iframe);
+            const doc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);
+            if (doc) {
+              doc.open();
+              doc.write(code);
+              doc.close();
+            } else {
+              showToast("Failed to load game frame.", "error");
+            }
+          } else {
+            frameContainer.innerHTML = '<div style="color:white; text-align:center; margin-top:20%; font-family:Orbitron;">Failed to load game</div>';
+            showToast("Failed to load game.", "error");
+          }
+        } else if (game.method === "code") {
           const fetchedCode = await fetchText(game.url);
           frameContainer.innerHTML = "";
 
@@ -4022,7 +4204,7 @@
       document.getElementById("btn-fullscreen").addEventListener("click", async () => {
         if (!currentGame) return;
 
-        const targetUrl = currentGame.url;
+        const targetUrl = currentGame.method === "gnmath" ? currentGame.url + "?t=" + Date.now() : currentGame.url;
         const fetchedContent = await fetchText(targetUrl);
 
         if (fetchedContent) {
